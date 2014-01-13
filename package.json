@@ -1,0 +1,32 @@
+{
+  "name": "badgekit-issue-client",
+  "version": "0.0.0",
+  "description": "A client for the badgekit issuer",
+  "main": "index.js",
+  "author": "Mozilla OpenBadges",
+  "license": "MPLv2",
+  "dependencies": {
+    "restify": "~2.6.1"
+  },
+  "devDependencies": {
+    "jshint": "~2.3.0",
+    "save": "0.0.20",
+    "tap": "~0.4.6"
+  },
+  "scripts": {
+    "test": "npm run lint && tap test/*.test.js",
+    "lint": "jshint --verbose index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mozilla/badgekit-issue-client.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mozilla/badgekit-issue-client/issues"
+  },
+  "homepage": "https://github.com/mozilla/badgekit-issue-client",
+  "jshintConfig": {
+    "esnext": true,
+    "asi": true
+  }
+}
