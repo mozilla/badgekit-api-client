@@ -9,8 +9,9 @@
     "request": "~2.31.0"
   },
   "devDependencies": {
+    "async": "~0.2.9",
     "jshint": "~2.3.0",
-    "save": "0.0.20",
+    "nock": "~0.27.1",
     "tap": "~0.4.6"
   },
   "scripts": {
