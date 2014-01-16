@@ -1,38 +1,61 @@
-const restify = require('restify');
+const request = require('request');
+const url = require('url');
+
+function makeUrl (endpoint, path, query) {
+  var uri = url.resolve(endpoint, path);
+  if (query) {
+    uri = url.parse(uri, true);
+    uri.query = Object.keys(query).reduce(function (q, key) {
+      return (q[key] = query[key], q);
+    }, uri.query || {});
+    delete uri.search;
+    uri = url.format(uri);
+  }
+  return uri;
+}
 
 function Client (endpoint) {
   if (!(this instanceof Client))
     return new Client (endpoint);
 
-  const client = restify.createJsonClient({
-    url: endpoint
-  });
-
   function remote (method, options, cb) {
-    var args;
+    if (typeof options === 'string')
+      options = {path: options};
+
     var filter = options.filter;
     var def = options.default;
-    var body = options.body;
+
+    options.url = makeUrl(endpoint, options.path, options.query);
+    options.json = options.json || {};
 
     delete options.filter;
     delete options.default;
-    delete options.body;
+    delete options.path;
+    delete options.query;
 
-    function callback (err, req, res, data) {
-      if (filter)
-        data = (data||{})[filter];
+    request[method](options, function (err, rsp, body) {
+      if (typeof cb !== 'function')
+        return;
 
-      if (typeof cb === 'function')
-        cb(err, data || def);
-    }
+      if (err) {
+        return cb(err, null);
+      }
 
-    if (body) {
-      args = [options, body, callback];
-    } else {
-      args = [options, callback];
-    }
+      if (rsp.statusCode < 300) {
+        if (filter)
+          body = (body||{})[filter];
+        cb(null, body || def);
+      } else {
+        // Handle errors
+        // TODO - needs more work
+        if (Object.keys(body).length)
+          err = body;
+        else
+          err = {status: rsp.statusCode};
 
-    client[method].apply(client, args);
+        cb(err, null);
+      }
+    });
   }
 
   ['get', 'head', 'post', 'put', 'del'].forEach(function (method) {
@@ -78,7 +101,7 @@ Client.prototype.getBadge = function (badge, callback) {
 Client.prototype.createBadge = function (badge, callback) {
   const options = {
     path: '/badges',
-    body: badge,
+    json: badge,
     filter: 'status'
   };
 
@@ -99,7 +122,7 @@ Client.prototype.updateBadge = function (badge, callback) {
   const slug = badge.slug || badge.id;
   const options = {
     path: '/badges/' + slug,
-    body: badge,
+    json: badge,
     filter: 'status'
   };
 

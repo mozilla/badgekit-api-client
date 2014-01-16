@@ -6,7 +6,7 @@
   "author": "Mozilla OpenBadges",
   "license": "MPLv2",
   "dependencies": {
-    "restify": "~2.6.1"
+    "request": "~2.31.0"
   },
   "devDependencies": {
     "jshint": "~2.3.0",
