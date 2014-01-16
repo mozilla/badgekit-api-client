@@ -1,6 +1,6 @@
 {
   "name": "badgekit-issue-client",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A client for the badgekit issuer",
   "main": "index.js",
   "author": "Mozilla OpenBadges",
