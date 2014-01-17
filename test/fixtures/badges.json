@@ -1,0 +1,122 @@
+{
+  "testBadge": {
+    "slug": "test-badge",
+    "name": "A Test Badge",
+    "strapline": "A badge for testing",
+    "description": "This is a badge quite useful for testing",
+    "image": "http://example.org/badge.png"
+  },
+  "archivedBadge": {
+    "slug": "archived-badge",
+    "name": "An Archived Badge",
+    "strapline": "An archived badge for testing",
+    "description": "This is an archived badge quite useful for testing",
+    "image": "http://example.org/badge.png",
+    "archived": true
+  },
+  "badBadge": {
+    "slug": "test-badge",
+    "name": "",
+    "strapline": "A corrupt badge",
+    "description": "This is a bad badge, quite useful for testing",
+    "image": "http://example.org/badge.png"
+  },
+  "missingBadge": {
+    "slug": "missing-badge",
+    "name": "Missing Badge",
+    "strapline": "A missing badge",
+    "description": "This is a missing badge, quite useful for testing",
+    "image": "http://example.org/badge.png"
+  },
+
+  "notFoundResponse": {
+    "error": "not found"
+  },
+
+  "creationSuccessResponse": {
+    "status": "created"
+  },
+  "creationDuplicateResponse": {
+    "error": "A badge with that `slug` already exists",
+    "received": {
+      "slug": "another-test-badge",
+      "name": "My Test Badge",
+      "strapline": "My Test Badge Strapline",
+      "description": "My Test Badge Description",
+      "imageId": 95
+    }
+  },
+  "creationErrorResponse": {
+    "errors": [{
+      "name": "ValidatorError",
+      "message": "String is not in range",
+      "field": "name"
+    }]
+  },
+
+  "getResponse": {
+    "badges": [
+      {
+        "slug": "test-badge",
+        "name": "A Test Badge",
+        "strapline": "A badge for testing",
+        "description": "This is a badge quite useful for testing",
+        "imageURL": "http://example.org/badge.png",
+        "archived": false
+      }
+    ]
+  },
+  "getAllResponse": {
+    "badges": [
+      {
+        "slug": "test-badge",
+        "name": "A Test Badge",
+        "strapline": "A badge for testing",
+        "description": "This is a badge quite useful for testing",
+        "imageURL": "http://example.org/badge.png",
+        "archived": false
+      },
+      {
+        "slug": "archived-badge",
+        "name": "An Archived Badge",
+        "strapline": "An archived badge for testing",
+        "description": "This is an archived badge quite useful for testing",
+        "imageURL": "http://example.org/badge.png",
+        "archived": true
+      }
+    ]
+  },
+  "getSingleResponse": {
+    "badge": {
+      "slug": "test-badge",
+      "name": "A Test Badge",
+      "strapline": "A badge for testing",
+      "description": "This is a badge quite useful for testing",
+      "imageURL": "http://example.org/badge.png",
+      "archived": false
+    }
+  },
+
+  "updateSuccessResponse": {
+    "status": "updated"
+  },
+  "updateErrorResponse": {
+    "errors": [{
+      "name": "ValidatorError",
+      "message": "String is not in range",
+      "field": "name"
+    }]
+  },
+
+  "deleteSuccessResponse": {
+    "status": "deleted",
+    "badge": {
+      "slug": "test-badge",
+      "name": "A Test Badge",
+      "strapline": "A badge for testing",
+      "description": "This is a badge quite useful for testing",
+      "image": "http://example.org/badge.png",
+      "archived": false
+    }
+  }
+}
