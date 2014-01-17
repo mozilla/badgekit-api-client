@@ -1,3 +1,4 @@
+const methods = require('./methods')
 const request = require('request');
 const url = require('url');
 
@@ -14,10 +15,7 @@ function makeUrl (endpoint, path, query) {
   return uri;
 }
 
-function Client (endpoint) {
-  if (!(this instanceof Client))
-    return new Client (endpoint);
-
+exports = module.exports = function makeClient (endpoint) {
   function remote (method, options, cb) {
     if (typeof options === 'string')
       options = {path: options};
@@ -62,71 +60,17 @@ function Client (endpoint) {
     remote[method] = remote.bind(remote, method);
   });
 
-  Object.defineProperty(this, 'remote', {
+  var client = Object.keys(methods).reduce(function (obj, key) {
+    Object.defineProperty(obj, key, {
+      enumerable: true,
+      value: methods[key]
+    });
+    return obj;
+  }, {});
+
+  Object.defineProperty(client, 'remote', {
     value: remote
   });
+
+  return client;
 }
-
-Client.prototype.getBadges = function (callback) {
-  const options = {
-    path: '/badges',
-    filter: 'badges',
-    default: []
-  };
-
-  this.remote.get(options, callback);
-}
-
-Client.prototype.getAllBadges = function (callback) {
-  const options = {
-    path: '/badges',
-    query: {archived: 'any'},
-    filter: 'badges',
-    default: []
-  };
-
-  this.remote.get(options, callback);
-}
-
-Client.prototype.getBadge = function (badge, callback) {
-  const slug = badge.slug || badge.id || badge;
-  const options = {
-    path: '/badges/' + slug,
-    filter: 'badge'
-  };
-
-  this.remote.get(options, callback);
-}
-
-Client.prototype.createBadge = function (badge, callback) {
-  const options = {
-    path: '/badges',
-    json: badge,
-    filter: 'status'
-  };
-
-  this.remote.post(options, callback);
-}
-
-Client.prototype.deleteBadge = function (badge, callback) {
-  const slug = badge.slug || badge.id || badge;
-  const options = {
-    path: '/badges/' + slug,
-    filter: 'status'
-  };
-
-  this.remote.del(options, callback);
-}
-
-Client.prototype.updateBadge = function (badge, callback) {
-  const slug = badge.slug || badge.id;
-  const options = {
-    path: '/badges/' + slug,
-    json: badge,
-    filter: 'status'
-  };
-
-  this.remote.put(options, callback);
-}
-
-exports = module.exports = Client;
