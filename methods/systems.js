@@ -29,7 +29,8 @@ exports.getSystems = function getSystems (callback) {
  */
 exports.getSystem = function getSystem (system, callback) {
   const options = {
-    path: '/systems/' + getSlug(system)
+    path: '/systems/' + getSlug(system),
+    filter: 'system'
   };
 
   this.remote.get(options, callback);
@@ -60,7 +61,6 @@ exports.createSystem = function createSystem (system, callback) {
 exports.deleteSystem = function deleteSystem (system, callback) {
   const options = {
     path: '/systems/' + getSlug(system),
-    json: system,
     filter: 'status'
   };
 

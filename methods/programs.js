@@ -29,7 +29,8 @@ exports.getPrograms = function getPrograms (callback) {
  */
 exports.getProgram = function getProgram (program, callback) {
   const options = {
-    path: '/programs/' + getSlug(program)
+    path: '/programs/' + getSlug(program),
+    filter: 'program'
   };
 
   this.remote.get(options, callback);
@@ -60,7 +61,6 @@ exports.createProgram = function createProgram (program, callback) {
 exports.deleteProgram = function deleteProgram (program, callback) {
   const options = {
     path: '/programs/' + getSlug(program),
-    json: program,
     filter: 'status'
   };
 

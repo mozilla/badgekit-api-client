@@ -29,7 +29,8 @@ exports.getIssuers = function getIssuers (callback) {
  */
 exports.getIssuer = function getIssuer (issuer, callback) {
   const options = {
-    path: '/issuers/' + getSlug(issuer)
+    path: '/issuers/' + getSlug(issuer),
+    filter: 'issuer'
   };
 
   this.remote.get(options, callback);
@@ -60,7 +61,6 @@ exports.createIssuer = function createIssuer (issuer, callback) {
 exports.deleteIssuer = function deleteIssuer (issuer, callback) {
   const options = {
     path: '/issuers/' + getSlug(issuer),
-    json: issuer,
     filter: 'status'
   };
 
