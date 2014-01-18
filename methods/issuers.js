@@ -1,6 +1,4 @@
-function getSlug (issuer) {
-  return '' + (issuer.slug || issuer);
-}
+const getSlug = require('../lib/getSlug');
 
 exports.getIssuers = function getIssuers (callback) {
   const options = {

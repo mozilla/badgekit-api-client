@@ -1,6 +1,4 @@
-function getSlug (system) {
-  return '' + (system.slug || system);
-}
+const getSlug = require('../lib/getSlug');
 
 exports.getSystems = function getSystems (callback) {
   const options = {

@@ -1,6 +1,4 @@
-function getSlug (program) {
-  return '' + (program.slug || program);
-}
+const getSlug = require('../lib/getSlug');
 
 exports.getPrograms = function getPrograms (callback) {
   const options = {

@@ -1,6 +1,4 @@
-function getSlug (badge) {
-  return '' + (badge.slug || badge);
-}
+const getSlug = require('../lib/getSlug');
 
 exports.getBadges = function getBadges (callback) {
   const options = {
