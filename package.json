@@ -16,7 +16,7 @@
   },
   "scripts": {
     "test": "npm run lint && tap test/*.test.js",
-    "lint": "jshint --verbose index.js"
+    "lint": "jshint --verbose index.js methods/*.js"
   },
   "repository": {
     "type": "git",
