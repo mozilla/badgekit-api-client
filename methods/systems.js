@@ -24,7 +24,7 @@ exports.getSystems = function getSystems (callback) {
 /**
  * Fetches a single system
  * `GET /systems/<id>`
- * @param {string|object} system - Slug (or object containing slug) identifier
+ * @param {string|object} system - Slug (or object containing slug) identifying system
  * @param {requestCallback} callback - Callback to handle response
  */
 exports.getSystem = function getSystem (system, callback) {
@@ -55,7 +55,7 @@ exports.createSystem = function createSystem (system, callback) {
 /**
  * Deletes an existing system
  * `DELETE /systems/<id>`
- * @param {string|object} system - Slug (or object containing slug) identifier
+ * @param {string|object} system - Slug (or object containing slug) identifying system
  * @param {requestCallback} callback - Callback to handle response
  */
 exports.deleteSystem = function deleteSystem (system, callback) {
