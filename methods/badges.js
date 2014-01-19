@@ -1,3 +1,4 @@
+const fixBadge = require('../lib/augment')('badge');
 const getSlug = require('../lib/getSlug');
 
 /**
@@ -12,13 +13,17 @@ const getSlug = require('../lib/getSlug');
  * @param {requestCallback} callback - Callback to handle response
  */
 exports.getBadges = function getBadges (callback) {
+  const client = this;
   const options = {
     path: '/badges',
     filter: 'badges',
     default: []
   };
 
-  this.remote.get(options, callback);
+  this.remote.get(options, function (err, badges) {
+    if (badges) badges = badges.map(fixBadge.bind(null, client));
+    callback(err, badges);
+  });
 }
 
 /**
@@ -27,6 +32,7 @@ exports.getBadges = function getBadges (callback) {
  * @param {requestCallback} callback - Callback to handle response
  */
 exports.getAllBadges = function getAllBadges (callback) {
+  const client = this;
   const options = {
     path: '/badges',
     query: {archived: 'any'},
@@ -34,7 +40,10 @@ exports.getAllBadges = function getAllBadges (callback) {
     default: []
   };
 
-  this.remote.get(options, callback);
+  this.remote.get(options, function (err, badges) {
+    if (badges) badges = badges.map(fixBadge.bind(null, client));
+    callback(err, badges);
+  });
 }
 
 /**
@@ -44,12 +53,15 @@ exports.getAllBadges = function getAllBadges (callback) {
  * @param {requestCallback} callback - Callback to handle response
  */
 exports.getBadge = function getBadge (badge, callback) {
+  const client = this;
   const options = {
     path: '/badges/' + getSlug(badge),
     filter: 'badge'
   };
 
-  this.remote.get(options, callback);
+  this.remote.get(options, function (err, badge) {
+    callback(err, fixBadge(client, badge));
+  });
 }
 
 /**
