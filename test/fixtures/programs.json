@@ -1,0 +1,77 @@
+{
+  "testProgram": {
+    "slug": "test-program",
+    "name": "A Test Program",
+    "description": "This is a program, quite useful for testing"
+  },
+  "badBadge": {
+    "slug": "test-program",
+    "name": "",
+    "description": "This is a bad program, quite useful for testing"
+  },
+  "missingProgram": {
+    "slug": "missing-program",
+    "name": "A Missing Program",
+    "description": "This is a missing program, quite useful for testing"
+  },
+
+  "notFoundResponse": {
+    "error": "not found"
+  },
+
+  "creationSuccessResponse": {
+    "status": "created"
+  },
+  "creationDuplicateResponse": {
+    "error": "A program with that `slug` already exists",
+    "received": {
+      "slug": "test-program",
+      "name": "A Test Program",
+      "description": "This is a program, quite useful for testing"
+    }
+  },
+  "creationErrorResponse": {
+    "errors": [{
+      "name": "ValidatorError",
+      "message": "String is not in range",
+      "field": "name"
+    }]
+  },
+
+  "getResponse": {
+    "programs": [
+      {
+        "slug": "test-program",
+        "name": "A Test Program",
+        "description": "This is a program, quite useful for testing"
+      }
+    ]
+  },
+  "getSingleResponse": {
+    "program": {
+      "slug": "test-program",
+      "name": "A Test Program",
+      "description": "This is a program, quite useful for testing"
+    }
+  },
+
+  "updateSuccessResponse": {
+    "status": "updated"
+  },
+  "updateErrorResponse": {
+    "errors": [{
+      "name": "ValidatorError",
+      "message": "String is not in range",
+      "field": "name"
+    }]
+  },
+
+  "deleteSuccessResponse": {
+    "status": "deleted",
+    "program": {
+      "slug": "test-program",
+      "name": "A Test Program",
+      "description": "This is a program, quite useful for testing"
+    }
+  }
+}
