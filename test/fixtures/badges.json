@@ -3,14 +3,14 @@
     "slug": "test-badge",
     "name": "A Test Badge",
     "strapline": "A badge for testing",
-    "description": "This is a badge quite useful for testing",
+    "description": "This is a badge, quite useful for testing",
     "image": "http://example.org/badge.png"
   },
   "archivedBadge": {
     "slug": "archived-badge",
     "name": "An Archived Badge",
     "strapline": "An archived badge for testing",
-    "description": "This is an archived badge quite useful for testing",
+    "description": "This is an archived badge, quite useful for testing",
     "image": "http://example.org/badge.png",
     "archived": true
   },
@@ -23,7 +23,7 @@
   },
   "missingBadge": {
     "slug": "missing-badge",
-    "name": "Missing Badge",
+    "name": "A Missing Badge",
     "strapline": "A missing badge",
     "description": "This is a missing badge, quite useful for testing",
     "image": "http://example.org/badge.png"
@@ -39,11 +39,11 @@
   "creationDuplicateResponse": {
     "error": "A badge with that `slug` already exists",
     "received": {
-      "slug": "another-test-badge",
-      "name": "My Test Badge",
-      "strapline": "My Test Badge Strapline",
-      "description": "My Test Badge Description",
-      "imageId": 95
+      "slug": "test-badge",
+      "name": "A Test Badge",
+      "strapline": "A badge for testing",
+      "description": "This is a badge, quite useful for testing",
+      "imageId": 1
     }
   },
   "creationErrorResponse": {
@@ -60,7 +60,7 @@
         "slug": "test-badge",
         "name": "A Test Badge",
         "strapline": "A badge for testing",
-        "description": "This is a badge quite useful for testing",
+        "description": "This is a badge, quite useful for testing",
         "imageURL": "http://example.org/badge.png",
         "archived": false
       }
@@ -72,7 +72,7 @@
         "slug": "test-badge",
         "name": "A Test Badge",
         "strapline": "A badge for testing",
-        "description": "This is a badge quite useful for testing",
+        "description": "This is a badge, quite useful for testing",
         "imageURL": "http://example.org/badge.png",
         "archived": false
       },
@@ -80,7 +80,7 @@
         "slug": "archived-badge",
         "name": "An Archived Badge",
         "strapline": "An archived badge for testing",
-        "description": "This is an archived badge quite useful for testing",
+        "description": "This is an archived badge, quite useful for testing",
         "imageURL": "http://example.org/badge.png",
         "archived": true
       }
@@ -91,7 +91,7 @@
       "slug": "test-badge",
       "name": "A Test Badge",
       "strapline": "A badge for testing",
-      "description": "This is a badge quite useful for testing",
+      "description": "This is a badge, quite useful for testing",
       "imageURL": "http://example.org/badge.png",
       "archived": false
     }
@@ -114,7 +114,7 @@
       "slug": "test-badge",
       "name": "A Test Badge",
       "strapline": "A badge for testing",
-      "description": "This is a badge quite useful for testing",
+      "description": "This is a badge, quite useful for testing",
       "image": "http://example.org/badge.png",
       "archived": false
     }

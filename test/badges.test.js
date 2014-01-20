@@ -48,6 +48,7 @@ test('Getting badges', function (t) {
     .getAndReturn('/badges', fixtures.getResponse)
     .getAndReturn('/badges?archived=any', fixtures.getAllResponse)
     .getAndReturn('/badges/test-badge', fixtures.getSingleResponse)
+    .getAndReturn('/badges/test-badge', fixtures.getSingleResponse)
     .getAndReturn('/badges/missing-badge', fixtures.notFoundResponse, 404);
 
   async.series([
@@ -64,6 +65,14 @@ test('Getting badges', function (t) {
         t.same(badges.length, 2, 'Correct number of badges returned');
         done();
       })
+    },
+    function (done) {
+      client.getBadge(fixtures.testBadge.slug, function (err, badge) {
+        t.notOk(err, 'No error was raised when getting badge from slug');
+        t.ok(badge, 'A badge was returned');
+        t.same(badge.slug, 'test-badge', 'Appropriate badge was returned');
+        done();
+      });
     },
     function (done) {
       client.getBadge(fixtures.testBadge, function (err, badge) {
