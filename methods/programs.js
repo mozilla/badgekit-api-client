@@ -1,3 +1,4 @@
+const fixProgram = require('../lib/augment')('program');
 const getSlug = require('../lib/getSlug');
 
 /**
@@ -12,13 +13,17 @@ const getSlug = require('../lib/getSlug');
  * @param {requestCallback} callback - Callback to handle response
  */
 exports.getPrograms = function getPrograms (callback) {
+  const client = this;
   const options = {
     path: '/programs',
     filter: 'programs',
     default: []
   };
 
-  this.remote.get(options, callback);
+  this.remote.get(options, function (err, programs) {
+    if (programs) programs = programs.map(fixProgram.bind(null, client));
+    callback(err, programs);
+  });
 }
 
 /**
@@ -28,12 +33,15 @@ exports.getPrograms = function getPrograms (callback) {
  * @param {requestCallback} callback - Callback to handle response
  */
 exports.getProgram = function getProgram (program, callback) {
+  const client = this;
   const options = {
     path: '/programs/' + getSlug(program),
     filter: 'program'
   };
 
-  this.remote.get(options, callback);
+  this.remote.get(options, function (err, program) {
+    callback(err, fixProgram(client, program));
+  });
 }
 
 /**

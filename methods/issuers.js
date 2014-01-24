@@ -1,3 +1,4 @@
+const fixIssuer = require('../lib/augment')('issuer');
 const getSlug = require('../lib/getSlug');
 
 /**
@@ -12,13 +13,17 @@ const getSlug = require('../lib/getSlug');
  * @param {requestCallback} callback - Callback to handle response
  */
 exports.getIssuers = function getIssuers (callback) {
+  const client = this;
   const options = {
     path: '/issuers',
     filter: 'issuers',
     default: []
   };
 
-  this.remote.get(options, callback);
+  this.remote.get(options, function (err, issuers) {
+    if (issuers) issuers = issuers.map(fixIssuer.bind(null, client));
+    callback(err, issuers);
+  });
 }
 
 /**
@@ -28,12 +33,15 @@ exports.getIssuers = function getIssuers (callback) {
  * @param {requestCallback} callback - Callback to handle response
  */
 exports.getIssuer = function getIssuer (issuer, callback) {
+  const client = this;
   const options = {
     path: '/issuers/' + getSlug(issuer),
     filter: 'issuer'
   };
 
-  this.remote.get(options, callback);
+  this.remote.get(options, function (err, issuer) {
+    callback(err, fixIssuer(client, issuer));
+  });
 }
 
 /**
