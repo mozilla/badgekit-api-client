@@ -4,6 +4,8 @@ const methodSets = [
   require('./programs'),
   require('./badges'),
   require('./assessment'),
+  require('./claims'),
+  require('./issuing'),
 ];
 
 exports = module.exports = methodSets.reduce(function(methods, set) {
