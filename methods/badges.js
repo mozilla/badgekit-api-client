@@ -49,7 +49,7 @@ exports.getAllBadges = function getAllBadges (callback) {
 /**
  * Fetches a single badge
  * `GET /badges/<id>`
- * @param {string|object} badge - Slug (or object containing slug) identifying badge
+ * @param {string|object} badge - Slug (or object with `slug` property) identifying badge
  * @param {requestCallback} callback - Callback to handle response
  */
 exports.getBadge = function getBadge (badge, callback) {
@@ -83,7 +83,7 @@ exports.createBadge = function createBadge (badge, callback) {
 /**
  * Deletes an existing badges
  * `DELETE /badges/<id>`
- * @param {string|object} badge - Slug (or object containing slug) identifying badge
+ * @param {string|object} badge - Slug (or object with `slug` property) identifying badge
  * @param {requestCallback} callback - Callback to handle response
  */
 exports.deleteBadge = function deleteBadge (badge, callback) {

@@ -9,7 +9,7 @@ const getSlug = require('../lib/getSlug');
 /**
  * Fetches badge awards
  * `GET /badges/<id>/awards
- * @param {string|object} badge - Slug (or object containing slug) identifying badge
+ * @param {string|object} badge - Slug (or object with `slug` property) identifying badge
  * @param {requestCallback} callback - Callback to handle response
  */
 exports.getBadgeAwards = function getBadgeAwards (badge, callback) {
@@ -25,7 +25,7 @@ exports.getBadgeAwards = function getBadgeAwards (badge, callback) {
 /**
  * Awards a badge
  * `POST /badges/<id>/awards
- * @param {string|object} badge - Slug (or object containing slug) identifying badge
+ * @param {string|object} badge - Slug (or object with `slug` property) identifying badge
  * @param {object} award - Award
  * @param {requestCallback} callback - Callback to handle response
  */
@@ -42,8 +42,8 @@ exports.grantBadgeAward = function grantBadgeAward (badge, award, callback) {
 /**
  * Rescinds an awarded badge
  * `DELETE /badges/<id>/awards/<id>
- * @param {string|object} badge - Slug (or object containing slug) identifying badge
- * @param {string|object} award - Slug (or object containing slug) identifying award
+ * @param {string|object} badge - Slug (or object with `slug` property) identifying badge
+ * @param {string|object} award - Slug (or object with `slug` property) identifying award
  * @param {requestCallback} callback - Callback to handle response
  */
 exports.rescindBadgeAward = function rescindBadgeAward (badge, award, callback) {

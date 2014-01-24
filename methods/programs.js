@@ -29,7 +29,7 @@ exports.getPrograms = function getPrograms (callback) {
 /**
  * Fetches a single program
  * `GET /programs/<id>`
- * @param {string|object} program - Slug (or object containing slug) identifying program
+ * @param {string|object} program - Slug (or object with `slug` property) identifying program
  * @param {requestCallback} callback - Callback to handle response
  */
 exports.getProgram = function getProgram (program, callback) {
@@ -63,7 +63,7 @@ exports.createProgram = function createProgram (program, callback) {
 /**
  * Deletes an existing program
  * `DELETE /programs/<id>`
- * @param {string|object} program - Slug (or object containing slug) identifying program
+ * @param {string|object} program - Slug (or object with `slug` property) identifying program
  * @param {requestCallback} callback - Callback to handle response
  */
 exports.deleteProgram = function deleteProgram (program, callback) {

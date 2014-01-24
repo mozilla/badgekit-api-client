@@ -29,7 +29,7 @@ exports.getIssuers = function getIssuers (callback) {
 /**
  * Fetches a single issuer
  * `GET /issuers/<id>`
- * @param {string|object} issuer - Slug (or object containing slug) identifying issuer
+ * @param {string|object} issuer - Slug (or object with `slug` property) identifying issuer
  * @param {requestCallback} callback - Callback to handle response
  */
 exports.getIssuer = function getIssuer (issuer, callback) {
@@ -63,7 +63,7 @@ exports.createIssuer = function createIssuer (issuer, callback) {
 /**
  * Deletes an existing issuer
  * `DELETE /issuers/<id>`
- * @param {string|object} issuer - Slug (or object containing slug) identifying issuer
+ * @param {string|object} issuer - Slug (or object with `slug` property) identifying issuer
  * @param {requestCallback} callback - Callback to handle response
  */
 exports.deleteIssuer = function deleteIssuer (issuer, callback) {

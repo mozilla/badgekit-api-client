@@ -9,7 +9,7 @@ const getSlug = require('../lib/getSlug');
 /**
  * Fetches applications for a badge
  * `GET /badges/<id>/applications`
- * @param {string|object} badge - Slug (or object containing slug) identifying badge
+ * @param {string|object} badge - Slug (or object with `slug` property) identifying badge
  * @param {requestCallback} callback - Callback to handle response
  */
 exports.getBadgeApplications = function getBadgeApplications (badge, callback) {
@@ -25,7 +25,7 @@ exports.getBadgeApplications = function getBadgeApplications (badge, callback) {
 /**
  * Adds application to a badge
  * `POST /badges/<id>/applications`
- * @param {string|object} badge - Slug (or object containing slug) identifying badge
+ * @param {string|object} badge - Slug (or object with `slug` property) identifying badge
  * @param {object} application - Application object
  * @param {requestCallback} callback - Callback to handle response
  */
@@ -42,8 +42,8 @@ exports.addBadgeApplication = function addBadgeApplication (badge, application, 
 /**
  * Fetches evidence for a given application
  * `GET /badges/<id>/applications/<id>/evidence`
- * @param {string|object} badge - Slug (or object containing slug) identifying badge
- * @param {string|object} application - Slug (or object containing slug) identifying application
+ * @param {string|object} badge - Slug (or object with `slug` property) identifying badge
+ * @param {string|object} application - Slug (or object with `slug` property) identifying application
  * @param {requestCallback} callback - Callback to handle response
  */
 exports.getAllBadgeApplicationEvidence = function getAllBadgeApplicationEvidence (badge, application, callback) {
@@ -59,8 +59,8 @@ exports.getAllBadgeApplicationEvidence = function getAllBadgeApplicationEvidence
 /**
  * Adds evidence to a given application
  * `POST /badges/<id>/applications/<id>/evidence`
- * @param {string|object} badge - Slug (or object containing slug) identifying badge
- * @param {string|object} application - Slug (or object containing slug) identifying application
+ * @param {string|object} badge - Slug (or object with `slug` property) identifying badge
+ * @param {string|object} application - Slug (or object with `slug` property) identifying application
  * @param {object} evidence - Evidence object
  * @param {requestCallback} callback - Callback to handle response
  */
@@ -77,9 +77,9 @@ exports.addBadgeApplicationEvidence = function addBadgeApplicationEvidence (badg
 /**
  * Fetches a single piece of evidence for a given application
  * `GET /badges/<id>/applications/<id>/evidence/<id>`
- * @param {string|object} badge - Slug (or object containing slug) identifying badge
- * @param {string|object} application - Slug (or object containing slug) identifying application
- * @param {string|object} evidence - Slug (or object containing slug) identifying evidence
+ * @param {string|object} badge - Slug (or object with `slug` property) identifying badge
+ * @param {string|object} application - Slug (or object with `slug` property) identifying application
+ * @param {string|object} evidence - Slug (or object with `slug` property) identifying evidence
  * @param {requestCallback} callback - Callback to handle response
  */
 exports.getBadgeApplicationEvidence = function getBadgeApplicationEvidence (badge, application, evidence, callback) {
@@ -94,9 +94,9 @@ exports.getBadgeApplicationEvidence = function getBadgeApplicationEvidence (badg
 /**
  * Fetches a single piece of evidence for a given application
  * `DELETE /badges/<id>/applications/<id>/evidence/<id>`
- * @param {string|object} badge - Slug (or object containing slug) identifying badge
- * @param {string|object} application - Slug (or object containing slug) identifying application
- * @param {string|object} evidence - Slug (or object containing slug) identifying evidence
+ * @param {string|object} badge - Slug (or object with `slug` property) identifying badge
+ * @param {string|object} application - Slug (or object with `slug` property) identifying application
+ * @param {string|object} evidence - Slug (or object with `slug` property) identifying evidence
  * @param {requestCallback} callback - Callback to handle response
  */
 exports.deleteBadgeApplicationEvidence = function deleteBadgeApplicationEvidence (badge, application, evidence, callback) {
@@ -111,8 +111,8 @@ exports.deleteBadgeApplicationEvidence = function deleteBadgeApplicationEvidence
 /**
  * Adds a comment to a given application
  * `POST /badges/<id>/applications/<id>/comment`
- * @param {string|object} badge - Slug (or object containing slug) identifying badge
- * @param {string|object} application - Slug (or object containing slug) identifying application
+ * @param {string|object} badge - Slug (or object with `slug` property) identifying badge
+ * @param {string|object} application - Slug (or object with `slug` property) identifying application
  * @param {object} comment - Comment object
  * @param {requestCallback} callback - Callback to handle response
  */
@@ -129,8 +129,8 @@ exports.addBadgeApplicationComment = function addBadgeApplicationComment (badge,
 /**
  * Approves a given application
  * `POST /badges/<id>/applications/<id>/approve`
- * @param {string|object} badge - Slug (or object containing slug) identifying badge
- * @param {string|object} application - Slug (or object containing slug) identifying application
+ * @param {string|object} badge - Slug (or object with `slug` property) identifying badge
+ * @param {string|object} application - Slug (or object with `slug` property) identifying application
  * @param {requestCallback} callback - Callback to handle response
  */
 exports.approveBadgeApplication = function approveBadgeApplication (badge, application, callback) {
@@ -145,8 +145,8 @@ exports.approveBadgeApplication = function approveBadgeApplication (badge, appli
 /**
  * Denies a given application
  * `POST /badges/<id>/applications/<id>/deny`
- * @param {string|object} badge - Slug (or object containing slug) identifying badge
- * @param {string|object} application - Slug (or object containing slug) identifying application
+ * @param {string|object} badge - Slug (or object with `slug` property) identifying badge
+ * @param {string|object} application - Slug (or object with `slug` property) identifying application
  * @param {requestCallback} callback - Callback to handle response
  */
 exports.denyBadgeApplication = function denyBadgeApplication (badge, application, callback) {
