@@ -43,7 +43,9 @@ Creates a new system.
 * *system*: `object`  
   System object
 
-**Returns** the created system object.
+**Returns** the action status.
+
+**@TODO** - should return the created system object.
 
 ### `deleteSystem`
 
@@ -54,7 +56,9 @@ Deletes an system.
 * *slug*: `string`|`object`  
   Slug (or object with `slug` property) identifying system.
 
-**Returns** the deleted system object.
+**Returns** the action status.
+
+**@TODO** - should return the deleted system object.
 
 ### `updateSystem`
 
@@ -65,7 +69,9 @@ Updates a given system.
 * *system*: `object`  
   System object
 
-**Returns** the updated system
+**Returns** the action status.
+
+**@TODO** - should return the updated system object.
 
 ## Callbacks
 

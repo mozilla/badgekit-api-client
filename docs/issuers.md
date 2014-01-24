@@ -43,7 +43,9 @@ Creates a new issuer.
 * *issuer*: `object`  
   Issuer object
 
-**Returns** the created issuer object.
+**Returns** the action status.
+
+**@TODO** - should return the created issuer object.
 
 ### `deleteIssuer`
 
@@ -54,7 +56,9 @@ Deletes an issuer.
 * *slug*: `string`|`object`  
   Slug (or object with `slug` property) identifying issuer.
 
-**Returns** the deleted issuer object.
+**Returns** the action status.
+
+**@TODO** - should return the deleted issuer object.
 
 ### `updateIssuer`
 
@@ -65,7 +69,9 @@ Updates a given issuer.
 * *issuer*: `object`  
   Issuer object
 
-**Returns** the updated issuer
+**Returns** the action status.
+
+**@TODO** - should return the updated issuer object.
 
 ## Callbacks
 

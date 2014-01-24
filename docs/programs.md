@@ -43,7 +43,9 @@ Creates a new program.
 * *program*: `object`  
   Program object
 
-**Returns** the created program object.
+**Returns** the action status.
+
+**@TODO** - should return the created program object.
 
 ### `deleteProgram`
 
@@ -54,7 +56,9 @@ Deletes an program.
 * *slug*: `string`|`object`  
   Slug (or object with `slug` property) identifying program.
 
-**Returns** the deleted program object.
+**Returns** the action status.
+
+**@TODO** - should return the deleted program object.
 
 ### `updateProgram`
 
@@ -65,7 +69,9 @@ Updates a given program.
 * *program*: `object`  
   Program object
 
-**Returns** the updated program
+**Returns** the action status.
+
+**@TODO** - should return the updated program object.
 
 ## Callbacks
 
