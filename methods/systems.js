@@ -1,91 +1,39 @@
-const fixSystem = require('../lib/augment')('system');
-const getSlug = require('../lib/getSlug');
+const utils = require('../lib/modelUtils');
 
-/**
- * @callback requestCallback
- * @param {?object} err - Resulting error, if raised
- * @param {?*} data - Resulting data, if returned
- */
+const System = require('../models/system');
 
-/**
- * Fetches all systems
- * `GET /systems`
- * @param {requestCallback} callback - Callback to handle response
- */
 exports.getSystems = function getSystems (callback) {
-  const client = this;
   const options = {
-    path: '/systems',
+    path: this._path + System.pathPart,
     filter: 'systems',
-    default: []
+    default: [],
+    generator: new utils.Generator(System, this)
   };
 
-  this.remote.get(options, function (err, systems) {
-    if (systems) systems = systems.map(fixSystem.bind(null, client));
-    callback(err, systems);
+  this._remote.get(options, callback);
+}
+
+function doSystemAction(context, client, action, callback) {
+  utils.getContext(context, client, 'System', function (err, system) {
+    if (err)
+      return callback(err, null);
+
+    system[action](callback);
   });
 }
 
-/**
- * Fetches a single system
- * `GET /systems/<id>`
- * @param {string|object} system - Slug (or object with `slug` property) identifying system
- * @param {requestCallback} callback - Callback to handle response
- */
-exports.getSystem = function getSystem (system, callback) {
-  const options = {
-    path: '/systems/' + getSlug(system),
-    filter: 'system'
-  };
-
-  this.remote.get(options, function (err, system) {
-    callback(err, fixSystem(client, system));
-  });
+exports.getSystem = function getSystem (context, callback) {
+  doSystemAction(context, this, 'load', callback);
 }
 
-/**
- * Creates a new system
- * `POST /systems`
- * @param {object} system - System object
- * @param {requestCallback} callback - Callback to handle response
- */
-exports.createSystem = function createSystem (system, callback) {
-  const options = {
-    path: '/systems',
-    json: system,
-    filter: 'status'
-  };
-
-  this.remote.post(options, callback);
+exports.createSystem = function createSystem (context, callback) {
+  doSystemAction(context, this, 'create', callback);
 }
 
-/**
- * Deletes an existing system
- * `DELETE /systems/<id>`
- * @param {string|object} system - Slug (or object with `slug` property) identifying system
- * @param {requestCallback} callback - Callback to handle response
- */
-exports.deleteSystem = function deleteSystem (system, callback) {
-  const options = {
-    path: '/systems/' + getSlug(system),
-    filter: 'status'
-  };
-
-  this.remote.del(options, callback);
+exports.deleteSystem = function deleteSystem (context, callback) {
+  doSystemAction(context, this, 'delete', callback);
 }
 
-/**
- * Updates an existing system
- * `PUT /systems/<id>`
- * @param {object} system - System object
- * @param {requestCallback} callback - Callback to handle response
- */
-exports.updateSystem = function updateSystem (system, callback) {
-  const options = {
-    path: '/systems/' + getSlug(system),
-    json: system,
-    filter: 'status'
-  };
-
-  this.remote.put(options, callback);
+exports.updateSystem = function updateSystem (context, callback) {
+  doSystemAction(context, this, 'save', callback);
 }

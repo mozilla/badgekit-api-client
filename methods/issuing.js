@@ -1,56 +1,44 @@
-const getSlug = require('../lib/getSlug');
+const utils = require('../lib/modelUtils');
 
-/**
- * @callback requestCallback
- * @param {?object} err - Resulting error, if raised
- * @param {?*} data - Resulting data, if returned
- */
+const BadgeInstance = require('../models/badgeInstance');
 
-/**
- * Fetches badge awards
- * `GET /badges/<id>/awards
- * @param {string|object} badge - Slug (or object with `slug` property) identifying badge
- * @param {requestCallback} callback - Callback to handle response
- */
-exports.getBadgeAwards = function getBadgeAwards (badge, callback) {
-  const options = {
-    path: '/badges/' + getSlug(badge) + '/awards',
-    filter: 'awards',
-    default: []
-  };
+exports.getBadgeInstances = function getBadgeInstances (context, callback) {
+  utils.getContext(context, this, 'Badge', function (err, badge) {
+    if (err)
+      return callback(err, null);
 
-  this.remote.get(options, callback);
+    const options = {
+      path: badge._path + BadgeInstance.pathPart,
+      filter: 'instances',
+      default: [],
+      generator: new utils.Generator(BadgeInstance, context)
+    };
+
+    this._remote.get(options, callback);
+  }.bind(this));
 }
 
-/**
- * Awards a badge
- * `POST /badges/<id>/awards
- * @param {string|object} badge - Slug (or object with `slug` property) identifying badge
- * @param {object} award - Award
- * @param {requestCallback} callback - Callback to handle response
- */
-exports.grantBadgeAward = function grantBadgeAward (badge, award, callback) {
-  const options = {
-    path: '/badges/' + getSlug(badge) + '/awards',
-    json: award,
-    filter: 'status'
-  };
+function doBadgeInstanceAction(context, client, action, callback) {
+  utils.getContext(context, client, 'BadgeInstance', function (err, badgeInstance) {
+    if (err)
+      return callback(err, null);
 
-  this.remote.post(options, callback);
+    badgeInstance[action](callback);
+  });
 }
 
-/**
- * Rescinds an awarded badge
- * `DELETE /badges/<id>/awards/<id>
- * @param {string|object} badge - Slug (or object with `slug` property) identifying badge
- * @param {string|object} award - Slug (or object with `slug` property) identifying award
- * @param {requestCallback} callback - Callback to handle response
- */
-exports.rescindBadgeAward = function rescindBadgeAward (badge, award, callback) {
-  const options = {
-    path: '/awards/' + getSlug(badge) + '/awards/' + getSlug(award),
-    filter: 'status'
-  };
+exports.getBadgeInstance = function getBadgeInstance (context, callback) {
+  doBadgeInstanceAction(context, this, 'load', callback);
+}
 
-  this.remote.delete(options, callback);
+exports.createBadgeInstance = function createBadgeInstance (context, callback) {
+  doBadgeInstanceAction(context, this, 'create', callback);
+}
+
+exports.deleteBadgeInstance = function deleteBadgeInstance (context, callback) {
+  doBadgeInstanceAction(context, this, 'delete', callback);
+}
+
+exports.updateBadgeInstance = function updateBadgeInstance (context, callback) {
+  doBadgeInstanceAction(context, this, 'save', callback);
 }

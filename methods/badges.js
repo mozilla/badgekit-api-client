@@ -1,113 +1,53 @@
-const fixBadge = require('../lib/augment')('badge');
-const getSlug = require('../lib/getSlug');
+const utils = require('../lib/modelUtils');
 
-/**
- * @callback requestCallback
- * @param {?object} err - Resulting error, if raised
- * @param {?*} data - Resulting data, if returned
- */
+const Badge = require('../models/badge');
 
-/**
- * Fetches public badges
- * `GET /badges`
- * @param {requestCallback} callback - Callback to handle response
- */
-exports.getBadges = function getBadges (callback) {
-  const client = this;
-  const options = {
-    path: '/badges',
-    filter: 'badges',
-    default: []
-  };
+function findBadges (context, client, callback, query) {
+  utils.getContext(context, client, function (err, context) {
+    if (err)
+      return callback(err, null);
 
-  this.remote.get(options, function (err, badges) {
-    if (badges) badges = badges.map(fixBadge.bind(null, client));
-    callback(err, badges);
+    const options = {
+      path: context._path + Badge.pathPart,
+      filter: 'badges',
+      default: [],
+      generator: new utils.Generator(Badge, context),
+      query: query ? query : undefined
+    };
+
+    client._remote.get(options, callback);
   });
 }
 
-/**
- * Fetches all badges, including those which are archived
- * `GET /badges?archived=any`
- * @param {requestCallback} callback - Callback to handle response
- */
-exports.getAllBadges = function getAllBadges (callback) {
-  const client = this;
-  const options = {
-    path: '/badges',
-    query: {archived: 'any'},
-    filter: 'badges',
-    default: []
-  };
+exports.getBadges = function getBadges (context, callback) {
+  findBadges(context, this, callback);
+}
 
-  this.remote.get(options, function (err, badges) {
-    if (badges) badges = badges.map(fixBadge.bind(null, client));
-    callback(err, badges);
+exports.getAllBadges = function getAllBadges (context, callback) {
+  findBadges(context, this, callback, {archived: 'any'});
+}
+
+function doBadgeAction(context, client, action, callback) {
+  utils.getContext(context, client, 'Badge', function (err, badge) {
+    if (err)
+      return callback(err, null);
+
+    badge[action](callback);
   });
 }
 
-/**
- * Fetches a single badge
- * `GET /badges/<id>`
- * @param {string|object} badge - Slug (or object with `slug` property) identifying badge
- * @param {requestCallback} callback - Callback to handle response
- */
-exports.getBadge = function getBadge (badge, callback) {
-  const client = this;
-  const options = {
-    path: '/badges/' + getSlug(badge),
-    filter: 'badge'
-  };
-
-  this.remote.get(options, function (err, badge) {
-    callback(err, fixBadge(client, badge));
-  });
+exports.getBadge = function getBadge (context, callback) {
+  doBadgeAction(context, this, 'load', callback);
 }
 
-/**
- * Creates a new badge
- * `POST /badges`
- * @param {object} badge - Badge object
- * @param {requestCallback} callback - Callback to handle response
- */
-exports.createBadge = function createBadge (badge, callback) {
-  const options = {
-    path: '/badges',
-    json: badge,
-    filter: 'status'
-  };
-
-  this.remote.post(options, callback);
+exports.createBadge = function createBadge (context, callback) {
+  doBadgeAction(context, this, 'create', callback);
 }
 
-/**
- * Deletes an existing badges
- * `DELETE /badges/<id>`
- * @param {string|object} badge - Slug (or object with `slug` property) identifying badge
- * @param {requestCallback} callback - Callback to handle response
- */
-exports.deleteBadge = function deleteBadge (badge, callback) {
-  const options = {
-    path: '/badges/' + getSlug(badge),
-    filter: 'status'
-  };
-
-  this.remote.del(options, callback);
+exports.deleteBadge = function deleteBadge (context, callback) {
+  doBadgeAction(context, this, 'delete', callback);
 }
 
-/**
- * Updates an existing badge
- * `PUT /badges/<id>`
- * @param {object} badge - Badge object
- * @param {requestCallback} callback - Callback to handle response
- */
-exports.updateBadge = function updateBadge (badge, callback) {
-  const options = {
-    path: '/badges/' + getSlug(badge),
-    json: badge,
-    filter: 'status'
-  };
-
-  console.log(options);
-  this.remote.put(options, callback);
+exports.updateBadge = function updateBadge (context, callback) {
+  doBadgeAction(context, this, 'save', callback);
 }

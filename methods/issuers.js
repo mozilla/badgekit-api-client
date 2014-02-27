@@ -1,92 +1,44 @@
-const fixIssuer = require('../lib/augment')('issuer');
-const getSlug = require('../lib/getSlug');
+const utils = require('../lib/modelUtils');
 
-/**
- * @callback requestCallback
- * @param {?object} err - Resulting error, if raised
- * @param {?*} data - Resulting data, if returned
- */
+const Issuer = require('../models/issuer');
 
-/**
- * Fetches public issuers
- * `GET /issuers`
- * @param {requestCallback} callback - Callback to handle response
- */
-exports.getIssuers = function getIssuers (callback) {
-  const client = this;
-  const options = {
-    path: '/issuers',
-    filter: 'issuers',
-    default: []
-  };
+exports.getIssuers = function getIssuers (context, callback) {
+  utils.getContext(context, this, 'System', function (err, system) {
+    if (err)
+      return callback(err, null);
 
-  this.remote.get(options, function (err, issuers) {
-    if (issuers) issuers = issuers.map(fixIssuer.bind(null, client));
-    callback(err, issuers);
+    const options = {
+      path: system._path + Issuer.pathPart,
+      filter: 'issuers',
+      default: [],
+      generator: new utils.Generator(Issuer, system)
+    };
+
+    this._remote.get(options, callback);
+  }.bind(this));
+}
+
+function doIssuerAction(context, client, action, callback) {
+  utils.getContext(context, client, 'Issuer', function (err, issuer) {
+    if (err)
+      return callback(err, null);
+
+    issuer[action](callback);
   });
 }
 
-/**
- * Fetches a single issuer
- * `GET /issuers/<id>`
- * @param {string|object} issuer - Slug (or object with `slug` property) identifying issuer
- * @param {requestCallback} callback - Callback to handle response
- */
-exports.getIssuer = function getIssuer (issuer, callback) {
-  const client = this;
-  const options = {
-    path: '/issuers/' + getSlug(issuer),
-    filter: 'issuer'
-  };
-
-  this.remote.get(options, function (err, issuer) {
-    callback(err, fixIssuer(client, issuer));
-  });
+exports.getIssuer = function getIssuer (context, callback) {
+  doIssuerAction(context, this, 'load', callback);
 }
 
-/**
- * Creates a new issuer
- * `POST /issuers`
- * @param {object} issuer - Issuer object
- * @param {requestCallback} callback - Callback to handle response
- */
-exports.createIssuer = function createIssuer (issuer, callback) {
-  const options = {
-    path: '/issuers',
-    json: issuer,
-    filter: 'status'
-  };
-
-  this.remote.post(options, callback);
+exports.createIssuer = function createIssuer (context, callback) {
+  doIssuerAction(context, this, 'create', callback);
 }
 
-/**
- * Deletes an existing issuer
- * `DELETE /issuers/<id>`
- * @param {string|object} issuer - Slug (or object with `slug` property) identifying issuer
- * @param {requestCallback} callback - Callback to handle response
- */
-exports.deleteIssuer = function deleteIssuer (issuer, callback) {
-  const options = {
-    path: '/issuers/' + getSlug(issuer),
-    filter: 'status'
-  };
-
-  this.remote.del(options, callback);
+exports.deleteIssuer = function deleteIssuer (context, callback) {
+  doIssuerAction(context, this, 'delete', callback);
 }
 
-/**
- * Updates an existing issuer
- * `PUT /issuers/<id>`
- * @param {object} issuer - Issuer object
- * @param {requestCallback} callback - Callback to handle response
- */
-exports.updateIssuer = function updateIssuer (issuer, callback) {
-  const options = {
-    path: '/issuers/' + getSlug(issuer),
-    json: issuer,
-    filter: 'status'
-  };
-
-  this.remote.put(options, callback);
+exports.updateIssuer = function updateIssuer (context, callback) {
+  doIssuerAction(context, this, 'save', callback);
 }

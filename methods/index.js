@@ -1,11 +1,13 @@
+const utils = require('../lib/modelUtils');
+
 const methodSets = [
   require('./systems'),
   require('./issuers'),
   require('./programs'),
   require('./badges'),
-  require('./assessment'),
-  require('./claims'),
+  require('./claimCodes'),
   require('./issuing'),
+  require('./assessment'),
 ];
 
 exports = module.exports = methodSets.reduce(function(methods, set) {

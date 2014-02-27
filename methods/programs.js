@@ -1,92 +1,44 @@
-const fixProgram = require('../lib/augment')('program');
-const getSlug = require('../lib/getSlug');
+const utils = require('../lib/modelUtils');
 
-/**
- * @callback requestCallback
- * @param {?object} err - Resulting error, if raised
- * @param {?*} data - Resulting data, if returned
- */
+const Program = require('../models/program');
 
-/**
- * Fetches all programs
- * `GET /programs`
- * @param {requestCallback} callback - Callback to handle response
- */
-exports.getPrograms = function getPrograms (callback) {
-  const client = this;
-  const options = {
-    path: '/programs',
-    filter: 'programs',
-    default: []
-  };
+exports.getPrograms = function getPrograms (context, callback) {
+  utils.getContext(context, this, 'Issuer', function (err, issuer) {
+    if (err)
+      return callback(err, null);
 
-  this.remote.get(options, function (err, programs) {
-    if (programs) programs = programs.map(fixProgram.bind(null, client));
-    callback(err, programs);
+    const options = {
+      path: issuer._path + Program.pathPart,
+      filter: 'programs',
+      default: [],
+      generator: new utils.Generator(Program, issuer)
+    };
+
+    this._remote.get(options, callback);
+  }.bind(this));
+}
+
+function doProgramAction(context, client, action, callback) {
+  utils.getContext(context, client, 'Program', function (err, program) {
+    if (err)
+      return callback(err, null);
+
+    program[action](callback);
   });
 }
 
-/**
- * Fetches a single program
- * `GET /programs/<id>`
- * @param {string|object} program - Slug (or object with `slug` property) identifying program
- * @param {requestCallback} callback - Callback to handle response
- */
-exports.getProgram = function getProgram (program, callback) {
-  const client = this;
-  const options = {
-    path: '/programs/' + getSlug(program),
-    filter: 'program'
-  };
-
-  this.remote.get(options, function (err, program) {
-    callback(err, fixProgram(client, program));
-  });
+exports.getProgram = function getProgram (context, callback) {
+  doProgramAction(context, this, 'load', callback);
 }
 
-/**
- * Creates a new program
- * `POST /programs`
- * @param {object} program - Program object
- * @param {requestCallback} callback - Callback to handle response
- */
-exports.createProgram = function createProgram (program, callback) {
-  const options = {
-    path: '/programs',
-    json: program,
-    filter: 'status'
-  };
-
-  this.remote.post(options, callback);
+exports.createProgram = function createProgram (context, callback) {
+  doProgramAction(context, this, 'create', callback);
 }
 
-/**
- * Deletes an existing program
- * `DELETE /programs/<id>`
- * @param {string|object} program - Slug (or object with `slug` property) identifying program
- * @param {requestCallback} callback - Callback to handle response
- */
-exports.deleteProgram = function deleteProgram (program, callback) {
-  const options = {
-    path: '/programs/' + getSlug(program),
-    filter: 'status'
-  };
-
-  this.remote.del(options, callback);
+exports.deleteProgram = function deleteProgram (context, callback) {
+  doProgramAction(context, this, 'delete', callback);
 }
 
-/**
- * Updates an existing program
- * `PUT /programs/<id>`
- * @param {object} program - Program object
- * @param {requestCallback} callback - Callback to handle response
- */
-exports.updateProgram = function updateProgram (program, callback) {
-  const options = {
-    path: '/programs/' + getSlug(program),
-    json: program,
-    filter: 'status'
-  };
-
-  this.remote.put(options, callback);
+exports.updateProgram = function updateProgram (context, callback) {
+  doProgramAction(context, this, 'save', callback);
 }
