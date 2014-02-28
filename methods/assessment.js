@@ -1,6 +1,6 @@
 const utils = require('../lib/modelUtils');
 
-const Application = require('../models/Application');
+const Application = require('../models/application');
 
 exports.getApplications = function getApplications (context, callback) {
   utils.getContext(context, this, function (err, context) {
