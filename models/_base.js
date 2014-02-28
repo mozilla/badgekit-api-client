@@ -74,7 +74,14 @@ utils.initModel(BaseModel, {
     doAction(this, 'get', callback);
   },
   save: function saveItem (callback) {
-    doAction(this, 'put', callback);
+    const options = {
+      path: this._path,
+      data: this,
+      filter: this.constructor.name.toLowerCase(),
+      generator: new utils.Generator(this.constructor, this._parent)
+    }
+
+    this._remote.put(options, callback);
   },
   delete: function deleteItem (callback) {
     doAction(this, 'delete', callback);
