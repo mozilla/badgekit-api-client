@@ -13,4 +13,4 @@ Object.defineProperty(Comment, 'pathIdentifier', {value: 'id'});
 
 utils.initModel(Comment, '/comment', {}, BaseModel);
 
-exports = module.exports = Evidence;
+exports = module.exports = Comment;
