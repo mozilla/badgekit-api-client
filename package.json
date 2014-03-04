@@ -1,5 +1,5 @@
 {
-  "name": "badgekit-issue-client",
+  "name": "badgekit-api-client",
   "version": "0.2.0",
   "description": "A client for the badgekit issuer",
   "main": "index.js",
@@ -22,12 +22,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/mozilla/badgekit-issue-client.git"
+    "url": "git://github.com/mozilla/badgekit-api-client.git"
   },
   "bugs": {
-    "url": "https://github.com/mozilla/badgekit-issue-client/issues"
+    "url": "https://github.com/mozilla/badgekit-api-client/issues"
   },
-  "homepage": "https://github.com/mozilla/badgekit-issue-client",
+  "homepage": "https://github.com/mozilla/badgekit-api-client",
   "jshintConfig": {
     "esnext": true,
     "asi": true
