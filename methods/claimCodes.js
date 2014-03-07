@@ -33,7 +33,7 @@ function doClaimCodeAction(context, client, action, callback) {
       return callback(err, null);
 
     if (claimCode._parent.constructor.name !== 'Badge') {
-      var err = new Error('Missing badge');
+      err = new Error('Missing badge');
       Object.defineProperty(err, 'name', 'ContextError');
       return callback(err, null);
     }
@@ -54,6 +54,6 @@ exports.deleteClaimCode = function deleteClaimCode (context, callback) {
   doClaimCodeAction(context, this, 'delete', callback);
 }
 
-exports.updateIssuer = function updateIssuer (context, callback) {
+exports.updateClaimCode = function updateClaimCode (context, callback) {
   doClaimCodeAction(context, this, 'save', callback);
 }

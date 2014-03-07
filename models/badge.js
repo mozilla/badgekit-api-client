@@ -37,11 +37,11 @@ function Badge (data, parent) {
 
 utils.initModel(Badge, '/badges', {
   addApplication: function addApplication (application, callback) {
-    var application = new models.Application(application, this);
+    application = new models.Application(application, this);
     application.create(callback);
   },
   addClaimCode: function addClaimCode (code, callback) {
-    var code = new models.Code(code, this);
+    code = new models.Code(code, this);
     code.create(callback);
   },
   generateClaimCode: function generateClaimCode (callback) {
