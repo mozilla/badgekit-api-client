@@ -26,13 +26,13 @@ function Badge (data, parent) {
   loadModels();
 
   if (this.system)
-    this.system = (new utils.Generator(models.System, this._heritage.client))(this.system);
+    this.system = new models.System(this.system, this._heritage.client);
 
   if (this.issuer)
-    this.issuer = (new utils.Generator(models.Issuer, this._heritage.system))(this.issuer);
+    this.issuer = new models.Issuer(this.issuer, this.system);
 
   if (this.program)
-    this.program = (new utils.Generator(models.Program, this._heritage.issuer))(this.program);
+    this.program = new models.Program(this.program, this.issuer);
 }
 
 utils.initModel(Badge, '/badges', {
