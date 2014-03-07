@@ -109,5 +109,5 @@ getClient(function (client) {
   test(':cleanup:', function (t) {
     client.done();
     t.end();
-  })
+  });
 });

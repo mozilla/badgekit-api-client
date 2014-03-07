@@ -8,7 +8,6 @@ getClient(function (client) {
     client.getIssuers(context, function (err, issuers) {
       t.notOk(err, 'No error was thrown');
       t.same(issuers.length, 1, 'One issuer was found');
-      console.log(issuers);
 
       t.end();
     });
@@ -86,7 +85,6 @@ getClient(function (client) {
     };
 
     client.updateIssuer(context, function (err, issuer) {
-      console.log('Update: %j', err ? err.details : issuer);
       t.notOk(err, 'No error was thrown');
       t.same(issuer.slug, context.issuer.slug, 'Correct issuer was returned');
       t.same(issuer.name, context.issuer.name, 'Issuer was correctly updated');
@@ -131,5 +129,5 @@ getClient(function (client) {
   test(':cleanup:', function (t) {
     client.done();
     t.end();
-  })
+  });
 });
