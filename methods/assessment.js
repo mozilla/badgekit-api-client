@@ -15,7 +15,7 @@ exports.getApplications = function getApplications (context, callback) {
     };
 
     this._remote.get(options, callback);
-  });
+  }.bind(this));
 }
 
 exports.getApplication = function getApplication (context, callback) {

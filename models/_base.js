@@ -50,9 +50,12 @@ function BaseModel (data, parent) {
 }
 
 function doAction (item, method, callback) {
+  var filter = item.constructor.name;
+  filter = filter.charAt(0).toLowerCase() + filter.substr(1);
+
   const options = {
     path: item._path,
-    filter: item.constructor.name.toLowerCase(),
+    filter: filter,
     generator: new utils.Generator(item.constructor, item._parent)
   };
 
@@ -61,10 +64,13 @@ function doAction (item, method, callback) {
 
 utils.initModel(BaseModel, {
   create: function createItem (callback) {
+    var filter = this.constructor.name;
+    filter = filter.charAt(0).toLowerCase() + filter.substr(1);
+
     const options = {
       path: this._parent._path + this.constructor.pathPart,
       data: this,
-      filter: this.constructor.name.toLowerCase(),
+      filter: filter,
       generator: new utils.Generator(this.constructor, this._parent)
     }
 
@@ -74,10 +80,13 @@ utils.initModel(BaseModel, {
     doAction(this, 'get', callback);
   },
   save: function saveItem (callback) {
+    var filter = this.constructor.name;
+    filter = filter.charAt(0).toLowerCase() + filter.substr(1);
+
     const options = {
       path: this._path,
       data: this,
-      filter: this.constructor.name.toLowerCase(),
+      filter: filter,
       generator: new utils.Generator(this.constructor, this._parent)
     }
 

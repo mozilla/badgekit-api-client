@@ -13,7 +13,7 @@ function loadModels () {
     System: require('./system'),
     Application: require('./application'),
     BadgeInstance: require('./instance'),
-    Code: require('./code')
+    ClaimCode: require('./claimCode')
   }
 }
 
@@ -26,29 +26,29 @@ function Badge (data, parent) {
   loadModels();
 
   if (this.system)
-    this.system = (new utils.Generator(models.System, this._heritage.client))(this.system);
+    this.system = new models.System(this.system, this._heritage.client);
 
   if (this.issuer)
-    this.issuer = (new utils.Generator(models.Issuer, this._heritage.system))(this.issuer);
+    this.issuer = new models.Issuer(this.issuer, this.system);
 
   if (this.program)
-    this.program = (new utils.Generator(models.Program, this._heritage.issuer))(this.program);
+    this.program = new models.Program(this.program, this.issuer);
 }
 
 utils.initModel(Badge, '/badges', {
   addApplication: function addApplication (application, callback) {
-    var application = new models.Application(application, this);
+    application = new models.Application(application, this);
     application.create(callback);
   },
-  addClaimCode: function addClaimCode (code, callback) {
-    var code = new models.Code(code, this);
-    code.create(callback);
+  addClaimCode: function addClaimCode (claimCode, callback) {
+    claimCode = new models.ClaimCode(claimCode, this);
+    claimCode.create(callback);
   },
   generateClaimCode: function generateClaimCode (callback) {
     const options = {
-      path: this._path + models.Code.pathPart + '/random',
-      filter: 'code',
-      generator: new utils.Generator(models.Code, this)
+      path: this._path + models.ClaimCode.pathPart + '/random',
+      filter: 'claimCode',
+      generator: new utils.Generator(models.ClaimCode, this)
     }
 
     this._remote.post(options, callback);

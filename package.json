@@ -11,14 +11,13 @@
     "request": "~2.31.0"
   },
   "devDependencies": {
-    "async": "~0.2.9",
+    "badgekit-api": "mozilla/badgekit-api",
     "jshint": "~2.3.0",
-    "nock": "~0.27.1",
     "tap": "~0.4.6"
   },
   "scripts": {
     "test": "npm run lint && tap test/*.test.js",
-    "lint": "jshint --verbose index.js methods/*.js"
+    "lint": "jshint --verbose index.js methods/*.js models/*.js"
   },
   "repository": {
     "type": "git",
