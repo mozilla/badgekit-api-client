@@ -5,12 +5,38 @@ const BaseModel = require('./_base');
 /**
  *
  */
-function Code (data, parent) {
+function ClaimCode (data, parent) {
   BaseModel.call(this, data, parent);
 }
 
-Object.defineProperty(Code, 'pathIdentifier', {value: 'code'});
+ClaimCode.parseResponse = function parseResponse (data) {
+  if (data.badge) {
+    if (data.claimCodes) {
+      data.claimCodes = data.claimCodes.map(function (code) {
+        code.badge = data.badge;
+        return code;
+      });
+    } else if (data.claimCode) {
+      data.claimCode.badge = data.badge;
+    }
+  }
 
-utils.initModel(Code, '/codes', {}, BaseModel);
+  return data;
+}
 
-exports = module.exports = Code;
+Object.defineProperty(ClaimCode, 'pathIdentifier', {value: 'code'});
+
+utils.initModel(ClaimCode, '/codes', {
+  claim: function claimClaimCode (email, callback) {
+    const options = {
+      path: this._path + '/claim',
+      filter: 'claimCode',
+      generator: new utils.Generator(ClaimCode, this._heritage.badge),
+      data: {email: email}
+    };
+
+    this._remote.post(options, callback);
+  }
+}, BaseModel);
+
+exports = module.exports = ClaimCode;
