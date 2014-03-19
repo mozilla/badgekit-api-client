@@ -13,7 +13,7 @@ function loadModels () {
     System: require('./system'),
     Application: require('./application'),
     BadgeInstance: require('./instance'),
-    Code: require('./code')
+    ClaimCode: require('./claimCode')
   }
 }
 
@@ -40,15 +40,15 @@ utils.initModel(Badge, '/badges', {
     application = new models.Application(application, this);
     application.create(callback);
   },
-  addClaimCode: function addClaimCode (code, callback) {
-    code = new models.Code(code, this);
-    code.create(callback);
+  addClaimCode: function addClaimCode (claimCode, callback) {
+    claimCode = new models.ClaimCode(claimCode, this);
+    claimCode.create(callback);
   },
   generateClaimCode: function generateClaimCode (callback) {
     const options = {
-      path: this._path + models.Code.pathPart + '/random',
-      filter: 'code',
-      generator: new utils.Generator(models.Code, this)
+      path: this._path + models.ClaimCode.pathPart + '/random',
+      filter: 'claimCode',
+      generator: new utils.Generator(models.ClaimCode, this)
     }
 
     this._remote.post(options, callback);
