@@ -53,6 +53,20 @@ getClient(function (client) {
     });
   });
 
+  test('Get badge in wrong context', function (t) {
+    const context = {
+      system: 'chicago',
+      badge: 'chicago-scratch-badge'
+    };
+
+    client.getBadge(context, function (err, badge) {
+      t.notOk(err, 'No error was thrown');
+      t.notSame(badge._parent.slug, context.system, 'Badge parent is not given system');
+
+      t.end();
+    })
+  });
+
   test('Create new badge', function (t) {
     const context = {
       system: 'chicago',

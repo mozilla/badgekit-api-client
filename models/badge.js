@@ -21,18 +21,28 @@ function loadModels () {
  *
  */
 function Badge (data, parent) {
-  ActionableModel.apply(this, arguments);
-
   loadModels();
 
-  if (this.system)
-    this.system = new models.System(this.system, this._heritage.client);
+  var client = parent;
+  while (client._parent)
+    client = client._parent;
 
-  if (this.issuer)
-    this.issuer = new models.Issuer(this.issuer, this.system);
+  if (data.system) {
+    data.system = new models.System(data.system, client);
+    parent = data.system;
+  }
 
-  if (this.program)
-    this.program = new models.Program(this.program, this.issuer);
+  if (data.issuer) {
+    data.issuer = new models.Issuer(data.issuer, data.system);
+    parent = data.issuer;
+  }
+
+  if (data.program) {
+    data.program = new models.Program(data.program, data.issuer);
+    parent = data.program;
+  }
+
+  ActionableModel.call(this, data, parent);
 }
 
 utils.initModel(Badge, '/badges', {
