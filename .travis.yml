@@ -1,0 +1,9 @@
+language: node_js
+services: mysql
+node_js:
+  - 0.10
+  - 0.8
+env:
+  - NODE_ENV="test" DB_NAME="badgekit_api_test" DB_USER="root" DB_PASSWORD=""
+before_script:
+  - mysql -e 'create database badgekit_api_test;'
