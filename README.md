@@ -21,7 +21,7 @@ var auth = {
   secret: '<auth secret>'
 };
 
-var client = new Client(endpoint, auth);
+var client = new Client(apiEndpoint, auth);
 ```
 
 ## Documentation
