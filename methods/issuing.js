@@ -19,7 +19,7 @@ exports.getBadgeInstances = function getBadgeInstances (context, callback) {
 }
 
 function doBadgeInstanceAction(context, client, action, callback) {
-  utils.getContext(context, client, 'BadgeInstance', function (err, badgeInstance) {
+  utils.getContext(context, client, 'Instance', function (err, badgeInstance) {
     if (err)
       return callback(err, null);
 
