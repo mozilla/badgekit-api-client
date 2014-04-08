@@ -4,14 +4,34 @@ const BaseModel = require('./_base');
 const Comment = require('./comment');
 const Evidence = require('./evidence');
 
+// Prevents race condition errors
+var models;
+function loadModels () {
+  if (models) return;
+
+  models = {
+    Badge: require('./badge'),
+    Comment: Comment,
+    Evidence: Evidence
+  }
+}
+
 /**
  *
  */
 function Application (data, parent) {
-  BaseModel.apply(this, arguments);
-}
+  loadModels();
 
-Object.defineProperty(Application, 'pathIdentifier', {value: 'id'});
+  if (data.badge) {
+    parent = data.badge = new models.Badge(data.badge, parent._parent);
+  }
+
+  BaseModel.call(this, data, parent);
+
+  this.evidence = (this.evidence || []).map(function (evidence) {
+    return new models.Evidence(evidence, this);
+  }.bind(this));
+}
 
 utils.initModel(Application, '/applications', {
   getEvidence: utils.getAllOfModelType(Evidence),
