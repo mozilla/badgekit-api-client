@@ -9,7 +9,7 @@ function Instance (data, parent) {
   BaseModel.apply(this, arguments);
 }
 
-Object.defineProperty(Instance, 'pathIdentifier', {value: 'id'});
+Object.defineProperty(Instance, 'pathIdentifier', {value: 'email'});
 
 utils.initModel(Instance, '/instances', {}, BaseModel);
 

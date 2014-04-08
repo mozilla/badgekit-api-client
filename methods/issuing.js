@@ -1,6 +1,6 @@
 const utils = require('../lib/modelUtils');
 
-const BadgeInstance = require('../models/badgeInstance');
+const BadgeInstance = require('../models/instance');
 
 exports.getBadgeInstances = function getBadgeInstances (context, callback) {
   utils.getContext(context, this, 'Badge', function (err, badge) {
@@ -19,7 +19,7 @@ exports.getBadgeInstances = function getBadgeInstances (context, callback) {
 }
 
 function doBadgeInstanceAction(context, client, action, callback) {
-  utils.getContext(context, client, 'BadgeInstance', function (err, badgeInstance) {
+  utils.getContext(context, client, 'Instance', function (err, badgeInstance) {
     if (err)
       return callback(err, null);
 
