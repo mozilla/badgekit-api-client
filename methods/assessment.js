@@ -1,6 +1,7 @@
 const utils = require('../lib/modelUtils');
 
 const Application = require('../models/application');
+const Review = require('../models/review');
 
 exports.getApplications = function getApplications (context, callback) {
   utils.getContext(context, this, function (err, context) {
@@ -33,6 +34,24 @@ exports.addApplication = function addApplication (context, callback) {
       return callback(err, null);
 
     application.create(callback);
+  });
+}
+
+exports.addReview = function addReview (context, callback) {
+  utils.getContext(context, this, 'Review', function (err, review) {
+    if (err)
+      return callback(err, null);
+
+    review.create(callback);
+  });
+}
+
+exports.deleteReview = function deleteReview (context, callback) {
+  utils.getContext(context, this, 'Review', function (err, review) {
+    if (err)
+      return callback(err, null);
+
+    review.delete(callback);
   });
 }
 

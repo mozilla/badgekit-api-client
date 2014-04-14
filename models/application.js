@@ -1,7 +1,6 @@
 const utils = require('../lib/modelUtils');
 
 const BaseModel = require('./_base');
-const Comment = require('./comment');
 const Evidence = require('./evidence');
 
 // Prevents race condition errors
@@ -11,7 +10,6 @@ function loadModels () {
 
   models = {
     Badge: require('./badge'),
-    Comment: Comment,
     Evidence: Evidence
   }
 }
@@ -38,22 +36,6 @@ utils.initModel(Application, '/applications', {
   getEvidenceItem: utils.getInstanceOfModelType(Evidence),
   addEvidence: utils.addInstanceOfModelType(Evidence),
   deleteEvidence: utils.deleteInstanceOfModelType(Evidence),
-  addComment: utils.addInstanceOfModelType(Comment),
-  deleteComment: utils.deleteInstanceOfModelType(Comment),
-  approve: function approve (callback) {
-    const options = {
-      path: this._path + '/approve'
-    };
-
-    this._remote.post(options, callback);
-  },
-  deny: function deny (callback) {
-    const options = {
-      path: this._path + '/deny'
-    };
-
-    this._remote.post(options, callback);
-  }
 }, BaseModel);
 
 exports = module.exports = Application;
