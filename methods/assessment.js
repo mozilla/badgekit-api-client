@@ -37,6 +37,15 @@ exports.addApplication = function addApplication (context, callback) {
   });
 }
 
+exports.updateApplication = function updateApplication (context, callback) {
+  utils.getContext(context, this, 'Application', function (err, application) {
+    if (err)
+      return callback(err, null);
+
+    application.save(callback);
+  });
+}
+
 exports.addReview = function addReview (context, callback) {
   utils.getContext(context, this, 'Review', function (err, review) {
     if (err)
