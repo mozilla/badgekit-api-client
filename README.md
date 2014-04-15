@@ -2,6 +2,8 @@
 
 A Node client library for [`badgekit-api`](https://github.com/mozilla/badgekit-api).
 
+[![Build Status](https://travis-ci.org/mozilla/badgekit-api-client.svg?branch=master)](https://travis-ci.org/mozilla/badgekit-api-client)
+
 ## Installation
 
 ```
@@ -19,7 +21,7 @@ var auth = {
   secret: '<auth secret>'
 };
 
-var client = new Client(endpoint, auth);
+var client = new Client(apiEndpoint, auth);
 ```
 
 ## Documentation
