@@ -1,6 +1,6 @@
 const utils = require('../lib/modelUtils');
 
-const BadgeInstance = require('../models/badgeInstance');
+const BadgeInstance = require('../models/instance');
 
 exports.getBadgeInstances = function getBadgeInstances (context, callback) {
   utils.getContext(context, this, 'Badge', function (err, badge) {
@@ -19,11 +19,14 @@ exports.getBadgeInstances = function getBadgeInstances (context, callback) {
 }
 
 function doBadgeInstanceAction(context, client, action, callback) {
-  utils.getContext(context, client, 'BadgeInstance', function (err, badgeInstance) {
+  var args = Array.prototype.slice.call(arguments, 4);
+  args.push(callback);
+
+  utils.getContext(context, client, 'Instance', function (err, badgeInstance) {
     if (err)
       return callback(err, null);
 
-    badgeInstance[action](callback);
+    badgeInstance[action].apply(badgeInstance, args);
   });
 }
 
@@ -31,8 +34,13 @@ exports.getBadgeInstance = function getBadgeInstance (context, callback) {
   doBadgeInstanceAction(context, this, 'load', callback);
 }
 
-exports.createBadgeInstance = function createBadgeInstance (context, callback) {
-  doBadgeInstanceAction(context, this, 'create', callback);
+exports.createBadgeInstance = function createBadgeInstance (context, code, callback) {
+  if (!callback) {
+    callback = code;
+    code = undefined;
+  }
+
+  doBadgeInstanceAction(context, this, 'create', callback, code);
 }
 
 exports.deleteBadgeInstance = function deleteBadgeInstance (context, callback) {

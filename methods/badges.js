@@ -51,3 +51,19 @@ exports.deleteBadge = function deleteBadge (context, callback) {
 exports.updateBadge = function updateBadge (context, callback) {
   doBadgeAction(context, this, 'save', callback);
 }
+
+exports.getBadgeFromCode = function getBadgeFromCode (context, code, callback) {
+  utils.getContext(context, this, function (err, context) {
+    if (err)
+      return callback(err, null);
+
+    const options = {
+      path: context._path + '/codes/' + code,
+      filter: 'badge',
+      default: [],
+      generator: new utils.Generator(Badge, context)
+    };
+
+    this._remote.get(options, callback);
+  }.bind(this));
+}
