@@ -77,7 +77,8 @@ getClient(function (client) {
         consumerDescription: 'Consumer description',
         criteriaUrl: 'http://example.org/criteria',
         unique: false,
-        image: 'http://example.org/badge.png'
+        image: 'http://example.org/badge.png',
+        type: 'some type'
       }
     };
 
