@@ -14,7 +14,7 @@ exports.getBadgeInstances = function getBadgeInstances (context, email, callback
         return callback(err, null);
 
       const options = {
-        path: populatedContext._path + BadgeInstance.pathPart + '/' + email,
+        path: populatedContext._path + BadgeInstance.pathPart + '/' + encodeURIComponent(email),
         filter: 'instances',
         default: [],
         generator: new utils.Generator(BadgeInstance, context)
