@@ -7,6 +7,7 @@ const methodSets = [
   require('./badges'),
   require('./claimCodes'),
   require('./issuing'),
+  require('./milestones'),
   require('./assessment'),
 ];
 
