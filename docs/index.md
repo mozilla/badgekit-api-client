@@ -34,23 +34,23 @@ __System is the top admin level in BadgeKit. A system can contain one or more is
 
 At its most simple, a context object is simply a namespaced set of slugs. For example:
 
-```json
+```js
 {
-  'system': 'system-slug',
-  'issuer': 'issuer-slug',
-  'badge': 'badge-slug'
+  system: 'system-slug',
+  issuer: 'issuer-slug',
+  badge: 'badge-slug'
 }
 ```
 
 When submitting data, such as creating or updating an issuer, the context object expands to contain the necessary information:
 
-```json
+```js
 {
-  'system': 'system-slug',
-  'issuer': {
-    'name': 'Issuer Name',
-    'description': 'Issuer description',
-    'slug': 'issuer-slug'
+  system: 'system-slug',
+  issuer: {
+    name: 'Issuer Name',
+    description: 'Issuer description',
+    slug: 'issuer-slug'
   }
 }
 ```
