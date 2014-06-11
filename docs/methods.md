@@ -96,21 +96,39 @@
   * *Context* is variable, but does require a full `badge`
   * *Returns* the updated badge
 
+* **`getBadgeFromCode`**: `Badge`
+  * *Context* is variable
+  * *Code* query code
+  * *Returns* the requested badge
+
 <a name="claimCodes"></a>
 ## Claim Codes
 
-*TO DO*
+* **`getClaimCodes`**
+* **`generateRandomClaimCode`**
+* **`getClaimCode`**
+* **`createClaimCode`**
+* **`deleteClaimCode`**
+* **`updateClaimCode`**
+* **`claimClaimCode`**
 
 <a name="issuing"></a>
 ## Issuing
 
-*TO DO*
+* **`getBadgeInstances`**
+* **`getBadgeInstance`**
+* **`createBadgeInstance`**
+* **`deleteBadgeInstance`**
+* **`updateBadgeInstance`**
 
 <a name="assessment"></a>
 ## Assessment
 
-*TO DO*
-
-
-
-
+* **`getApplications`**
+* **`getApplication`**
+* **`addApplication`**
+* **`updateApplication`**
+* **`addReview`**
+* **`deleteReview`**
+* **`getApplicationEvidence`**
+* **`getApplicationEvidenceItem`**
