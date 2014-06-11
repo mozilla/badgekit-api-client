@@ -13,21 +13,13 @@ var client = new Client(apiEndpoint, auth);
 
 You can then access the methods within your app via the `client` object.
 
-All client methods, with one exception, require a [context object](#contexts), and a [callback method](#callbacks).
+Most client methods require a [context object](#contexts), and a [callback method](#callbacks).
 
 ```js
 client.<method> (<context>, <callback>);
 ```
 
-The only method that does not require a context is `getSystems`:
-
-```js
-client.getSystems (<callback>);
-```
-
-_However, as this call requires master-level authentication, you probably won't be using it._
-
-__System is the top admin level in BadgeKit. A system can contain one or more issuers, and an issuer can contain one or more programs. Badges may be associated with a system, issuer or program.__
+__Note on context: System is the top admin level in BadgeKit. A system can contain one or more issuers, and an issuer can contain one or more programs. Badges may be associated with a system, issuer or program.__
 
 <a name="contexts"></a>
 ## Contexts
