@@ -110,30 +110,16 @@ Along with `Badges`, `Systems`/`Issuers`/`Programs` also have these methods:
 var application = new Application(<data>, Badge);
 ```
 
-* ~~**`getEvidence`**~~
+* **`getEvidence`**
+ 
+* **`getEvidenceItem`**
+ 
+* **`addEvidence`**
+ 
+* **`deleteEvidence`**
 
-  *TO DO*
-
-* ~~**`getEvidenceItem`**~~
-
-  *TO DO*
-
-* ~~**`addEvidence`**~~
-
-  *TO DO*
-
-* ~~**`deleteEvidence`**~~
-
-  *TO DO*
-
-* ~~**`addComment`**~~
-
-  *TO DO*
-
-* ~~**`deleteComment`**~~
-
-  *TO DO*
-
+<!--* **`addComment`**
+* **`deleteComment`**
 * **`approve`** - approves this application.
 
   ```
@@ -149,6 +135,7 @@ var application = new Application(<data>, Badge);
     ...
   });
   ```
+-->
 
 ## Badge
 
@@ -164,17 +151,11 @@ var badge = new Badge(<data>, System|Issuer|Program);
   });
   ```
 
-* ~~**`addClaimCode`**~~
+* **`addClaimCode`**
 
-  *TO DO*
+* **`generateClaimCode`**
 
-* ~~**`generateClaimCode`**~~
-
-  *TO DO*
-
-* ~~**`getInstances`**~~
-
-  *TO DO*
+* **`getInstances`**
 
 ## Issuer
 
@@ -220,7 +201,7 @@ Programs have no additional methods.
 var system = new System(<data>, Client);
 ```
 
-* **getIssuers** - gets all issuers associated with this system
+* **`getIssuers`** - gets all issuers associated with this system
 
   ```
   system.getIssuers(function (err, issuers) {
@@ -228,7 +209,7 @@ var system = new System(<data>, Client);
   });
   ```
 
-* **getIssuer** - gets a specified issuer
+* **`getIssuer`** - gets a specified issuer
 
   ```
   system.getIssuer(issuer, function (err, issuer) {
@@ -236,10 +217,21 @@ var system = new System(<data>, Client);
   });
   ```
 
-* **addIssuer** - adds an issuer to this system
+* **`addIssuer`** - adds an issuer to this system
 
   ```
   system.addIssuer(issuer, function (err, issuer) {
     ...
   });
   ```
+
+## ClaimCodes
+
+* **`claim`** - claims a code (takes email)
+
+## Instance
+
+__An instance is a badge awarded to a specific earner.__
+
+* **`create`** - creates an instance, issuing the badge to the earner (takes optional claim code)
+
