@@ -1,5 +1,7 @@
 # Badges
 
+The [`Client`](methods.md) object provides the following methods:
+
 * **`getBadges`**: `[Badge]`
   * *Context* is variable, depending on the badge, but requires at least a `system`, and potentially an `issuer` and `program`
   * *Returns* all available badges for the given system/issuer/program
