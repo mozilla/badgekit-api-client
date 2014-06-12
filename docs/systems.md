@@ -114,6 +114,12 @@ System not found.
 [ResourceNotFoundError: Could not find system field: `slug`, value: `attempted-slug`]
 ```
 
+Missing system.
+
+```
+[ContextError: Missing system]
+```
+
 ## `createSystem`: `System`
 
 Create a new system.
@@ -177,6 +183,13 @@ System data invalid.
 [ValidationError: Could not validate required fields]
 ```
 
+Missing system.
+
+```
+[ContextError: Missing system]
+```
+
+
 ## `deleteSystem`: `System`
 
 Delete an existing system.
@@ -224,6 +237,13 @@ System not found.
 ```
 [ResourceNotFoundError: Could not find system field: `slug`, value: `attempted-slug`]
 ```
+
+Missing system.
+
+```
+[ContextError: Missing system]
+```
+
 
 ## `updateSystem`: `System`
 
@@ -280,4 +300,10 @@ System not found.
 
 ```
 [ResourceNotFoundError: Could not find system field: `slug`, value: `attempted-slug`]
+```
+
+Missing system.
+
+```
+[ContextError: Missing system]
 ```
