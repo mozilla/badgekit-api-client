@@ -1,5 +1,7 @@
 # Programs
 
+The [`Client`](methods.md) object provides the following methods:
+
 * **`getPrograms`**: `[Program]`
   * *Context* requires a `system` and an `issuer`
   * *Returns* all available programs for the given system/issuer
