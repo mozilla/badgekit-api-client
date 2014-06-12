@@ -1,5 +1,7 @@
 # Claim Codes
 
+The [`Client`](methods.md) object provides the following methods:
+
 * **`getClaimCodes`**
 * **`generateRandomClaimCode`**
 * **`getClaimCode`**
