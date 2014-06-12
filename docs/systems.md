@@ -70,7 +70,7 @@ None.
 
 Retrieve a specific system.
 
-* *Context* - requires a `system` (only `slug` is required)
+* *Context* - requires a `system` (identified using its `slug`)
 * *Returns* - the requested `system`
 
 ### Example method call
@@ -181,8 +181,8 @@ System data invalid.
 
 Delete an existing system.
 
-* *Context* requires a `system` - only 'slug' is required
-* *Returns* the deleted `system`
+* *Context* - requires a `system` (identified using its 'slug')
+* *Returns* - the deleted `system`
 
 ### Example method call
 
@@ -229,8 +229,8 @@ System not found.
 
 Update an existing system.
 
-* *Context* requires a `system` - `slug` is required _plus any fields you are updating_
-* *Returns* the updated `system`
+* *Context* - requires a `system` - (identified using its `slug` _also passing data for any fields you are updating_)
+* *Returns* - the updated `system`
 
 ### Example method call
 
