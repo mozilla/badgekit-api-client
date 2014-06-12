@@ -13,6 +13,15 @@ Retrieve all available systems.
 * *Context* - is not required
 * *Returns* - array containing available systems
 
+### Example method call
+
+```js
+client.getSystems(function (err, availableSystems) {
+  //...
+  
+});
+```
+
 ### Expected response
 
 ```json
@@ -58,6 +67,15 @@ Retrieve a specific system.
 * *Context* - requires a `system` (only `slug` is required)
 * *Returns* - the requested `system`
 
+### Example method call
+
+```js
+client.getSystem({system: 'system-slug'}, function (err, requestedSystem) {
+  //...
+  
+});
+```
+
 ### Expected response
 
 ```json
@@ -86,7 +104,7 @@ Retrieve a specific system.
 
 System not found.
 
-```json
+```
 [ResourceNotFoundError: Could not find system field: `slug`, value: `attempted-slug`]
 ```
 
@@ -149,7 +167,7 @@ var newSystem = {
 
 System data invalid.
 
-```json
+```
 [ValidationError: Could not validate required fields]
 ```
 
@@ -197,7 +215,7 @@ client.deleteSystem({system: 'system-slug'}, function (err, deletedSystem) {
 
 System not found.
 
-```json
+```
 [ResourceNotFoundError: Could not find system field: `slug`, value: `attempted-slug`]
 ```
 
@@ -217,7 +235,7 @@ var editedSystem = {
 		"slug": "system-slug",
 		"url": "http://newsystemsite.com"
 	}
-	};
+};
 client.updateSystem(editedSystem, function (err, updatedSystem) {
   //...
   
@@ -250,8 +268,8 @@ client.updateSystem(editedSystem, function (err, updatedSystem) {
 
 ### Potential errors
 
-System nor found.
+System not found.
 
-```json
+```
 [ResourceNotFoundError: Could not find system field: `slug`, value: `attempted-slug`]
 ```
