@@ -1,6 +1,6 @@
 # Client Methods
 
-The client provides the following methods - see the linked pages for detailed overviews of data, sample method calls, expected response data and errors.
+The `Client` object provides the following methods - see the linked pages for detailed overviews of data, sample method calls, expected response data and errors.
 
 ## [Systems](systems.md)
 
