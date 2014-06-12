@@ -70,12 +70,6 @@ Missing system.
 [ContextError: Missing system]
 ```
 
-Incorrect context.
-
-```
-[ContextError: Context not of required type: System]
-```
-
 _If the specified system does not contain any issuers, the client will return an empty array._
 
 ## `getIssuer`: `Issuer`
@@ -130,19 +124,15 @@ System OR issuer not found.
 [ResourceNotFoundError: Could not find issuer field: `slug`, value: `attempted-slug`]
 ```
 
-Missing system OR issuer.
+Missing system.
 
 ```
 [ContextError: Missing system]
-
-[ContextError: Missing issuer]
 ```
 
 Incorrect context.
 
 ```
-[ContextError: Context not of required type: System]
-
 [ContextError: Context not of required type: Issuer]
 ```
 
@@ -215,19 +205,15 @@ System not found.
 [ResourceNotFoundError: Could not find system field: `slug`, value: `attempted-slug`]
 ```
 
-Missing system OR issuer.
+Missing system.
 
 ```
 [ContextError: Missing system]
-
-[ContextError: Missing issuer]
 ```
 
 Incorrect context.
 
 ```
-[ContextError: Context not of required type: System]
-
 [ContextError: Context not of required type: Issuer]
 ```
 
@@ -283,19 +269,15 @@ System OR issuer not found.
 [ResourceNotFoundError: Could not find issuer field: `slug`, value: `attempted-slug`]
 ```
 
-Missing system OR issuer.
+Missing system.
 
 ```
 [ContextError: Missing system]
-
-[ContextError: Missing issuer]
 ```
 
 Incorrect context.
 
 ```
-[ContextError: Context not of required type: System]
-
 [ContextError: Context not of required type: Issuer]
 ```
 
@@ -364,18 +346,14 @@ Issuer data invalid.
 [ValidationError: Could not validate required fields]
 ```
 
-Missing system OR issuer.
+Missing system.
 
 ```
 [ContextError: Missing system]
-
-[ContextError: Missing issuer]
 ```
 
 Incorrect context.
 
 ```
-[ContextError: Context not of required type: System]
-
 [ContextError: Context not of required type: Issuer]
 ```
