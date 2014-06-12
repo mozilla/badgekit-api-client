@@ -8,6 +8,6 @@ __NB The [BadgeKit Web app](https://github.com/mozilla/openbadges-badgekit) uses
 
 The [introduction](index.md) explains how to instantiate and use the client.
 
-The [method list](methods.md) links to detailed examples of method calls and responses.
+The [`Client` object method list](methods.md) links to detailed examples of client calls and responses.
 
-The [models overview](models.md) explains how the client manages badging objects and data.
+The [models overview](models.md) details how the client manages badging objects and data.
