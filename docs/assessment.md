@@ -1,6 +1,6 @@
 # Assessment 
 
-The `Client` object provides the following methods:
+The [`Client`](methods.md) object provides the following methods:
 
 * `getApplications`
 * `getApplication`
