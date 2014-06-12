@@ -1,5 +1,7 @@
 # Issuers
 
+The [`Client`](methods.md) object provides the following methods:
+
 * **`getIssuers`**: `[Issuer]`
   * *Context* requires a `system`
   * *Returns* all available issuers for the given system
