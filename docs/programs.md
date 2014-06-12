@@ -1,23 +1,304 @@
 # Programs
 
+Programs represent the lowest-level of admin in BadgeKit API. Each program belongs to a single [issuer](issuers.md), which in turn belongs to a [system](systems.md). Badges may be associated with a particular program.
+
 The [`Client`](methods.md) object provides the following methods:
 
-* **`getPrograms`**: `[Program]`
-  * *Context* requires a `system` and an `issuer`
-  * *Returns* all available programs for the given system/issuer
+* [`getPrograms`](#getprograms-program)
+* [`getProgram`](#getprogram-program)
+* [`createProgram`](#createprorgam-program)
+* [`deleteProgram`](#deleteprogram-program)
+* [`updateProgram`](#updateprogram-program)
 
-* **`getProgram`**: `Program`
-  * *Context* requires a `system` and an `issuer`
-  * *Returns* the requested program
+## `getPrograms`: `[Program]`
 
-* **`createProgram`**: `Program`  
-  * *Context* requires a `system`, an issuer, and a full `program`
-  * *Returns* the created program
+Retrieve all available programs within a particular [`issuer`](issuers.md) and [`system`](systems.md).
 
-* **`deleteProgram`**: `Program`
-  * *Context* requires a `system`, an `issuer`, and a `program`
-  * *Returns* the deleted program
+* *Context* - requires a `system` and an `issuer` (each identified by `slug`)
+* *Returns* - all available programs for the given system/ issuer
 
-* **`updateProgram`**: `Program`
-  * *Context* requires a `system`, an `issuer`, and a full `program`
-  * *Returns* the updated program
+### Example method call
+
+```js
+client.getPrograms({system: 'system-slug', issuer: 'issuer-slug'}, function (err, availablePrograms) {
+  //...
+  
+});
+```
+
+### Expected response
+
+```json
+[
+ {
+  "id": 1,
+  "slug": "program-slug",
+  "url": "http://programsite.com",
+  "name": "Program Name",
+  "description": "Program description.",
+  "email": "admin@programsite.com",
+  "imageUrl": "http://programsite.com/image.jpg"
+  },
+  ...
+]
+```
+
+#### Response structure
+
+* `[ ]`
+ * id
+ * slug
+ * url
+ * name
+ * description
+ * email
+ * imageUrl
+
+### Potential errors
+
+System OR issuer not found.
+
+```
+[ResourceNotFoundError: Could not find system field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find issuer field: `slug`, value: `attempted-slug`]
+```
+
+_If the specified system/ issuer does not contain any programs, the client will return an empty array._
+
+## `getProgram`: `Program`
+
+Retrieve a specific program.
+
+* *Context* - requires a `system`, `issuer` and `program` (each identified by `slug`)
+* *Returns* - the requested program
+
+### Example method call
+
+```js
+client.getProgram({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug'}, function (err, requestedProgram) {
+  //...
+  
+});
+```
+
+### Expected response
+
+```json
+{
+ "id": 1,
+ "slug": "program-slug",
+ "url": "http://programsite.com",
+ "name": "Program Name",
+ "description": "Program description.",
+ "email": "admin@programsite.com",
+ "imageUrl": "http://programsite.com/image.jpg"
+}
+```
+
+#### Response structure
+
+* id
+* slug
+* url
+* name
+* description
+* email
+* imageUrl
+
+### Potential errors
+
+System, issuer OR program not found.
+
+```
+[ResourceNotFoundError: Could not find system field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find issuer field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find program field: `slug`, value: `attempted-slug`]
+```
+
+## `createProgram`: `Program`  
+
+Create a new program within a system and issuer.
+
+* *Context* - requires a `system` and `issuer` (each identified by `slug`), and the `program` you are creating:
+ * __required__: `slug`, `name`, `url`
+ * __optional__: `id`, `description`, `email`, `imageUrl`, `[programs]`
+* *Returns* - the created `program`
+
+### Example method call
+
+```js
+var newProgram = 
+	{
+		"id": 7,
+		"slug": "new-program",
+		"name": "New Program",
+		"url": "http://programsite.com",
+		"description": "Program description.",
+		"email": "admin@programsite.com",
+		"imageUrl": "http://programsite.com/image.jpg"
+	};		
+client.createProgram({system: 'system-slug', issuer: 'issuer-slug', program: newProgram}, function (err, createdProgram) {
+ //...
+  
+});
+```
+
+### Expected response
+
+```json
+{
+ "id": 1,
+ "slug": "new-program",
+ "url": "http://programsite.com",
+ "name": "New Program",
+ "description": "Program description.",
+ "email": "admin@programsite.com",
+ "imageUrl": "http://programsite.com/image.jpg"
+}
+```
+
+#### Response structure
+
+* id
+* slug
+* url
+* name
+* description
+* email
+* imageUrl
+
+### Potential errors
+
+Program data invalid.
+
+```
+[ValidationError: Could not validate required fields]
+```
+
+System OR issuer not found.
+
+```
+[ResourceNotFoundError: Could not find system field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find issuer field: `slug`, value: `attempted-slug`]
+```
+
+## `deleteProgram`: `Program`
+
+Delete an existing program within a system and issuer.
+
+* *Context* - requires a `system`, `issuer` and `program` (each identified by `slug`)
+* *Returns* - the deleted `program`
+
+### Example method call
+
+```js
+client.deleteProgram({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug'}, function (err, deletedProgram) {
+ //...
+  
+});
+```
+
+### Expected response
+
+```json
+{
+ "id": 1,
+ "slug": "program-slug",
+ "url": "http://programsite.com",
+ "name": "Program Name",
+ "description": "Program description.",
+ "email": "admin@programsite.com",
+ "imageUrl": "http://programsite.com/image.jpg"
+}
+```
+
+#### Response structure
+
+* id
+* slug
+* url
+* name
+* description
+* email
+* imageUrl
+
+### Potential errors
+
+System, issuer OR program not found.
+
+```
+[ResourceNotFoundError: Could not find system field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find issuer field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find program field: `slug`, value: `attempted-slug`]
+```
+
+## `updateProgram`: `Program`
+
+Update an existing program within a system and issuer.
+
+* *Context* - requires a `system`, `issuer` (each identified by `slug`) and  the `program` you are updating:
+ * __required__: `slug`
+ * __optional__: `id`, `name`, `url`, `description`, `email`, `imageUrl`
+* *Returns* - the updated `program`
+
+### Example method call
+
+```js
+var editedProgram = 
+	{
+		"slug": "program-slug",
+		"name": "New Program Name"
+	};		
+client.updateProgram({system: 'system-slug', issuer: 'issuer-slug', program: editedProgram}, function (err, updatedProgram) {
+	 //...
+  
+});
+```
+
+### Expected response
+
+```json
+{
+ "id": 1,
+ "slug": "program-slug",
+ "url": "http://programsite.com",
+ "name": "New Program Name",
+ "description": "Program description.",
+ "email": "admin@programsite.com",
+ "imageUrl": "http://programsite.com/image.jpg"
+}
+```
+
+#### Response structure
+
+* id
+* slug
+* url
+* name
+* description
+* email
+* imageUrl
+
+### Potential errors
+
+System, issuer OR program not found.
+
+```
+[ResourceNotFoundError: Could not find system field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find issuer field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find program field: `slug`, value: `attempted-slug`]
+```
+
+Program data invalid.
+
+```
+[ValidationError: Could not validate required fields]
+```
