@@ -1,5 +1,9 @@
 # Systems
 
+System is the top level of admin in BadgeKit. Each BadgeKit API instance is associated with at least a single system. Each system can contain one or more [issuer](issuers.md), with each issuer containing one or more [programs](programs.md). Badges may be associated with a system, issuer or program. Badge issuers can use these admin levels in whatever way suits the needs of their own projects and communities. 
+
+For example, a system could be a city authority, with issuers representing badging organizations within the authority, such as schools, libraries, museums etc, and programs representing events or education programs. _If you do not need these admin levels, you can simply organize all of your badges into a single system._
+
 * [`getSystems`](#getsystems-system) 
 * [`getSystem`](#getsystem-system)
 * [`createSystem`](#createsystem-system)
