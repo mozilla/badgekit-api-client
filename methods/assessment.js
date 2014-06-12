@@ -3,19 +3,25 @@ const utils = require('../lib/modelUtils');
 const Application = require('../models/application');
 const Review = require('../models/review');
 
-exports.getApplications = function getApplications (context, callback) {
+exports.getApplications = function getApplications (context, options, callback) {
+  if (typeof options === 'function') {
+    callback = options;
+    options = {};
+  }
+
   utils.getContext(context, this, function (err, context) {
     if (err)
       return callback(err, null);
 
-    const options = {
+    const opts = {
       path: context._path + Application.pathPart,
       filter: 'applications',
       default: [],
-      generator: new utils.Generator(Application, context)
+      generator: new utils.Generator(Application, context),
+      query: options.paginate ? options.paginate : undefined
     };
 
-    this._remote.get(options, callback);
+    this._remote.get(opts, callback);
   }.bind(this));
 }
 

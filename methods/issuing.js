@@ -2,25 +2,29 @@ const utils = require('../lib/modelUtils');
 
 const BadgeInstance = require('../models/instance');
 
-exports.getBadgeInstances = function getBadgeInstances (context, email, callback) {
-  if (typeof email === 'function') {
-    callback = email;
-    email = null;
+exports.getBadgeInstances = function getBadgeInstances (context, options, callback) {
+  if (typeof options === 'function') {
+    callback = options;
+    options = {};
+  }
+  else if (typeof options === 'string') {
+    options = { email: options }
   }
 
-  if (email) {
+  if (options.email) {
     utils.getContext(context, this, function (err, populatedContext) {
       if (err)
         return callback(err, null);
 
-      const options = {
-        path: populatedContext._path + BadgeInstance.pathPart + '/' + encodeURIComponent(email),
+      const opts = {
+        path: populatedContext._path + BadgeInstance.pathPart + '/' + encodeURIComponent(options.email),
         filter: 'instances',
         default: [],
-        generator: new utils.Generator(BadgeInstance, context)
+        generator: new utils.Generator(BadgeInstance, context), 
+        query: options.paginate ? options.paginate : undefined
       };
 
-      this._remote.get(options, callback);
+      this._remote.get(opts, callback);
     }.bind(this));
   }
   else {
@@ -28,14 +32,15 @@ exports.getBadgeInstances = function getBadgeInstances (context, email, callback
       if (err)
         return callback(err, null);
 
-      const options = {
+      const opts = {
         path: badge._path + BadgeInstance.pathPart,
         filter: 'instances',
         default: [],
-        generator: new utils.Generator(BadgeInstance, context)
+        generator: new utils.Generator(BadgeInstance, context), 
+        query: options.paginate ? options.paginate : undefined        
       };
 
-      this._remote.get(options, callback);
+      this._remote.get(opts, callback);
     }.bind(this));
   }
 }

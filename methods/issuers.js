@@ -2,19 +2,25 @@ const utils = require('../lib/modelUtils');
 
 const Issuer = require('../models/issuer');
 
-exports.getIssuers = function getIssuers (context, callback) {
+exports.getIssuers = function getIssuers (context, options, callback) {
+  if (typeof options === 'function') {
+    callback = options;
+    options = {};
+  }
+
   utils.getContext(context, this, 'System', function (err, system) {
     if (err)
       return callback(err, null);
 
-    const options = {
+    const opts = {
       path: system._path + Issuer.pathPart,
       filter: 'issuers',
       default: [],
-      generator: new utils.Generator(Issuer, system)
+      generator: new utils.Generator(Issuer, system),
+      query: options.paginate ? options.paginate : undefined
     };
 
-    this._remote.get(options, callback);
+    this._remote.get(opts, callback);
   }.bind(this));
 }
 
