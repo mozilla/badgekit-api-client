@@ -1,10 +1,12 @@
 # Assessment 
 
-* **`getApplications`**
-* **`getApplication`**
-* **`addApplication`**
-* **`updateApplication`**
-* **`addReview`**
-* **`deleteReview`**
-* **`getApplicationEvidence`**
-* **`getApplicationEvidenceItem`**
+The `Client` object provides the following methods:
+
+* `getApplications`
+* `getApplication`
+* `addApplication`
+* `updateApplication`
+* `addReview`
+* `deleteReview`
+* `getApplicationEvidence`
+* `getApplicationEvidenceItem`
