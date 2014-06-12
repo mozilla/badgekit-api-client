@@ -70,7 +70,7 @@ _If the specified system does not contain any issuers, the client will return an
 
 Retrieve a specific issuer.
 
-* *Context* - requires a `system` and an `issuer` (both identified using their `slugs`)
+* *Context* - requires a `system` and an `issuer` (both identified by their `slugs`)
 * *Returns* - the requested `issuer`
 
 ### Example method call
@@ -122,7 +122,7 @@ System OR issuer not found.
 
 Create a new issuer within a system context.
 
-* *Context* - requires a `system` (identifed by `slug`) and the `issuer` you are creating:
+* *Context* - requires a `system` (identifed by its `slug`) and the `issuer` you are creating:
  * __required__: `slug`, `name`, `url`
  * __optional__: `id`, `description`, `email`, `imageUrl`, `[programs]`
 * *Returns* - the created `issuer`
@@ -191,7 +191,7 @@ System not found.
 
 Delete an existing issuer.
 
-* *Context* - requires a `system` and an `issuer` (both identified using their `slugs`)
+* *Context* - requires a `system` and an `issuer` (both identified by their `slugs`)
 * *Returns* - the deleted `issuer`
 
 ### Example method call
@@ -243,7 +243,7 @@ System OR issuer not found.
 
 Update an existing issuer.
 
-* *Context* - requires a `system` (identified using its `slug`) and the `issuer` you are updating:
+* *Context* - requires a `system` (identified by its `slug`) and the `issuer` you are updating:
  * __required__: `slug`
  * __optional__: `id`, `name`, `url`, `description`, `email`, `imageUrl`, `[programs]`
 * *Returns* - the updated `issuer`
