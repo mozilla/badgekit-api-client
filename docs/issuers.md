@@ -1,6 +1,6 @@
 # Issuers
 
-Issuers represent mid-level badging admin in BadgeKit API. Each issuer is part of a single [system](systems.md), potentially along with other issuers. An issuer can contain one or more programs. Badges may be associated with a particular issuer.
+Issuers represent mid-level badging admin in BadgeKit API. Each issuer is part of a single [system](systems.md), potentially along with other issuers. An issuer can contain one or more [programs](programs.md). Badges may be associated with a particular issuer.
 
 The [`Client`](methods.md) object provides the following methods:
 
