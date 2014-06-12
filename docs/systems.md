@@ -4,6 +4,8 @@ System is the top level of admin in BadgeKit. Each BadgeKit API instance is asso
 
 For example, a system could be a city authority, with issuers representing badging organizations within the authority, such as schools, libraries, museums etc, and programs representing events or education programs. _If you do not need these admin levels, you can simply organize all of your badges into a single system._
 
+The `Client` object provides the following methods:
+
 * [`getSystems`](#getsystems-system) 
 * [`getSystem`](#getsystem-system)
 * [`createSystem`](#createsystem-system)
