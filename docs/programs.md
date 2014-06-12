@@ -64,6 +64,20 @@ System OR issuer not found.
 [ResourceNotFoundError: Could not find issuer field: `slug`, value: `attempted-slug`]
 ```
 
+Missing system OR issuer.
+
+```
+[ContextError: Missing system]
+
+[ContextError: Missing issuer]
+```
+
+Incorrect context.
+
+```
+[ContextError: Context not of required type: Issuer]
+```
+
 _If the specified system/ issuer does not contain any programs, the client will return an empty array._
 
 ## `getProgram`: `Program`
@@ -116,6 +130,20 @@ System, issuer OR program not found.
 [ResourceNotFoundError: Could not find issuer field: `slug`, value: `attempted-slug`]
 
 [ResourceNotFoundError: Could not find program field: `slug`, value: `attempted-slug`]
+```
+
+Missing system OR issuer.
+
+```
+[ContextError: Missing system]
+
+[ContextError: Missing issuer]
+```
+
+Incorrect context.
+
+```
+[ContextError: Context not of required type: Program]
 ```
 
 ## `createProgram`: `Program`  
@@ -186,6 +214,20 @@ System OR issuer not found.
 [ResourceNotFoundError: Could not find issuer field: `slug`, value: `attempted-slug`]
 ```
 
+Missing system OR issuer.
+
+```
+[ContextError: Missing system]
+
+[ContextError: Missing issuer]
+```
+
+Incorrect context.
+
+```
+[ContextError: Context not of required type: Program]
+```
+
 ## `deleteProgram`: `Program`
 
 Delete an existing program within a system and issuer.
@@ -236,6 +278,20 @@ System, issuer OR program not found.
 [ResourceNotFoundError: Could not find issuer field: `slug`, value: `attempted-slug`]
 
 [ResourceNotFoundError: Could not find program field: `slug`, value: `attempted-slug`]
+```
+
+Missing system OR issuer.
+
+```
+[ContextError: Missing system]
+
+[ContextError: Missing issuer]
+```
+
+Incorrect context.
+
+```
+[ContextError: Context not of required type: Program]
 ```
 
 ## `updateProgram`: `Program`
@@ -301,4 +357,18 @@ Program data invalid.
 
 ```
 [ValidationError: Could not validate required fields]
+```
+
+Missing system OR issuer.
+
+```
+[ContextError: Missing system]
+
+[ContextError: Missing issuer]
+```
+
+Incorrect context.
+
+```
+[ContextError: Context not of required type: Program]
 ```
