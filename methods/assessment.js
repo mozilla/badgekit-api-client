@@ -9,6 +9,11 @@ exports.getApplications = function getApplications (context, options, callback) 
     options = {};
   }
 
+  var query = options.paginate ? options.paginate : {};
+  if (options.processed !== undefined) {
+    query.processed = options.processed;
+  }
+
   utils.getContext(context, this, function (err, context) {
     if (err)
       return callback(err, null);
@@ -18,7 +23,7 @@ exports.getApplications = function getApplications (context, options, callback) 
       filter: 'applications',
       default: [],
       generator: new utils.Generator(Application, context),
-      query: options.paginate ? options.paginate : undefined
+      query: query
     };
 
     this._remote.get(opts, callback);
