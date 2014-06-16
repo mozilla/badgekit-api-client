@@ -1,32 +1,1035 @@
 # Badges
 
+BadgeKit models badges in two main ways: generic badges and badge instances (specific badges awarded to earners). A badge is represented by a series of data items issuers can define and use throughout the issuing process (including information for earners, reviewers and consumers interested in an earner's badges). When creating a badge, you can include information that will aid the assessment process, defining badge criteria and guidance for reviewers. 
+
+When an earner is awarded a badge, BadgeKit creates a badge instance including the badge earned and the email address for the earner - see [issuing](issuing.md) for information about badge instances. This document regards generic badges, created and listed in issuer sites.
+
 The [`Client`](methods.md) object provides the following methods:
 
-* **`getBadges`**: `[Badge]`
-  * *Context* is variable, depending on the badge, but requires at least a `system`, and potentially an `issuer` and `program`
-  * *Returns* all available badges for the given system/issuer/program
+* [`getBadges`](#getbadges-badge)
+* [`getAllBadges`](#getallbadges-badge)
+* [`getBadge`](#getbadge-badge)
+* [`createBadge`](#createbadge-badge)
+* [`deleteBadge`](#deletebadge-badge)
+* [`updateBadge`](#updatebadge-badge)
+* [`getBadgeFromCode`](#getbadgefromcode-badge)
 
-* **`getAllBadges`**: `[Badge]`
-  * *Context* is variable
-  * *Returns* all available badges, including those marked as 'archived'
+## `getBadges`: `[Badge]`
 
-* **`getBadge`**: `Badge`
-  * *Context* is variable, as with `getBadges`, but also requires a `badge`
-  * *Returns* the requested badge
+Get available (published) badges within the system, issuer or program context.
 
-* **`createBadge`**: `Badge`  
-  * *Context* is variable, but does require a full `badge`
-  * *Returns* the created badge
+* *Context*
+ * __required__: system `slug`
+ * __optional__: issuer `slug`, program `slug`
+* *Returns* - all available (published) `badges` for the given `system`/ `issuer`/ `program`
 
-* **`deleteBadge`**: `Badge`
-  * *Context* is variable, but does require a `badge`
-  * *Returns* the deleted badge
+### Example method call
 
-* **`updateBadge`**: `Badge`
-  * *Context* is variable, but does require a full `badge`
-  * *Returns* the updated badge
+```js
+client.getBadges({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug'}, function (err, availableBadges) {
+ //...
+  
+});
+```
 
-* **`getBadgeFromCode`**: `Badge`
-  * *Context* is variable
-  * *Code* query code
-  * *Returns* the requested badge
+### Expected response
+
+```json
+[
+    {
+        "id": 1,
+        "slug": "badge-slug",
+        "name": "Badge Name",
+        "strapline": "Badge strapline.",
+        "earnerDescription": "Description for earners.",
+        "consumerDescription": "Description for consumers.",
+        "issuerUrl": "http://badgeissuersite.com",
+        "rubricUrl": "http://badgeissuersite.com/rubric",
+        "timeValue": 0,
+        "timeUnits": "minutes",
+        "limit": 0,
+        "unique": 0,
+        "created": "2014-06-11T15:36:49.000Z",
+        "imageUrl": "http://badgeissuersite.com/image.jpg",
+        "type": "badge type",
+        "archived": false,
+        "system": {
+            "id": 1,
+            "slug": "system-slug",
+            "url": "http://systemsite.com",
+            "name": "System Name",
+            "description": "System description.",
+            "email": "admin@systemsite.com",
+            "imageUrl": "http://systemsite.com/image.jpg",
+            "issuers": [ ]
+        },
+        "issuer": {
+            "id": 1,
+            "slug": "issuer-slug",
+            "url": "http://issuersite.com",
+            "name": "Issuer Name",
+            "description": "Issuer description",
+            "email": "admin@issuersite.com",
+            "imageUrl": "http://issuersite.com/image.jpg",
+            "programs": [ ]
+        },
+        "program": {
+            "id": 1,
+            "slug": "program-slug",
+            "url": "http://programsite.com",
+            "name": "Program Name",
+            "description": "Program description.",
+            "email": "admin@programsite.com",
+            "imageUrl": "http://programsite.com/image.jpg"
+        },
+        "criteriaUrl": "http://badgeissuersite.com/criteria",
+        "criteria": [
+            {
+                "id": 1,
+                "description": "Criteria description.",
+                "required": 1,
+                "note": "Note for reviewer."
+            }
+        ],
+        "alignments": [ ],
+        "evidenceType": "image",
+        "categories": [ ],
+        "tags": [ ],
+        "milestones": [ ]
+    },
+    ...
+]
+```
+
+#### Response structure
+
+* `[ ]`
+ * id
+ * slug
+ * name
+ * strapline
+ * earnerDescription
+ * consumerDescription
+ * issuerUrl
+ * rubricUrl
+ * timeValue
+ * timeUnits
+ * limit
+ * unique
+ * created
+ * imageUrl
+ * type
+ * archived
+ * [system](systems.md)
+ * [issuer](issuers.md) (_only returned where badge belongs to an issuer_)
+ * [program](programs.md) (_only returned where badge belongs to a program_)
+ * criteriaUrl
+ * criteria `[ ]`
+    * id
+    * description
+    * required
+    * note
+ * alignments `[ ]`
+ * evidence type (_`URL` | `Text` | `Photo` | `Video` | `Sound`_)
+ * categories `[ ]`
+ * tags `[ ]`
+ * milestones `[ ]`
+
+### Potential errors
+
+System, issuer or program not found.
+
+```
+[ResourceNotFoundError: Could not find system field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find issuer field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find program field: `slug`, value: `attempted-slug`]
+```
+
+Missing system.
+
+```
+[ContextError: Missing system]
+```
+
+_If the specified system/ issuer/ program does not contain any badges, the client will return an empty array._
+
+##  `getAllBadges`: `[Badge]`
+
+Get all badges for a system, issuer or program, including archived badges (archived badges are not available for earning but existing earners can continue to display them).
+
+* *Context* 
+ * __required__: system `slug`
+ * __optional__: issuer `slug`, program `slug`
+* *Returns* - all `badges`, including those marked as `archived`
+
+### Example method call
+
+```js
+
+client.getAllBadges({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug'}, function (err, allAvailableBadges) {
+ //...
+  
+});
+```
+
+### Expected response
+
+```json
+[
+    {
+        "id": 1,
+        "slug": "badge-slug",
+        "name": "Badge Name",
+        "strapline": "Badge strapline.",
+        "earnerDescription": "Description for earners.",
+        "consumerDescription": "Description for consumers.",
+        "issuerUrl": "http://badgeissuersite.com",
+        "rubricUrl": "http://badgeissuersite.com/rubric",
+        "timeValue": 0,
+        "timeUnits": "minutes",
+        "limit": 0,
+        "unique": 0,
+        "created": "2014-06-11T15:36:49.000Z",
+        "imageUrl": "http://badgeissuersite.com/image.jpg",
+        "type": "badge type",
+        "archived": false,
+        "system": {
+            "id": 1,
+            "slug": "system-slug",
+            "url": "http://systemsite.com",
+            "name": "System Name",
+            "description": "System description.",
+            "email": "admin@systemsite.com",
+            "imageUrl": "http://systemsite.com/image.jpg",
+            "issuers": [ ]
+        },
+        "issuer": {
+            "id": 1,
+            "slug": "issuer-slug",
+            "url": "http://issuersite.com",
+            "name": "Issuer Name",
+            "description": "Issuer description",
+            "email": "admin@issuersite.com",
+            "imageUrl": "http://issuersite.com/image.jpg",
+            "programs": [ ]
+        },
+        "program": {
+            "id": 1,
+            "slug": "program-slug",
+            "url": "http://programsite.com",
+            "name": "Program Name",
+            "description": "Program description.",
+            "email": "admin@programsite.com",
+            "imageUrl": "http://programsite.com/image.jpg"
+        },
+        "criteriaUrl": "http://badgeissuersite.com/criteria",
+        "criteria": [
+            {
+                "id": 1,
+                "description": "Criteria description.",
+                "required": 1,
+                "note": "Note for reviewer."
+            }
+        ],
+        "alignments": [ ],
+        "evidenceType": "image",
+        "categories": [ ],
+        "tags": [ ],
+        "milestones": [ ]
+    },
+    ...
+]
+```
+
+#### Response structure
+
+* `[ ]`
+ * id
+ * slug
+ * name
+ * strapline
+ * earnerDescription
+ * consumerDescription
+ * issuerUrl
+ * rubricUrl
+ * timeValue
+ * timeUnits
+ * limit
+ * unique
+ * created
+ * imageUrl
+ * type
+ * archived
+ * [system](systems.md)
+ * [issuer](issuers.md) (_only returned where badge belongs to an issuer_)
+ * [program](programs.md) (_only returned where badge belongs to a program_)
+ * criteriaUrl
+ * criteria `[ ]`
+    * id
+    * description
+    * required
+    * note
+ * alignments `[ ]`
+ * evidence type (_`URL` | `Text` | `Photo` | `Video` | `Sound`_)
+ * categories `[ ]`
+ * tags `[ ]`
+ * milestones `[ ]`
+
+### Potential errors
+
+System, issuer or program not found.
+
+```
+[ResourceNotFoundError: Could not find system field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find issuer field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find program field: `slug`, value: `attempted-slug`]
+```
+
+Missing system.
+
+```
+[ContextError: Missing system]
+```
+
+_If the specified system/ issuer/ program does not contain any badges, the client will return an empty array._
+
+## `getBadge`: `Badge`
+
+Retrieve a particular badge.
+
+* *Context*
+ * __required__: system `slug`, badge `slug`
+ * __optional__: issuer `slug`, program `slug`
+* *Returns* - the requested `badge`
+
+### Example method call
+
+```js
+
+client.getBadge({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: 'badge-slug'}, function (err, requestedBadge) {
+ //...
+  
+});
+```
+
+### Expected response
+
+```json
+{
+    "id": 1,
+    "slug": "badge-slug",
+    "name": "Badge Name",
+    "strapline": "Badge strapline.",
+    "earnerDescription": "Description for earners.",
+    "consumerDescription": "Description for consumers.",
+    "issuerUrl": "http://badgeissuersite.com",
+    "rubricUrl": "http://badgeissuersite.com/rubric",
+    "timeValue": 0,
+    "timeUnits": "minutes",
+    "limit": 0,
+    "unique": 0,
+    "created": "2014-06-11T15:36:49.000Z",
+    "imageUrl": "http://badgeissuersite.com/image.jpg",
+    "type": "badge type",
+    "archived": false,
+    "system": {
+        "id": 1,
+        "slug": "system-slug",
+        "url": "http://systemsite.com",
+        "name": "System Name",
+        "description": "System description.",
+        "email": "admin@systemsite.com",
+        "imageUrl": "http://systemsite.com/image.jpg",
+        "issuers": [ ]
+    },
+    "issuer": {
+        "id": 1,
+        "slug": "issuer-slug",
+        "url": "http://issuersite.com",
+        "name": "Issuer Name",
+        "description": "Issuer description",
+        "email": "admin@issuersite.com",
+        "imageUrl": "http://issuersite.com/image.jpg",
+        "programs": [ ]
+    },
+    "program": {
+        "id": 1,
+        "slug": "program-slug",
+        "url": "http://programsite.com",
+        "name": "Program Name",
+        "description": "Program description.",
+        "email": "admin@programsite.com",
+        "imageUrl": "http://programsite.com/image.jpg"
+    },
+    "criteriaUrl": "http://badgeissuersite.com/criteria",
+    "criteria": [
+        {
+            "id": 1,
+            "description": "Criteria description.",
+            "required": 1,
+            "note": "Note for reviewer."
+        }
+    ],
+    "alignments": [ ],
+    "evidenceType": "image",
+    "categories": [ ],
+    "tags": [ ],
+    "milestones": [ ]
+},
+```
+
+#### Response structure
+
+* id
+* slug
+* name
+* strapline
+* earnerDescription
+* consumerDescription
+* issuerUrl
+* rubricUrl
+* timeValue
+* timeUnits
+* limit
+* unique
+* created
+* imageUrl
+* type
+* archived
+* [system](systems.md)
+* [issuer](issuers.md) (_only returned where badge belongs to an issuer_)
+* [program](programs.md) (_only returned where badge belongs to a program_)
+* criteriaUrl
+* criteria `[ ]`
+  * id
+  * description
+  * required
+  * note
+* alignments `[ ]`
+* evidence type (_`URL` | `Text` | `Photo` | `Video` | `Sound`_)
+* categories `[ ]`
+* tags `[ ]`
+* milestones `[ ]`
+
+### Potential errors
+
+System, issuer, program or badge not found.
+
+```
+[ResourceNotFoundError: Could not find system field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find issuer field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find program field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find badge field: `slug`, value: `attempted-slug`]
+```
+
+Missing system.
+
+```
+[ContextError: Missing system]
+```
+
+Incorrect context.
+
+```
+[ContextError: Context not of required type: Badge]
+```
+
+## `createBadge`: `Badge`
+
+Create a new badge within a system, issuer or program context.
+
+* *Context* - requires system `slug` and `badge`:
+ * __required__: `slug`, `name`, `earnerDescription`, `consumerDescription`, `criteriaUrl`, `unique`, `type`, `image`
+ * __optional__: issuer `slug`, program `slug`, badge `strapline`, `issuerUrl`, `rubricUrl`, `timeValue`, `timeUnits`, `evidenceType`, `limit`, `archived`, `criteria` array (each item includes `description`, `required` and optionally `note`), `categories` array, `tags` array
+* *Returns* - the created `badge`
+
+### Example method call
+
+```js
+var newBadge = 
+		{
+			"slug": "badge-slug",
+			"name": "New Badge Name",
+			"type": "badge type",
+			"earnerDescription": "Description for earners.",
+			"consumerDescription": "Description for consumers.",
+			"criteriaUrl": "http://badgeissuersite.com/criteria",
+			"unique": false,
+			"image": "http://badgeissuersite.com/image.jpg",
+			//...
+		};		
+client.createBadge({system: 'system-slug', badge: newBadge}, function (err, createdBadge) {
+ //...
+  
+});
+```
+
+### Expected response
+
+```json
+{
+    "id": 1,
+    "slug": "badge-slug",
+    "name": "New Badge Name",
+    "strapline": "Badge strapline.",
+    "earnerDescription": "Description for earners.",
+    "consumerDescription": "Description for consumers.",
+    "issuerUrl": "http://badgeissuersite.com",
+    "rubricUrl": "http://badgeissuersite.com/rubric",
+    "timeValue": 0,
+    "timeUnits": "minutes",
+    "limit": 0,
+    "unique": 0,
+    "created": "2014-06-11T15:36:49.000Z",
+    "imageUrl": "http://badgeissuersite.com/image.jpg",
+    "type": "badge type",
+    "archived": false,
+    "system": {
+        "id": 1,
+        "slug": "system-slug",
+        "url": "http://systemsite.com",
+        "name": "System Name",
+        "description": "System description.",
+        "email": "admin@systemsite.com",
+        "imageUrl": "http://systemsite.com/image.jpg",
+        "issuers": [ ]
+    },
+    "issuer": {
+        "id": 1,
+        "slug": "issuer-slug",
+        "url": "http://issuersite.com",
+        "name": "Issuer Name",
+        "description": "Issuer description",
+        "email": "admin@issuersite.com",
+        "imageUrl": "http://issuersite.com/image.jpg",
+        "programs": [ ]
+    },
+    "program": {
+        "id": 1,
+        "slug": "program-slug",
+        "url": "http://programsite.com",
+        "name": "Program Name",
+        "description": "Program description.",
+        "email": "admin@programsite.com",
+        "imageUrl": "http://programsite.com/image.jpg"
+    },
+    "criteriaUrl": "http://badgeissuersite.com/criteria",
+    "criteria": [
+        {
+            "id": 1,
+            "description": "Criteria description.",
+            "required": 1,
+            "note": "Note for reviewer."
+        }
+    ],
+    "alignments": [ ],
+    "evidenceType": "image",
+    "categories": [ ],
+    "tags": [ ],
+    "milestones": [ ]
+},
+```
+
+#### Response structure
+
+* id
+* slug
+* name
+* strapline
+* earnerDescription
+* consumerDescription
+* issuerUrl
+* rubricUrl
+* timeValue
+* timeUnits
+* limit
+* unique
+* created
+* imageUrl
+* type
+* archived
+* [system](systems.md)
+* [issuer](issuers.md) (_only returned where badge belongs to an issuer_)
+* [program](programs.md) (_only returned where badge belongs to a program_)
+* criteriaUrl
+* criteria `[ ]`
+  * id
+  * description
+  * required
+  * note
+* alignments `[ ]`
+* evidence type (_`URL` | `Text` | `Photo` | `Video` | `Sound`_)
+* categories `[ ]`
+* tags `[ ]`
+* milestones `[ ]`
+
+### Potential errors
+
+Badge data invalid.
+
+```
+[ValidationError: Could not validate required fields]
+```
+
+System, issuer or program not found.
+
+```
+[ResourceNotFoundError: Could not find system field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find issuer field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find program field: `slug`, value: `attempted-slug`]
+```
+
+Missing system.
+
+```
+[ContextError: Missing system]
+```
+
+Incorrect context.
+
+```
+[ContextError: Context not of required type: Badge]
+```
+
+## `deleteBadge`: `Badge`
+
+Delete an existing badge.
+
+* *Context* 
+ * __required__: system `slug`, badge `slug`
+ * __optional__: issuer `slug`, program `slug`
+* *Returns* - the deleted `badge`
+
+### Example method call
+
+```js
+client.deleteBadge({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: 'badge-slug'}, function (err, deletedBadge) {
+ //...
+  
+});
+```
+
+### Expected response
+
+```json
+{
+    "id": 1,
+    "slug": "badge-slug",
+    "name": "New Badge Name",
+    "strapline": "Badge strapline.",
+    "earnerDescription": "Description for earners.",
+    "consumerDescription": "Description for consumers.",
+    "issuerUrl": "http://badgeissuersite.com",
+    "rubricUrl": "http://badgeissuersite.com/rubric",
+    "timeValue": 0,
+    "timeUnits": "minutes",
+    "limit": 0,
+    "unique": 0,
+    "created": "2014-06-11T15:36:49.000Z",
+    "imageUrl": "http://badgeissuersite.com/image.jpg",
+    "type": "badge type",
+    "archived": false,
+    "system": {
+        "id": 1,
+        "slug": "system-slug",
+        "url": "http://systemsite.com",
+        "name": "System Name",
+        "description": "System description.",
+        "email": "admin@systemsite.com",
+        "imageUrl": "http://systemsite.com/image.jpg",
+        "issuers": [ ]
+    },
+    "issuer": {
+        "id": 1,
+        "slug": "issuer-slug",
+        "url": "http://issuersite.com",
+        "name": "Issuer Name",
+        "description": "Issuer description",
+        "email": "admin@issuersite.com",
+        "imageUrl": "http://issuersite.com/image.jpg",
+        "programs": [ ]
+    },
+    "program": {
+        "id": 1,
+        "slug": "program-slug",
+        "url": "http://programsite.com",
+        "name": "Program Name",
+        "description": "Program description.",
+        "email": "admin@programsite.com",
+        "imageUrl": "http://programsite.com/image.jpg"
+    },
+    "criteriaUrl": "http://badgeissuersite.com/criteria",
+    "criteria": [
+        {
+            "id": 1,
+            "description": "Criteria description.",
+            "required": 1,
+            "note": "Note for reviewer."
+        }
+    ],
+    "alignments": [ ],
+    "evidenceType": "image",
+    "categories": [ ],
+    "tags": [ ],
+    "milestones": [ ]
+},
+```
+
+#### Response structure
+
+* id
+* slug
+* name
+* strapline
+* earnerDescription
+* consumerDescription
+* issuerUrl
+* rubricUrl
+* timeValue
+* timeUnits
+* limit
+* unique
+* created
+* imageUrl
+* type
+* archived
+* [system](systems.md)
+* [issuer](issuers.md) (_only returned where badge belongs to an issuer_)
+* [program](programs.md) (_only returned where badge belongs to a program_)
+* criteriaUrl
+* criteria `[ ]`
+  * id
+  * description
+  * required
+  * note
+* alignments `[ ]`
+* evidence type (_`URL` | `Text` | `Photo` | `Video` | `Sound`_)
+* categories `[ ]`
+* tags `[ ]`
+* milestones `[ ]`
+
+### Potential errors
+
+System, issuer, program or badge not found.
+
+```
+[ResourceNotFoundError: Could not find system field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find issuer field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find program field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find badge field: `slug`, value: `attempted-slug`]
+```
+
+Missing system.
+
+```
+[ContextError: Missing system]
+```
+
+Incorrect context.
+
+```
+[ContextError: Context not of required type: Badge]
+```
+
+## `updateBadge`: `Badge`
+
+Update the data for an existing badge.
+
+* *Context*
+ * __required__: system `slug`, badge `slug`
+ * __optional__: any badge fields you want to update - `strapline`, `issuerUrl`, `rubricUrl`, `timeValue`, `timeUnits`, `evidenceType`, `limit`, `archived`, `criteria` array (each item includes `description`, `required` and optionally `note`), `categories` array, `tags` array
+* *Returns* - the updated badge
+
+### Example method call
+
+```js
+var editedBadge = 
+		{
+			"slug": "badge-slug",
+			"strapline": "This is the new strapline.",
+			//...
+		};		
+client.updateBadge({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: editedBadge}, function (err, updatedBadge) {
+ //...
+  
+});
+```
+
+### Expected response
+
+```json
+{
+    "id": 1,
+    "slug": "badge-slug",
+    "name": "Badge Name",
+    "strapline": "Updated badge strapline.",
+    "earnerDescription": "Description for earners.",
+    "consumerDescription": "Description for consumers.",
+    "issuerUrl": "http://badgeissuersite.com",
+    "rubricUrl": "http://badgeissuersite.com/rubric",
+    "timeValue": 0,
+    "timeUnits": "minutes",
+    "limit": 0,
+    "unique": 0,
+    "created": "2014-06-11T15:36:49.000Z",
+    "imageUrl": "http://badgeissuersite.com/image.jpg",
+    "type": "badge type",
+    "archived": false,
+    "system": {
+        "id": 1,
+        "slug": "system-slug",
+        "url": "http://systemsite.com",
+        "name": "System Name",
+        "description": "System description.",
+        "email": "admin@systemsite.com",
+        "imageUrl": "http://systemsite.com/image.jpg",
+        "issuers": [ ]
+    },
+    "issuer": {
+        "id": 1,
+        "slug": "issuer-slug",
+        "url": "http://issuersite.com",
+        "name": "Issuer Name",
+        "description": "Issuer description",
+        "email": "admin@issuersite.com",
+        "imageUrl": "http://issuersite.com/image.jpg",
+        "programs": [ ]
+    },
+    "program": {
+        "id": 1,
+        "slug": "program-slug",
+        "url": "http://programsite.com",
+        "name": "Program Name",
+        "description": "Program description.",
+        "email": "admin@programsite.com",
+        "imageUrl": "http://programsite.com/image.jpg"
+    },
+    "criteriaUrl": "http://badgeissuersite.com/criteria",
+    "criteria": [
+        {
+            "id": 1,
+            "description": "Criteria description.",
+            "required": 1,
+            "note": "Note for reviewer."
+        }
+    ],
+    "alignments": [ ],
+    "evidenceType": "image",
+    "categories": [ ],
+    "tags": [ ],
+    "milestones": [ ]
+},
+```
+
+#### Response structure
+
+* id
+* slug
+* name
+* strapline
+* earnerDescription
+* consumerDescription
+* issuerUrl
+* rubricUrl
+* timeValue
+* timeUnits
+* limit
+* unique
+* created
+* imageUrl
+* type
+* archived
+* [system](systems.md)
+* [issuer](issuers.md) (_only returned where badge belongs to an issuer_)
+* [program](programs.md) (_only returned where badge belongs to a program_)
+* criteriaUrl
+* criteria `[ ]`
+  * id
+  * description
+  * required
+  * note
+* alignments `[ ]`
+* evidence type (_`URL` | `Text` | `Photo` | `Video` | `Sound`_)
+* categories `[ ]`
+* tags `[ ]`
+* milestones `[ ]`
+
+### Potential errors
+
+System, issuer, program or badge not found.
+
+```
+[ResourceNotFoundError: Could not find system field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find issuer field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find program field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find badge field: `slug`, value: `attempted-slug`]
+```
+
+Badge data invalid.
+
+```
+[ValidationError: Could not validate required fields]
+```
+
+Missing system.
+
+```
+[ContextError: Missing system]
+```
+
+Incorrect context.
+
+```
+[ContextError: Context not of required type: Badge]
+```
+
+## `getBadgeFromCode`: `Badge`
+ 
+Retrieve a badge using a claim code (claim codes are associated with specific badges).
+
+* *Context* - requires system `slug`, optionally issuer and program `slug`
+* *Code* - query claim code
+* *Returns* - the requested badge
+
+### Example method call
+
+```js
+client.getBadgeFromCode({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug'}, 'query-claim-code', function (err, requestedBadge) {
+ //...
+  
+});
+```
+
+### Expected response
+
+```json
+{
+    "id": 1,
+    "slug": "badge-slug",
+    "name": "Badge Name",
+    "strapline": "Updated badge strapline.",
+    "earnerDescription": "Description for earners.",
+    "consumerDescription": "Description for consumers.",
+    "issuerUrl": "http://badgeissuersite.com",
+    "rubricUrl": "http://badgeissuersite.com/rubric",
+    "timeValue": 0,
+    "timeUnits": "minutes",
+    "limit": 0,
+    "unique": 0,
+    "created": "2014-06-11T15:36:49.000Z",
+    "imageUrl": "http://badgeissuersite.com/image.jpg",
+    "type": "badge type",
+    "archived": false,
+    "system": {
+        "id": 1,
+        "slug": "system-slug",
+        "url": "http://systemsite.com",
+        "name": "System Name",
+        "description": "System description.",
+        "email": "admin@systemsite.com",
+        "imageUrl": "http://systemsite.com/image.jpg",
+        "issuers": [ ]
+    },
+    "issuer": {
+        "id": 1,
+        "slug": "issuer-slug",
+        "url": "http://issuersite.com",
+        "name": "Issuer Name",
+        "description": "Issuer description",
+        "email": "admin@issuersite.com",
+        "imageUrl": "http://issuersite.com/image.jpg",
+        "programs": [ ]
+    },
+    "program": {
+        "id": 1,
+        "slug": "program-slug",
+        "url": "http://programsite.com",
+        "name": "Program Name",
+        "description": "Program description.",
+        "email": "admin@programsite.com",
+        "imageUrl": "http://programsite.com/image.jpg"
+    },
+    "criteriaUrl": "http://badgeissuersite.com/criteria",
+    "criteria": [
+        {
+            "id": 1,
+            "description": "Criteria description.",
+            "required": 1,
+            "note": "Note for reviewer."
+        }
+    ],
+    "alignments": [ ],
+    "evidenceType": "image",
+    "categories": [ ],
+    "tags": [ ],
+    "milestones": [ ]
+},
+```
+
+#### Response structure
+
+* id
+* slug
+* name
+* strapline
+* earnerDescription
+* consumerDescription
+* issuerUrl
+* rubricUrl
+* timeValue
+* timeUnits
+* limit
+* unique
+* created
+* imageUrl
+* type
+* archived
+* [system](systems.md)
+* [issuer](issuers.md) (_only returned where badge belongs to an issuer_)
+* [program](programs.md) (_only returned where badge belongs to a program_)
+* criteriaUrl
+* criteria `[ ]`
+  * id
+  * description
+  * required
+  * note
+* alignments `[ ]`
+* evidence type (_`URL` | `Text` | `Photo` | `Video` | `Sound`_)
+* categories `[ ]`
+* tags `[ ]`
+* milestones `[ ]`
+
+### Potential errors
+
+System, issuer, program or code not found.
+
+```
+[ResourceNotFoundError: Could not find system field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find issuer field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find program field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find the requested claim code `attempted-code`]
+```
+
+Missing system.
+
+```
+[ContextError: Missing system]
+```
