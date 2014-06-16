@@ -379,7 +379,7 @@ client.getBadge({system: 'system-slug', issuer: 'issuer-slug', program: 'program
     "categories": [ ],
     "tags": [ ],
     "milestones": [ ]
-},
+}
 ```
 
 #### Response structure
@@ -534,7 +534,7 @@ client.createBadge({system: 'system-slug', badge: newBadge}, function (err, crea
     "categories": [ ],
     "tags": [ ],
     "milestones": [ ]
-},
+}
 ```
 
 #### Response structure
@@ -681,7 +681,7 @@ client.deleteBadge({system: 'system-slug', issuer: 'issuer-slug', program: 'prog
     "categories": [ ],
     "tags": [ ],
     "milestones": [ ]
-},
+}
 ```
 
 #### Response structure
@@ -830,7 +830,7 @@ client.updateBadge({system: 'system-slug', issuer: 'issuer-slug', program: 'prog
     "categories": [ ],
     "tags": [ ],
     "milestones": [ ]
-},
+}
 ```
 
 #### Response structure
@@ -978,7 +978,7 @@ client.getBadgeFromCode({system: 'system-slug', issuer: 'issuer-slug', program: 
     "categories": [ ],
     "tags": [ ],
     "milestones": [ ]
-},
+}
 ```
 
 #### Response structure
