@@ -12,8 +12,6 @@ The [`Client`](methods.md) object provides the following methods:
 * [`updateApplication`](#updateapplication-application)
 * [`addReview`](#addreview-review)
 * [`deleteReview`](#deletereview-review)
-* [`getApplicationEvidence`](#getapplicationevidence-evidence)
-* [`getApplicationEvidenceItem`](#getapplicationevidenceitem-evidence)
 
 ## `getApplications`: `[Application]`
 
@@ -71,7 +69,7 @@ client.getApplications({system: 'system-slug', issuer: 'issuer-slug', program: '
         ...
         ],
         "alignments": [ ],
-        "evidenceType": image,
+        "evidenceType": "image",
         "categories": [ ],
         "tags": [ ],
         "milestones": [ ]
@@ -107,9 +105,9 @@ client.getApplications({system: 'system-slug', issuer: 'issuer-slug', program: '
  * [badge](badges.md)
  * processed
  * evidence `[ ]`
-   * url
-   * mediaType
-   * reflection
+    * url
+    * mediaType
+    * reflection
 
 ### Potential errors
 
@@ -186,7 +184,7 @@ client.getApplication({system: 'system-slug', issuer: 'issuer-slug', program: 'p
         ...
         ],
         "alignments": [ ],
-        "evidenceType": image,
+        "evidenceType": "image",
         "categories": [ ],
         "tags": [ ],
         "milestones": [ ]
@@ -326,7 +324,7 @@ var newApplication =
         ...
         ],
         "alignments": [ ],
-        "evidenceType": image,
+        "evidenceType": "image",
         "categories": [ ],
         "tags": [ ],
         "milestones": [ ]
@@ -473,7 +471,7 @@ client.updateApplication({system: 'system-slug', issuer: 'issuer-slug', program:
         ...
         ],
         "alignments": [ ],
-        "evidenceType": image,
+        "evidenceType": "image",
         "categories": [ ],
         "tags": [ ],
         "milestones": [ ]
@@ -548,8 +546,152 @@ Incorrect context.
 
 ## `addReview`: `Review`
 
+Add a review for a badge application.
+
+* *Context* 
+ * __required__: system `slug`, badge `slug`, application `slug`
+ * __optional__: issuer `slug`, program `slug`, `review` - `author` (email address of reviewer), `comment` (feedback for applicant), `reviewItems` array (each item includes `criterionId`, `satisfied`, `comment`)
+* *Returns* - the created `review`
+
+_Reviews can include a generic comment and a comment for each criterion item in the badge, together with an indicator of whether the criteria was met by the earner application._
+
+### Example method call
+
+```js
+var newReview = 
+	{
+		author: 'reviewer@example.org',
+		comment: 'great job',
+		reviewItems: [
+		{
+			criterionId: 1,
+			satisfied: 1,
+			comment: 'perfect'
+		},
+		//...
+		]
+	};		
+client.addReview({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: 'badge-slug', application: 'application-slug', review: newReview}, function (err, createdReview) {
+ //...
+  
+});
+```
+
+### Expected response
+
+```json
+{
+    "id": 1,
+    "slug": "review-slug",
+    "author": "reviewer@example.org",
+    "comment": "great job",
+    "reviewItems": [
+        {
+            "criterionId": 1,
+            "satisfied": 1,
+            "comment": "perfect"
+        },
+        ...
+    ]
+}
+```
+
+#### Response structure
+
+* id
+* slug
+* author
+* comment
+* reviewItems `[ ]`
+ * criterionId
+ * satisfied
+ * comment
+
+### Potential errors
+
+Review data invalid.
+
+```
+[ValidationError: Could not validate required fields]
+```
+
+System, issuer, program, badge or application not found.
+
+```
+[ResourceNotFoundError: Could not find system field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find issuer field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find program field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find badge field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find application field: `slug`, value: `attempted-slug`]
+```
+
+Missing system.
+
+```
+[ContextError: Missing system]
+```
+
+Incorrect context.
+
+```
+[ContextError: Context not of required type: Review]
+
+[ContextError: Review requires Application parent context]
+
+[ContextError: Application requires Badge parent context]
+```
+
 ## `deleteReview`: `Review`
 
-## `getApplicationEvidence`: `[Evidence]`
+Delete an existing application review.
 
-## `getApplicationEvidenceItem`: `Evidence`
+* *Context* 
+ * __required__: system `slug`, badge `slug`, application `slug`, review `slug`
+ * __optional__: issuer `slug`, program `slug`
+
+### Example method call
+
+```js
+client.deleteReview({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: 'badge-slug', application: 'application-slug', review: 'review-slug'}, function (err, returnedData) {
+ //...
+  
+});
+```
+
+### Potential errors
+
+System, issuer, program, badge, application or review not found.
+
+```
+[ResourceNotFoundError: Could not find system field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find issuer field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find program field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find badge field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find application field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find review field: `slug`, value: `attempted-slug`]
+```
+
+Missing system.
+
+```
+[ContextError: Missing system]
+```
+
+Incorrect context.
+
+```
+[ContextError: Context not of required type: Review]
+
+[ContextError: Review requires Application parent context]
+
+[ContextError: Application requires Badge parent context]
+```
