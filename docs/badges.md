@@ -446,7 +446,7 @@ Incorrect context.
 Create a new badge within a system, issuer or program context.
 
 * *Context* - requires system `slug` and `badge`:
- * __required__: `slug`, `name`, `earnerDescription`, `consumerDescription`, `criteriaUrl`, `unique`, `type`, `image`
+ * __required__: `name`, `earnerDescription`, `consumerDescription`, `criteriaUrl`, `unique`, `type`, `image`
  * __optional__: issuer `slug`, program `slug`, badge `strapline`, `issuerUrl`, `rubricUrl`, `timeValue`, `timeUnits`, `evidenceType`, `limit`, `archived`, `criteria` array (each item includes `description`, `required` and optionally `note`), `categories` array, `tags` array
 * *Returns* - the created `badge`
 
@@ -455,7 +455,6 @@ Create a new badge within a system, issuer or program context.
 ```js
 var newBadge = 
 		{
-			"slug": "badge-slug",
 			"name": "New Badge Name",
 			"type": "badge type",
 			"earnerDescription": "Description for earners.",
