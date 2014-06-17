@@ -281,7 +281,7 @@ var newApplication =
 			'assignedTo': 'reviewer@example.org',
 			'assignedExpiration': '2014-07-06T12:24:45.000Z'
 		};		
-		client.addApplication({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: 'badge-slug', application: newApplication}, function (err, createdApplication) {
+client.addApplication({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: 'badge-slug', application: newApplication}, function (err, createdApplication) {
  //...
   
 });
