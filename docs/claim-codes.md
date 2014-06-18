@@ -39,7 +39,7 @@ client.getClaimCodes({system: 'system-slug', issuer: 'issuer-slug', program: 'pr
 [
     {
         "id": 1,
-        "code": "abcdefghijklm0123456789012"
+        "code": "abcdefghijklm0123456789012",
         "claimed": false,
         "email": null,
         "multiuse": false,
@@ -161,7 +161,7 @@ client.getClaimCode({system: 'system-slug', issuer: 'issuer-slug', program: 'pro
 ```json
 {
     "id": 1,
-    "code": "abcdefghijklm0123456789012"
+    "code": "abcdefghijklm0123456789012",
     "claimed": false,
     "email": null,
     "multiuse": false,
@@ -298,7 +298,7 @@ client.createClaimCode({system: 'system-slug', issuer: 'issuer-slug', program: '
 ```json
 {
     "id": 1,
-    "code": "a1b2c3d4e5f6g7h8i9j0"
+    "code": "a1b2c3d4e5f6g7h8i9j0",
     "claimed": true,
     "email": "earner@example.org",
     "multiuse": false,
@@ -432,7 +432,7 @@ client.deleteClaimCode({system: 'system-slug', issuer: 'issuer-slug', program: '
 ```json
 {
     "id": 1,
-    "code": "a1b2c3d4e5f6g7h8i9j0"
+    "code": "a1b2c3d4e5f6g7h8i9j0",
     "claimed": true,
     "email": "earner@example.org",
     "multiuse": false,
