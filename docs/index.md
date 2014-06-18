@@ -19,7 +19,7 @@ Most client methods require a [context object](#contexts), and a [callback metho
 client.<method> (<context>, <callback>);
 ```
 
-__Note on context: System is the top admin level in BadgeKit. A system can contain one or more issuers, and an issuer can contain one or more programs. Badges may be associated with a system, issuer or program.__
+__Note on context: System is the top admin level in BadgeKit. A system can contain one or more issuers, and an issuer can contain one or more programs. Badges may be associated with a system, issuer or program. You will therefore typically represent the admin context for the client as: a system; a system plus issuer; a system plus issuer plus program. Other contexts include Badge, Application, Review, ClaimCode and Instance.__
 
 <a name="contexts"></a>
 ## Contexts
