@@ -15,10 +15,16 @@ The [`Client`](methods.md) object provides the following methods:
 
 Retrieve awarded instances of a particular badge.
 
-* *Context*
- * __required__: system `slug`, badge `slug`
- * __optional__: issuer `slug`, program `slug`
-* *Returns* - array of badge instances
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|issuer|`slug`|
+|badge|`slug`|program|`slug`|
+
+### Returns
+
+Array of badge instances.
 
 ### Example method call
 
@@ -141,10 +147,17 @@ _If there are no instances of the requested badge, the client will return an emp
 
 Retrieve instance of an awarded badge for a specific earner.
 
-* *Context*
- * __required__: system `slug`, badge `slug`, `instance` email
- * __optional__: issuer `slug`, program `slug`
-* *Returns* - requested badge instance
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|issuer|`slug`|
+|badge|`slug`|program|`slug`|
+|instance|`email`| | |
+
+### Returns
+
+Requested badge instance.
 
 ### Example method call
 
@@ -265,10 +278,20 @@ Incorrect context.
 
 Create a badge instance - this means issuing a badge to a particular earner. Badge issuing can involve a claim code.
 
-* *Context* - requires system `slug`, badge `slug` and instance:
- * __required__: `email` of earner
- * __optional__: issuer `slug`, program `slug`, instance `claimCode`, `slug`, `issuedOn` timestamp, `expires` timestamp
-* *Returns* - the created badge instance
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|issuer|`slug`|
+|badge|`slug`|program|`slug`|
+|instance|`email`|instance|`claimCode`|
+| | | |`slug`|
+| | | |`issuedOn` (_timestamp_)|
+| | | |`expires` (_timestamp_)|
+
+### Returns
+
+The created badge instance.
 
 ### Example method call
 
@@ -352,10 +375,17 @@ Incorrect context.
 
 Delete an awarded instance of a badge.
 
-* *Context* 
- * __required__: system `slug`, badge `slug`, `email` of instance earner
- * __optional__: issuer `slug`, program `slug`
-* *Returns* - the deleted badge instance
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|issuer|`slug`|
+|badge|`slug`|program|`slug`|
+|instance|`email`| | |
+
+### Returns
+
+The deleted badge instance.
 
 ### Example method call
 
