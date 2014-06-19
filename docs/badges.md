@@ -27,7 +27,7 @@ Get available (published) badges within the system, issuer or program context.
 
 ### Returns
 
-All available (published) badges for the given context.
+All available (published) `badges` for the given context.
 
 ### Example method call
 
