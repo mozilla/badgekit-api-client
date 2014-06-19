@@ -17,10 +17,17 @@ The [`Client`](methods.md) object provides the following methods:
 
 Retrieve existing applications within a system, issuer, program and/or badge context.
 
-* *Context*
- * __required__: system `slug`
- * __optional__: issuer `slug`, program `slug`, badge `slug`
-* *Returns* - array of existing applications
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|issuer|`slug`|
+| | |program|`slug`|
+| | |badge|`slug`|
+
+### Returns
+
+Array of existing `applications`.
 
 ### Example method call
 
@@ -133,10 +140,17 @@ Missing system.
 
 Retrieve a specific application for a badge.
 
-* *Context* 
- * __required__: system `slug`, badge `slug`, application `slug`
- * __optional__: issuer `slug`, program `slug`
-* *Returns* - the requested `application`
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|issuer|`slug`|
+|badge|`slug`|program|`slug`|
+|application|`slug`| | |
+
+### Returns
+
+The requested `application`.
 
 ### Example method call
 
@@ -255,10 +269,19 @@ Incorrect context.
 
 Add a new application for a badge.
 
-* *Context* - requires system `slug`, badge `slug` and `application`:
- * __required__: `learner` email
- * __optional__: issuer `slug`, program `slug`, application `evidence` array (each item can include `mediaType`, `url`, `reflection` - can be `image` or `link`), `assignedTo` reviewer email, `assignedExpiration` date
-* *Returns* - the created `application`
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|issuer|`slug`|
+|badge|`slug`|program|`slug`|
+|application|`learner` (_email_)|application|`evidence` `[ ]` (_`url`, `reflection`, `mediaType` - `image` or `link`_)|
+| | | |`assignedTo` (_reviewer email_)|
+| | | |`assignedExpiration` (_date_)|
+
+### Returns
+
+The created `application`.
 
 ### Example method call
 
@@ -399,10 +422,20 @@ Incorrect context.
 
 Update the data for an existing application.
 
-* *Context* 
- * __required__: system `slug`, badge `slug`, application `slug`
- * __optional__: issuer `slug`, program `slug`, any application fields you are updating - `processed` timestamp, `evidence` array (each item can include `mediaType`, `url`, `reflection` - can be `image` or `link`), `assignedTo` reviewer email, `assignedExpiration` date
-* *Returns* - the updated `application`
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|issuer|`slug`|
+|badge|`slug`|program|`slug`|
+|application|`slug`|application|`processed`|
+| | | |`evidence` `[ ]` (_`url`, `reflection`, `mediaType` - `image` or `link`_)|
+| | | |`assignedTo` (_reviewer email_)|
+| | | |`assignedExpiration` (_date_)|
+
+### Returns
+
+The updated `application`.
 
 ### Example method call
 
@@ -548,10 +581,19 @@ Incorrect context.
 
 Add a review for a badge application.
 
-* *Context* 
- * __required__: system `slug`, badge `slug`, application `slug`
- * __optional__: issuer `slug`, program `slug`, `review` - `author` (email address of reviewer), `comment` (feedback for applicant), `reviewItems` array (each item includes `criterionId`, `satisfied`, `comment`)
-* *Returns* - the created `review`
+### Context 
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|issuer|`slug`|
+|badge|`slug`|program|`slug`|
+|application|`slug`|review|`author` (_email of reviewer_)|
+| | | |`comment` (_feedback for applicant_)|
+| | | |`reviewItems` `[ ]` (_`criterionId`, `satisfied`, `comment`_)|
+
+### Returns
+
+The created `review`.
 
 _Reviews can include a generic comment and a comment for each criterion item in the badge, together with an indicator of whether the criteria was met by the earner application._
 
@@ -649,9 +691,14 @@ Incorrect context.
 
 Delete an existing application review.
 
-* *Context* 
- * __required__: system `slug`, badge `slug`, application `slug`, review `slug`
- * __optional__: issuer `slug`, program `slug`
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|issuer|`slug`|
+|badge|`slug`|program|`slug`|
+|application|`slug`| | |
+|review|`slug`| | |
 
 ### Example method call
 
