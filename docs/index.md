@@ -55,13 +55,13 @@ When submitting data, such as creating or updating an issuer, the context object
 
 Notice that the previous shorthand version only indicates the issuer `slug` - this is enough for the client to identify a system, issuer, program, badge, application, review or instance. (Claim codes require `code` instead.) In terms of structure, these two alternatives are therefore equivalent:
 
-```json
+```js
 {
   system: 'system-slug'
 }
 ```
 
-```json
+```js
 {
   system: {
     slug: 'system-slug'
@@ -100,4 +100,4 @@ Data returned from the client is JSON formatted. For example:
 ]
 ```
 
-See [methods](methods.md) for links to detailed examples of method calls and responses.
+See [methods](methods.md) for links to detailed examples of client method calls and responses.
