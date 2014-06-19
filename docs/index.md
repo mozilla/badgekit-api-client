@@ -19,12 +19,16 @@ Most client methods require a [context object](#contexts), and a [callback metho
 client.<method> (<context>, <callback>);
 ```
 
-__Note on context: System is the top admin level in BadgeKit. A system can contain one or more issuers, and an issuer can contain one or more programs. Badges may be associated with a system, issuer or program. You will therefore typically represent the admin context for the client as: a system; a system plus issuer; a system plus issuer plus program. Other contexts include Badge, Application, Review, ClaimCode and Instance.__
+__Note on context: System is the top admin level in BadgeKit. A system can contain one or more issuers, and an issuer can contain one or more programs. Badges may be associated with a [`System`](systems.md), [`Issuer`](issuers.md) or [`Program`](programs.md). You will therefore typically represent the admin context for the client as: a System; System plus Issuer; System plus Issuer plus Program. Other contexts include [`Badge`](badges.md), [`Application`](assessment.md), [`Review`](assessment.md#addreview-review), [`ClaimCode`](claim-codes.md) and [`Instance`](issuing.md).__
+
+_See [models](models.md) for more on how the client handles BadgeKit objects._
 
 <a name="contexts"></a>
 ## Contexts
 
-At its most simple, a context object is simply a namespaced set of slugs. For example:
+The client uses the context to determine which BadgeKit objects your method calls relate to. Your client calls should define context in JSON format. Each context object can contain multiple fields, however in cases where an object simply needs identified, only the `slug` needs to be provided (with the exception of claim codes, which are identified by `code`).
+
+At its most simple, a context object is a namespaced set of slugs. For example:
 
 ```js
 {
@@ -34,7 +38,9 @@ At its most simple, a context object is simply a namespaced set of slugs. For ex
 }
 ```
 
-When submitting data, such as creating or updating an issuer, the context object expands to contain the necessary information:
+This indicates a badge context, within a system and issuer.
+
+When submitting data, such as creating or updating an issuer, the context objects can expand to contain the additional information:
 
 ```js
 {
@@ -43,6 +49,22 @@ When submitting data, such as creating or updating an issuer, the context object
     name: 'Issuer Name',
     description: 'Issuer description',
     slug: 'issuer-slug'
+  }
+}
+```
+
+Notice that the previous shorthand version only indicates the issuer `slug` - this is enough for the client to identify a system, issuer, program, badge, application, review or instance. (Claim codes require `code` instead.) In terms of structure, these two alternatives are therefore equivalent:
+
+```json
+{
+  system: 'system-slug'
+}
+```
+
+```json
+{
+  system: {
+    slug: 'system-slug'
   }
 }
 ```
@@ -64,4 +86,18 @@ client.getBadges({system: 'system-slug'}, function (err, badges) {
 });
 ```
 
-See [methods](methods.md) for an overview of the available client methods.
+Data returned from the client is JSON formatted. For example:
+
+```json
+[
+    {
+        "id": 1,
+        "slug": "badge-slug",
+        "name": "Badge Name",
+        ...
+    },
+    ...
+]
+```
+
+See [methods](methods.md) for links to detailed examples of method calls and responses.
