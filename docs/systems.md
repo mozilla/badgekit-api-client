@@ -16,8 +16,13 @@ The [`Client`](methods.md) object provides the following methods:
 
 Retrieve all available systems.
 
-* *Context* - is not required
-* *Returns* - array containing available systems
+### Context
+
+Is not required.
+
+### Returns
+
+Array containing available systems.
 
 ### Example method call
 
@@ -70,8 +75,15 @@ None.
 
 Retrieve a specific system.
 
-* *Context* - requires a `system` (identified by `slug`)
-* *Returns* - the requested `system`
+### Context
+
+| |**Required**|
+|:---|:---|
+|system|`slug`|
+
+### Returns
+
+The requested `system`.
 
 ### Example method call
 
@@ -130,10 +142,18 @@ Incorrect context.
 
 Create a new system.
 
-* *Context* - requires the new `system`:
- * __required__: `slug`, `name`, `url`
- * __optional__: `id`, `description`, `email`, `imageUrl`, `[issuers]`
-* *Returns* - the created `system`
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|system|`description`|
+| |`name`| |`email`|
+| |`url`| |`imageUrl`|
+| | | |`issuers` `[ ]`|
+
+### Returns
+
+The created `system`.
 
 ### Example method call
 
@@ -205,8 +225,15 @@ Incorrect context.
 
 Delete an existing system.
 
-* *Context* - requires a `system` (identified by 'slug')
-* *Returns* - the deleted `system`
+### Context
+
+| |**Required**|
+|:---|:---|
+|system|`slug`|
+
+### Returns
+
+The deleted `system`.
 
 ### Example method call
 
@@ -265,10 +292,20 @@ Incorrect context.
 
 Update an existing system.
 
-* *Context* - requires the `system` you are updating:
- * __required__: `slug`
- * __optional__: `id`, `name`, `url`, `description`, `email`, `imageUrl`, `[issuers]`
-* *Returns* - the updated `system`
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|system|`name`|
+| | | |`url`|
+| | | |`description`|
+| | | |`email`|
+| | | |`imageUrl`|
+| | | |`issuers` `[ ]`|
+
+## Returns
+
+The updated `system`.
 
 ### Example method call
 
