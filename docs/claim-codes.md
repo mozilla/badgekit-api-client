@@ -19,10 +19,16 @@ The [`Client`](methods.md) object provides the following methods:
 
 Retrieve all existing claim codes for a badge.
 
-* *Context*
- * __required__: system `slug`, badge `slug`
- * __optional__: issuer `slug`, program `slug`
-* *Returns* - all claim codes for the given system/ issuer/ program/ badge
+### Context 
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|issuer|`slug`|
+|badge|`slug`|program|`slug`|
+
+### Returns
+
+All claim codes for the given system/ issuer/ program/ badge.
 
 ### Example method call
 
@@ -142,10 +148,17 @@ Missing system.
 
 Retrieve a specific claim code.
 
-* *Context*
- * __required__: system `slug`, badge `slug`, claimCode `code`
- * __optional__: issuer `slug`, program `slug`
-* *Returns* - the requested claim code
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|issuer|`slug`|
+|badge|`slug`|program|`slug`|
+|claimCode|`code`| | |
+
+### Returns
+
+The requested claim code.
 
 ### Example method call
 
@@ -272,10 +285,19 @@ Incorrect context.
 
 Create a new claim code.
 
-* *Context* - requires system `slug`, badge `slug` and claimCode `code`:
- * __required__: `code` string
- * __optional__: issuer `slug`, program `slug`, `claimed` boolean, `multiuse` boolean, `email` of claimed earner (if single-use)
-* *Returns* - the created `claimCode`
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|issuer|`slug`|
+|badge|`slug`|program|`slug`|
+|claimCode|`code`|claimCode|`claimed`|
+| | | |`multiuse`|
+| | | |`email` (_of claimed earner_)|
+
+### Returns
+
+The created `claimCode`.
 
 ### Example method call
 
@@ -413,10 +435,17 @@ Incorrect context.
 
 Delete an existing claim code.
 
-* *Context* 
- * __required__: system `slug`, badge `slug`, claimCode `code`
- * __optional__: issuer `slug`, program `slug`
-* *Returns* - the deleted `claimCode`
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|issuer|`slug`|
+|badge|`slug`|program|`slug`|
+|claimCode|`code`| | |
+
+### Returns
+
+The deleted `claimCode`.
 
 ### Example method call
 
