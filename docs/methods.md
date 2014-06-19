@@ -36,16 +36,14 @@ The `Client` object provides the following methods - see the linked pages for de
 * `updateBadge`: `Badge`
 * `getBadgeFromCode`: `Badge`
 
-## [Claim Codes](claim-codes.md)
+## [Assessment](assessment.md)
 
-* `getClaimCodes`
-* `getClaimCode`
-* `createClaimCode`
-* `deleteClaimCode`
-
-<!--* `generateRandomClaimCode`-->
-<!--* `updateClaimCode`-->
-<!--* `claimClaimCode`-->
+* `getApplications`
+* `getApplication`
+* `addApplication`
+* `updateApplication`
+* `addReview`
+* `deleteReview`
 
 ## [Issuing](issuing.md)
 
@@ -56,11 +54,13 @@ The `Client` object provides the following methods - see the linked pages for de
 
 <!--* `updateBadgeInstance`-->
 
-## [Assessment](assessment.md)
+## [Claim Codes](claim-codes.md)
 
-* `getApplications`
-* `getApplication`
-* `addApplication`
-* `updateApplication`
-* `addReview`
-* `deleteReview`
+* `getClaimCodes`
+* `getClaimCode`
+* `createClaimCode`
+* `deleteClaimCode`
+
+<!--* `generateRandomClaimCode`-->
+<!--* `updateClaimCode`-->
+<!--* `claimClaimCode`-->
