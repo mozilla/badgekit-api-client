@@ -107,6 +107,38 @@ item.getClaimCodes(function (err, claimCodes) {
 });
 ```
 
+## Badge
+
+```js
+var badge = new Badge(<data>, System|Issuer|Program);
+```
+
+* **`addApplication`** - starts an application for this badge.
+
+```js
+badge.addApplication(application, function (err, application) {
+  ...
+});
+```
+
+* **`addClaimCode`** - add a claim code for the badge
+
+```js
+badge.addClaimCode(claimCode, function (err, claimCode) {
+  ...
+});
+```
+
+<!--* **`generateClaimCode`**-->
+
+* **`getInstances`**
+
+```js
+badge.getInstances(function (err, instances)) {
+  ...
+});
+```
+
 ## Application
 
 ```js
@@ -141,31 +173,35 @@ var application = new Application(<data>, Badge);
   ```
 -->
 
-## Badge
+## System
 
 ```js
-var badge = new Badge(<data>, System|Issuer|Program);
+var system = new System(<data>, Client);
 ```
 
-* **`addApplication`** - starts an application for this badge.
+* **`getIssuers`** - gets all issuers associated with this system
 
 ```js
-badge.addApplication(application, function (err, application) {
+system.getIssuers(function (err, issuers) {
   ...
 });
 ```
 
-* **`addClaimCode`** - add a claim code for the badge
+* **`getIssuer`** - gets a specified issuer
 
 ```js
-badge.addClaimCode(claimCode, function (err, claimCode) {
+system.getIssuer(issuer, function (err, issuer) {
   ...
 });
 ```
 
-<!--* **`generateClaimCode`**-->
+* **`addIssuer`** - adds an issuer to this system
 
-* **`getInstances`**
+```js
+system.addIssuer(issuer, function (err, issuer) {
+  ...
+});
+```
 
 ## Issuer
 
@@ -203,43 +239,15 @@ issuer.addProgram(program, function (err, program) {
 var program = new Program(<data>, Issuer);
 ```
 
-## System
-
-```js
-var system = new System(<data>, Client);
-```
-
-* **`getIssuers`** - gets all issuers associated with this system
-
-```js
-system.getIssuers(function (err, issuers) {
-  ...
-});
-```
-
-* **`getIssuer`** - gets a specified issuer
-
-```js
-system.getIssuer(issuer, function (err, issuer) {
-  ...
-});
-```
-
-* **`addIssuer`** - adds an issuer to this system
-
-```js
-system.addIssuer(issuer, function (err, issuer) {
-  ...
-});
-```
-
-## ClaimCodes
+## ClaimCode
 
 ```js
 var claimCode = new ClaimCode(<data>, Badge);
 ```
 
+<!--
 * **`claim`** - claims a code (takes email)
+-->
 
 ## Instance
 
