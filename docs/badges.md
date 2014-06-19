@@ -18,10 +18,16 @@ The [`Client`](methods.md) object provides the following methods:
 
 Get available (published) badges within the system, issuer or program context.
 
-* *Context*
- * __required__: system `slug`
- * __optional__: issuer `slug`, program `slug`
-* *Returns* - all available (published) `badges` for the given `system`/ `issuer`/ `program`
+### Context:
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|issuer|`slug`|
+| | |program|`slug`|
+
+### Returns
+
+All available (published) badges for the given context.
 
 ### Example method call
 
@@ -159,10 +165,16 @@ _If the specified system/ issuer/ program does not contain any badges, the clien
 
 Get all badges for a system, issuer or program, including archived badges (archived badges are not available for earning but existing earners can continue to display them).
 
-* *Context* 
- * __required__: system `slug`
- * __optional__: issuer `slug`, program `slug`
-* *Returns* - all `badges`, including those marked as `archived`
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---:|---|
+|system|`slug`|issuer|`slug`|
+| | |program|`slug`|
+
+### Returns
+
+All `badges`, including those marked as `archived`.
 
 ### Example method call
 
@@ -301,10 +313,16 @@ _If the specified system/ issuer/ program does not contain any badges, the clien
 
 Retrieve a particular badge.
 
-* *Context*
- * __required__: system `slug`, badge `slug`
- * __optional__: issuer `slug`, program `slug`
-* *Returns* - the requested `badge`
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|issuer|`slug`|
+|badge|`slug`|program|`slug`|
+
+### Returns
+
+The requested `badge`.
 
 ### Example method call
 
@@ -445,10 +463,27 @@ Incorrect context.
 
 Create a new badge within a system, issuer or program context.
 
-* *Context* - requires system `slug` and `badge`:
- * __required__: `name`, `earnerDescription`, `consumerDescription`, `criteriaUrl`, `unique`, `type`, `image`
- * __optional__: issuer `slug`, program `slug`, badge `strapline`, `issuerUrl`, `rubricUrl`, `timeValue`, `timeUnits`, `evidenceType`, `limit`, `archived`, `criteria` array (each item includes `description`, `required` and optionally `note`), `categories` array, `tags` array
-* *Returns* - the created `badge`
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|issuer|`slug`|
+|badge|`name`|program|`slug`| 
+| |`earnerDescription`|badge|`strapline`|
+| |`consumerDescription`| |`issuerUrl`|
+| |`criteriaUrl`| |`rubricUrl`|
+| |`unique`| |`timeValue`|
+| |`type`| |`timeUnits`|
+| |`image`| |`evidenceType`|
+| | | |`limit`|
+| | | |`archived`|
+| | | |`criteria` `[ ]` (`description`, `required`, `note`)|
+| | | |`categories` `[ ]`|
+| | | |`tags` `[ ]`|
+
+### Returns
+
+The created `badge`.
 
 ### Example method call
 
@@ -603,10 +638,16 @@ Incorrect context.
 
 Delete an existing badge.
 
-* *Context* 
- * __required__: system `slug`, badge `slug`
- * __optional__: issuer `slug`, program `slug`
-* *Returns* - the deleted `badge`
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|issuer|`slug`|
+|badge|`slug`|program|`slug`|
+
+### Returns
+
+The deleted `badge`.
 
 ### Example method call
 
@@ -746,10 +787,33 @@ Incorrect context.
 
 Update the data for an existing badge.
 
-* *Context*
- * __required__: system `slug`, badge `slug`
- * __optional__: any badge fields you want to update - `strapline`, `issuerUrl`, `rubricUrl`, `timeValue`, `timeUnits`, `evidenceType`, `limit`, `archived`, `criteria` array (each item includes `description`, `required` and optionally `note`), `categories` array, `tags` array
-* *Returns* - the updated badge
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|issuer|`slug`|
+|badge|`slug`|program|`slug`| 
+| | |badge|`earnerDescription`|
+| | | |`strapline`|
+| | | |`consumerDescription`|
+| | | |`issuerUrl`|
+| | | |`criteriaUrl`|
+| | | |`rubricUrl`|
+| | | |`unique`|
+| | | |`timeValue`|
+| | | |`type`|
+| | | |`timeUnits`|
+| | | |`image`|
+| | | |`evidenceType`|
+| | | |`limit`|
+| | | |`archived`|
+| | | |`criteria` `[ ]` (`description`, `required`, `note`)|
+| | | |`categories` `[ ]`|
+| | | |`tags` `[ ]`|
+
+### Returns
+
+The updated `badge`.
 
 ### Example method call
 
@@ -901,9 +965,16 @@ Incorrect context.
  
 Retrieve a badge using a claim code (claim codes are associated with specific badges).
 
-* *Context* - requires system `slug`, optionally issuer and program `slug`
-* *Code* - query claim code
-* *Returns* - the requested badge
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|issuer|`slug`|
+| | |program|`slug`|
+
+__Method also requires the query claim code as a second parameter.__
+
+### Returns
+
+The requested badge.
 
 ### Example method call
 
