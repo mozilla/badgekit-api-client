@@ -14,8 +14,15 @@ The [`Client`](methods.md) object provides the following methods:
 
 Retrieve all available issuers within a particular system.
 
-* *Context* - requires a `system` (identified by `slug`)
-* *Returns* - all available `issuers` for the given `system`
+### Context
+
+| |**Required**|
+|:---|:---|
+|system|`slug`|
+
+### Returns
+
+All available `issuers` for the given `system`.
 
 ### Example method call
 
@@ -82,8 +89,16 @@ _If the specified system does not contain any issuers, the client will return an
 
 Retrieve a specific issuer.
 
-* *Context* - requires a `system` and an `issuer` (each identified by `slug`)
-* *Returns* - the requested `issuer`
+### Context 
+
+| |**Required**|
+|:---|:---|
+|system|`slug`|
+|issuer|`slug`|
+
+### Returns
+
+The requested `issuer`.
 
 ### Example method call
 
@@ -146,10 +161,18 @@ Incorrect context.
 
 Create a new issuer within a system context.
 
-* *Context* - requires a `system` (identifed by `slug`) and the `issuer` you are creating:
- * __required__: `slug`, `name`, `url`
- * __optional__: `id`, `description`, `email`, `imageUrl`, `[programs]`
-* *Returns* - the created `issuer`
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|issuer|`description`|
+|issuer|`slug`| |`email`|
+| |`name`| |`imageUrl`|
+| |`url`| |`programs` `[ ]`|
+
+### Returns
+
+The created `issuer`.
 
 ### Example method call
 
@@ -227,8 +250,16 @@ Incorrect context.
 
 Delete an existing issuer.
 
-* *Context* - requires a `system` and an `issuer` (each identified by `slug`)
-* *Returns* - the deleted `issuer`
+### Context
+
+| |**Required**|
+|:---|:---|
+|system|`slug`|
+|issuer|`slug`|
+
+### Returns
+
+The deleted `issuer`.
 
 ### Example method call
 
@@ -291,10 +322,21 @@ Incorrect context.
 
 Update an existing issuer.
 
-* *Context* - requires a `system` (identified by `slug`) and the `issuer` you are updating:
- * __required__: `slug`
- * __optional__: `id`, `name`, `url`, `description`, `email`, `imageUrl`, `[programs]`
-* *Returns* - the updated `issuer`
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|issuer|`name`|
+|issuer|`slug`| |`name`|
+| | | |`url`|
+| | | |`description`|
+| | | |`email`|
+| | | |`imageUrl`|
+| | | |`programs` `[ ]`|
+
+### Returns
+
+The updated `issuer`.
 
 ### Example method call
 
