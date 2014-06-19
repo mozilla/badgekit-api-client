@@ -1,12 +1,16 @@
 # Models
 
-Models are created either from a simple identifier, or a full object describing the model instance. Model instances also require a parent, which will vary depending on the context. `Badges` require a `System`, `Issuer` or `Program`, for example, while `Applications` require a `Badge`. With that said, client consumers will never actually need to construct model instances.
+You should not have to create model instances in order to use the client, however the following overview explains how the client models BadgeKit objects.
+
+Models are created either from a simple identifier, or a full object describing the model instance. Model instances also require a parent, which will vary depending on the context. `Badges` require a `System`, `Issuer` or `Program`, for example, while `Applications`, `Instances` and `ClaimCodes` require a `Badge`, and `Reviews` require an `Application`.
+
+As with client method calls, defining model objects involves JSON, which can be abbreviated:
 
 ```
 var item = new Model('item-slug', <parent>);
 ```
 
-Is equivalent to:
+...is equivalent to:
 
 ```
 var item = new Model({
@@ -14,7 +18,7 @@ var item = new Model({
 }, <parent>);
 ```
 
-Alternatively, with a full context.
+...alternatively, with a full context:
 
 ```
 var item = new Model({
@@ -109,7 +113,7 @@ Along with `Badges`, `Systems`/`Issuers`/`Programs` also have these methods:
 ```
 var application = new Application(<data>, Badge);
 ```
-
+<!--
 * **`getEvidence`**
  
 * **`getEvidenceItem`**
@@ -118,7 +122,7 @@ var application = new Application(<data>, Badge);
  
 * **`deleteEvidence`**
 
-<!--* **`addComment`**
+* **`addComment`**
 * **`deleteComment`**
 * **`approve`** - approves this application.
 
@@ -153,7 +157,7 @@ var badge = new Badge(<data>, System|Issuer|Program);
 
 * **`addClaimCode`**
 
-* **`generateClaimCode`**
+<!--* **`generateClaimCode`**-->
 
 * **`getInstances`**
 
