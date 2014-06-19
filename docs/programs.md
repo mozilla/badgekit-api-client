@@ -14,8 +14,16 @@ The [`Client`](methods.md) object provides the following methods:
 
 Retrieve all available programs within a particular [`issuer`](issuers.md) and [`system`](systems.md).
 
-* *Context* - requires a `system` and an `issuer` (each identified by `slug`)
-* *Returns* - all available programs for the given system/ issuer
+### Context
+
+| |**Required**|
+|:---|:---|
+|system|`slug`|
+|issuer|`slug`|
+
+### Returns
+
+All available programs for the given system/ issuer.
 
 ### Example method call
 
@@ -84,8 +92,17 @@ _If the specified system/ issuer does not contain any programs, the client will 
 
 Retrieve a specific program.
 
-* *Context* - requires a `system`, `issuer` and `program` (each identified by `slug`)
-* *Returns* - the requested program
+### Context
+
+| |**Required**|
+|:---|:---|
+|system|`slug`|
+|issuer|`slug`|
+|program|`slug`|
+
+### Returns
+
+The requested program.
 
 ### Example method call
 
@@ -150,10 +167,19 @@ Incorrect context.
 
 Create a new program within a system and issuer.
 
-* *Context* - requires a `system` and `issuer` (each identified by `slug`), and the `program` you are creating:
- * __required__: `slug`, `name`, `url`
- * __optional__: `id`, `description`, `email`, `imageUrl`, `[programs]`
-* *Returns* - the created `program`
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|program|`description`|
+|issuer|`slug`| |`email`|
+|program|`slug`| |`imageUrl`|
+| |`name`| |`programs` `[ ]`|
+| |`url`| | |
+
+### Returns
+
+The created `program`.
 
 ### Example method call
 
@@ -232,8 +258,17 @@ Incorrect context.
 
 Delete an existing program within a system and issuer.
 
-* *Context* - requires a `system`, `issuer` and `program` (each identified by `slug`)
-* *Returns* - the deleted `program`
+### Context
+
+| |**Required**|
+|:---|:---|
+|system|`slug`|
+|issuer|`slug`|
+|program|`slug`|
+
+### Returns
+
+The deleted `program`.
 
 ### Example method call
 
@@ -298,10 +333,19 @@ Incorrect context.
 
 Update an existing program within a system and issuer.
 
-* *Context* - requires a `system`, `issuer` (each identified by `slug`) and  the `program` you are updating:
- * __required__: `slug`
- * __optional__: `id`, `name`, `url`, `description`, `email`, `imageUrl`
-* *Returns* - the updated `program`
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|program|`name`|
+|issuer|`slug`| |`url`|
+|program|`slug`| |`description`|
+| | | |`email`|
+| | | |`imageUrl`|
+
+### Returns
+
+The updated `program`.
 
 ### Example method call
 
