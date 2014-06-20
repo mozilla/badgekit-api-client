@@ -1,6 +1,6 @@
 # Claim Codes
 
-BadgeKit supports a range of issuing approaches, including claim codes. When an earner completes an achievement or activity that entitles them to a badge, the issuer can provide them with a claim code for the badge. The issuer site can allow the earner to submit their claim code - if the claim code is valid the issuer site can then go ahead and issue the badge to the earner. The BadgeKit client therefore supports generating, retrieving and claiming claim codes.
+BadgeKit supports a range of issuing approaches, including claim codes. When an earner completes an achievement or activity that entitles them to a badge, the issuer can provide them with a claim code for the badge. The issuer site can allow the earner to submit their claim code - if the claim code is valid the issuer site can then go ahead and issue the badge to the earner. The BadgeKit client therefore supports managing claim codes.
 
 _Claim codes can be singe use or multi-use (meaning that the same claim code can be used by more than one earner to claim a badge). Single use claim codes are accompanied by the email address of the earner once claimed._
 
