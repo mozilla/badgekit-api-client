@@ -1,6 +1,6 @@
 # BadgeKit API Client
 
-A new client requires a remote endpoint, and an authorisation configuration. By default your BadgeKit API key will be `master`. The secret is set in your BadgeKit API configuration as `MASTER_SECRET`.
+A new client requires a remote endpoint (for your BadgeKit API instance) and an authorisation configuration. By default your BadgeKit API key will be `master`. The secret is set in your BadgeKit API configuration as `MASTER_SECRET`.
 
 ```js
 var apiEndpoint = 'http://yourapilocation.com';
@@ -38,9 +38,9 @@ At its most simple, a context object is a namespaced set of slugs. For example:
 }
 ```
 
-This indicates a badge context, within a system and issuer.
+This indicates a badge context, within a system and issuer. This would be typical of a client method call in which you were retrieving data.
 
-When submitting data, such as creating or updating an issuer, the context objects can expand to contain the additional information:
+When submitting data, such as creating or updating an item (`issuer` in the following example), the context objects can expand to contain the additional information:
 
 ```js
 {
@@ -53,7 +53,7 @@ When submitting data, such as creating or updating an issuer, the context object
 }
 ```
 
-Notice that the previous shorthand version only indicates the issuer `slug` - this is enough for the client to identify a system, issuer, program, badge, application, review or instance. (Claim codes require `code` instead.) In terms of structure, these two alternatives are therefore equivalent:
+While the previous shorthand version only indicates the issuer `slug` (which is enough for the client to identify a system, issuer, program, badge, application, review or instance - claim codes require `code` instead), this version includes the data you are submitting to the client, for example to update or create the issuer. These two alternatives therefore represent the same `system`:
 
 ```js
 {
