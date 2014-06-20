@@ -35,7 +35,13 @@ All claim codes for the given system/ issuer/ program/ badge.
 ### Example method call
 
 ```js
-client.getClaimCodes({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: 'badge-slug'}, function (err, requestedClaimCodes) {
+var context = {
+		system: 'system-slug', 
+		issuer: 'issuer-slug', 
+		program: 'program-slug', 
+		badge: 'badge-slug'
+	};
+client.getClaimCodes(context, function (err, requestedClaimCodes) {
  //...
   
 });
@@ -167,7 +173,14 @@ The requested claim code.
 ### Example method call
 
 ```js
-client.getClaimCode({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: 'badge-slug', claimCode: 'claim-code'}, function (err, requestedClaimCode) {
+var context = {
+		system: 'system-slug', 
+		issuer: 'issuer-slug', 
+		program: 'program-slug', 
+		badge: 'badge-slug', 
+		claimCode: 'claim-code'
+	};
+client.getClaimCode(context, function (err, requestedClaimCode) {
  //...
   
 });
@@ -306,14 +319,20 @@ The created `claimCode`.
 ### Example method call
 
 ```js
-var newClaimCode = 
-		{
-			code: 'a1b2c3d4e5f6g7h8i9j0',
-			claimed: true,
-			email: 'earner@example.org',
-			multiuse: false
-		};		
-client.createClaimCode({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: 'badge-slug', claimCode: newClaimCode}, function (err, createdClaimCode) {
+var newClaimCode = {
+		code: 'a1b2c3d4e5f6g7h8i9j0',
+		claimed: true,
+		email: 'earner@example.org',
+		multiuse: false
+	};
+var context = {
+		system: 'system-slug', 
+		issuer: 'issuer-slug', 
+		program: 'program-slug', 
+		badge: 'badge-slug', 
+		claimCode: newClaimCode
+	};
+client.createClaimCode(context, function (err, createdClaimCode) {
  //...
   
 });
@@ -454,7 +473,14 @@ The deleted `claimCode`.
 ### Example method call
 
 ```js
-client.deleteClaimCode({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: 'badge-slug', claimCode: 'a1b2c3d4e5f6g7h8i9j0'}, function (err, deletedClaimCode) {
+var context = {
+		system: 'system-slug', 
+		issuer: 'issuer-slug', 
+		program: 'program-slug', 
+		badge: 'badge-slug', 
+		claimCode: 'claim-cde'
+	};
+client.deleteClaimCode(context, function (err, deletedClaimCode) {
  //...
   
 });
