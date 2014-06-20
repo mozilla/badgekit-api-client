@@ -2,6 +2,8 @@
 
 Programs represent the lowest-level of admin in BadgeKit API. Each program belongs to a single [issuer](issuers.md), which in turn belongs to a [system](systems.md). Badges may be associated with a particular program.
 
+_Each program exists within the context of a system and issuer._
+
 The [`Client`](methods.md) object provides the following methods:
 
 * [`getPrograms`](#getprograms-program)
