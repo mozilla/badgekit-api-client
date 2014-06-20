@@ -264,7 +264,7 @@ The deleted `issuer`.
 ### Example method call
 
 ```js
-client.deleteIssuer({system: 'badgekit', issuer: 'top-museum'}, function (err, returnedData) {
+client.deleteIssuer({system: 'system-slug', issuer: 'issuer-slug'}, function (err, deletedIssuer) {
  //...
  
 });
