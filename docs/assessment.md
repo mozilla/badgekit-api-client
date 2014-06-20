@@ -134,6 +134,8 @@ Missing system.
 [ContextError: Missing system]
 ```
 
+_If the specified context does not contain any applications, the client will return an empty array._
+
 ## `getApplication`: `Application`
 
 Retrieve a specific application for a badge.
