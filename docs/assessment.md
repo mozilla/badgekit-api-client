@@ -2,6 +2,10 @@
 
 BadgeKit supports badge issuing via an assessment process. Issuer sites can accept earner applications for published badges, forwarding the application data to the API. Applications can then be reviewed and the reviews submitted. Each application should be accompanied by evidence appropriate to the badge criteria - this is what an assessor will review when making awarding decisions.
 
+_Each application exists within the context of a system, issuer, program and/ or badge._
+
+_Each review exists within the context of an application._
+
 The [`Client`](methods.md) object provides the following methods:
 
 * [`getApplications`](#getapplications-application)
