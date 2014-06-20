@@ -1,8 +1,6 @@
 # Assessment 
 
-BadgeKit facilitates badge issuing via an assessment process. Issuer sites can accept earner applications for published badges, forwarding the application data to the API. Applications can then be reviewed and the reviews submitted. Each application should be accompanied by evidence suited to the badge criteria - this is what an assessor will review when making awarding decisions.
-
-_Note that when you create a new application, it should typically include evidence._
+BadgeKit supports badge issuing via an assessment process. Issuer sites can accept earner applications for published badges, forwarding the application data to the API. Applications can then be reviewed and the reviews submitted. Each application should be accompanied by evidence appropriate to the badge criteria - this is what an assessor will review when making awarding decisions.
 
 The [`Client`](methods.md) object provides the following methods:
 
@@ -15,7 +13,7 @@ The [`Client`](methods.md) object provides the following methods:
 
 ## `getApplications`: `[Application]`
 
-Retrieve existing applications within a system, issuer, program and/or badge context.
+Retrieve existing applications within a system, issuer, program or badge context.
 
 ### Context
 
@@ -299,7 +297,8 @@ var newApplication =
 				'reflection': 'I did that stuff.',
 				'mediaType': 'link',
 				'url': 'http://example.org/evidence.html'
-				}//,...
+				}
+				//,...
 			],
 			'assignedTo': 'reviewer@example.org',
 			'assignedExpiration': '2014-07-06T12:24:45.000Z'
@@ -456,7 +455,8 @@ var editedApplication =
 				'reflection': 'I did that stuff.',
 				'mediaType': 'link',
 				'url': 'http://example.org/evidence.html'
-				}//,...
+				}
+				//,...
 			],
 			'assignedTo': 'reviewer@example.org',
 			'assignedExpiration': '2014-07-06T12:24:45.000Z'
@@ -587,9 +587,8 @@ Add a review for a badge application.
 |:---|:---|:---|:---|
 |system|`slug`|issuer|`slug`|
 |badge|`slug`|program|`slug`|
-|application|`slug`|review|`author` (_email of reviewer_)|
-| | | |`comment` (_feedback for applicant_)|
-| | | |`reviewItems` `[ ]` (_`criterionId`, `satisfied`, `comment`_)|
+|application|`slug`|review|`comment` (_feedback for applicant_)|
+|review|`author` (_email of reviewer_)| |`reviewItems` `[ ]` (_`criterionId`, `satisfied`, `comment`_)|
 
 ### Returns
 
