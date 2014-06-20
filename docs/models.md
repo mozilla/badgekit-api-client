@@ -1,8 +1,8 @@
 # Models
 
-You can access the full range of client functionality via the [client object methods](methods.md). However, you can also access model methods via the response objects returned from your client method calls, which you may find more convenient within your applications.
+You can access the full range of client functionality via the [client object methods](methods.md). However, you can also access a range of methods via the response objects returned from your client method calls, which you may find more convenient within your applications.
 
-You should typically not have to create model instances, however the following overview explains how the client instantiates BadgeKit objects. See [Common Methods](#common-methods) below for functionality you can exploit in response data items.
+You should typically not have to create model instances, however the following overview explains how the client instantiates BadgeKit objects. See [Common Methods](#common-methods) below for functionality you can exploit in model instances such as response data items.
 
 ## Instantiation
 
