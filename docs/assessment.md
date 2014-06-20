@@ -34,7 +34,13 @@ Array of existing `applications`.
 ### Example method call
 
 ```js
-client.getApplications({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: 'badge-slug'}, function (err, requestedApplications) {
+var context = {
+		system: 'system-slug', 
+		issuer: 'issuer-slug', 
+		program: 'program-slug', 
+		badge: 'badge-slug'
+	};
+client.getApplications(context, function (err, requestedApplications) {
  //...
   
 });
@@ -159,7 +165,14 @@ The requested `application`.
 ### Example method call
 
 ```js
-client.getApplication({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: 'badge-slug', application: 'application-slug'}, function (err, requestedApplication) {
+var context = {
+		system: 'system-slug', 
+		issuer: 'issuer-slug', 
+		program: 'program-slug', 
+		badge: 'badge-slug', 
+		application: 'application-slug'
+	};
+client.getApplication(context, function (err, requestedApplication) {
  //...
   
 });
@@ -308,8 +321,15 @@ var newApplication =
 			],
 			'assignedTo': 'reviewer@example.org',
 			'assignedExpiration': '2014-07-06T12:24:45.000Z'
-		};		
-client.addApplication({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: 'badge-slug', application: newApplication}, function (err, createdApplication) {
+		};
+var context = {
+		system: 'system-slug', 
+		issuer: 'issuer-slug', 
+		program: 'program-slug', 
+		badge: 'badge-slug', 
+		application: newApplication
+	};
+client.addApplication(context, function (err, createdApplication) {
  //...
   
 });
@@ -467,7 +487,14 @@ var editedApplication =
 			'assignedTo': 'reviewer@example.org',
 			'assignedExpiration': '2014-07-06T12:24:45.000Z'
 		};
-client.updateApplication({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: 'badge-slug', application: editedApplication}, function (err, updatedApplication) {
+var context = {
+		system: 'system-slug', 
+		issuer: 'issuer-slug', 
+		program: 'program-slug', 
+		badge: 'badge-slug', 
+		application: editedApplication
+	};
+client.updateApplication(context, function (err, updatedApplication) {
  //...
   
 });
@@ -617,8 +644,16 @@ var newReview =
 		},
 		//...
 		]
-	};		
-client.addReview({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: 'badge-slug', application: 'application-slug', review: newReview}, function (err, createdReview) {
+	};
+var context = {
+		system: 'system-slug', 
+		issuer: 'issuer-slug', 
+		program: 'program-slug', 
+		badge: 'badge-slug', 
+		application: 'application-slug',
+		review: newReview
+	};
+client.addReview(context, function (err, createdReview) {
  //...
   
 });
@@ -708,7 +743,15 @@ Delete an existing application review.
 ### Example method call
 
 ```js
-client.deleteReview({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: 'badge-slug', application: 'application-slug', review: 'review-slug'}, function (err, returnedData) {
+var context = {
+		system: 'system-slug', 
+		issuer: 'issuer-slug', 
+		program: 'program-slug', 
+		badge: 'badge-slug', 
+		application: 'application-slug',
+		review: 'review-slug'
+	};
+client.deleteReview(context, function (err, returnedData) {
  //...
   
 });
