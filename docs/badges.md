@@ -4,6 +4,8 @@ BadgeKit models badges in two ways: generic badges and badge instances (specific
 
 When an earner is awarded a badge, BadgeKit creates a badge instance, including the badge earned and the email address for the earner - see [issuing](issuing.md) for information about badge instances. This document regards generic earnable badges, which would for example be listed on issuer sites and made available for earner applications.
 
+_Each badge exists within the context of a system, issuer or program._
+
 The [`Client`](methods.md) object provides the following methods:
 
 * [`getBadges`](#getbadges-badge)
