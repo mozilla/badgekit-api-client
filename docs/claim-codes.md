@@ -144,6 +144,8 @@ Missing system.
 [ContextError: Missing system]
 ```
 
+_If the specified context does not contain any claim codes, the client will return an empty array._
+
 ## `getClaimCode`: `ClaimCode`
 
 Retrieve a specific claim code.
