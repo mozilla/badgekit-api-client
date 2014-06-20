@@ -34,7 +34,12 @@ All available (published) `badges` for the given context.
 ### Example method call
 
 ```js
-client.getBadges({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug'}, function (err, availableBadges) {
+var context = {
+		system: 'system-slug', 
+		issuer: 'issuer-slug', 
+		program: 'program-slug'
+	};
+client.getBadges(context, function (err, availableBadges) {
  //...
   
 });
@@ -181,8 +186,12 @@ All `badges`, including those marked as `archived`.
 ### Example method call
 
 ```js
-
-client.getAllBadges({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug'}, function (err, allAvailableBadges) {
+var context = {
+		system: 'system-slug', 
+		issuer: 'issuer-slug', 
+		program: 'program-slug'
+	};
+client.getAllBadges(context, function (err, allAvailableBadges) {
  //...
   
 });
@@ -329,8 +338,13 @@ The requested `badge`.
 ### Example method call
 
 ```js
-
-client.getBadge({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: 'badge-slug'}, function (err, requestedBadge) {
+var context = {
+		system: 'system-slug', 
+		issuer: 'issuer-slug', 
+		program: 'program-slug', 
+		badge: 'badge-slug'
+	};
+client.getBadge(context, function (err, requestedBadge) {
  //...
   
 });
@@ -500,8 +514,14 @@ var newBadge =
 			"unique": false,
 			"image": "http://badgeissuersite.com/image.jpg",
 			//...
-		};		
-client.createBadge({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: newBadge}, function (err, createdBadge) {
+		};
+var context = {
+		system: 'system-slug', 
+		issuer: 'issuer-slug', 
+		program: 'program-slug', 
+		badge: newBadge
+	};
+client.createBadge(context, function (err, createdBadge) {
  //...
   
 });
@@ -654,7 +674,13 @@ The deleted `badge`.
 ### Example method call
 
 ```js
-client.deleteBadge({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: 'badge-slug'}, function (err, deletedBadge) {
+var context = {
+		system: 'system-slug', 
+		issuer: 'issuer-slug', 
+		program: 'program-slug', 
+		badge: 'badge-slug'
+	};
+client.deleteBadge(context, function (err, deletedBadge) {
  //...
   
 });
@@ -825,8 +851,14 @@ var editedBadge =
 			"slug": "badge-slug",
 			"strapline": "This is the new strapline.",
 			//...
-		};		
-client.updateBadge({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: editedBadge}, function (err, updatedBadge) {
+		};
+var context = {
+		system: 'system-slug', 
+		issuer: 'issuer-slug', 
+		program: 'program-slug', 
+		badge: editedBadge
+	};
+client.updateBadge(context, function (err, updatedBadge) {
  //...
   
 });
@@ -985,7 +1017,12 @@ The requested badge.
 ### Example method call
 
 ```js
-client.getBadgeFromCode({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug'}, 'query-claim-code', function (err, requestedBadge) {
+var context = {
+		system: 'system-slug', 
+		issuer: 'issuer-slug', 
+		program: 'program-slug'
+	};
+client.getBadgeFromCode(context, 'query-claim-code', function (err, requestedBadge) {
  //...
   
 });
