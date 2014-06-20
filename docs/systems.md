@@ -22,7 +22,7 @@ Is not required.
 
 ### Returns
 
-Array containing available systems.
+Array containing available `systems`.
 
 ### Example method call
 
@@ -315,6 +315,7 @@ var editedSystem = {
 	{
 		"slug": "system-slug",
 		"url": "http://newsystemsite.com"
+		//,...
 	}
 };
 client.updateSystem(editedSystem, function (err, updatedSystem) {
