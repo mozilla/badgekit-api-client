@@ -303,25 +303,24 @@ The created `application`.
 ### Example method call
 
 ```js
-var newApplication = 
-		{ 
-			learner: 'earner@example.org',
-			evidence: [
-				{
-				'reflection': 'I did this stuff.',
-				'mediaType': 'image',
-				'url': 'http://example.org/evidence.html'
-				},
-				{
-				'reflection': 'I did that stuff.',
-				'mediaType': 'link',
-				'url': 'http://example.org/evidence.html'
-				}
-				//,...
-			],
-			'assignedTo': 'reviewer@example.org',
-			'assignedExpiration': '2014-07-06T12:24:45.000Z'
-		};
+var newApplication = { 
+		learner: 'earner@example.org',
+		evidence: [
+			{
+			'reflection': 'I did this stuff.',
+			'mediaType': 'image',
+			'url': 'http://example.org/evidence.html'
+			},
+			{
+			'reflection': 'I did that stuff.',
+			'mediaType': 'link',
+			'url': 'http://example.org/evidence.html'
+			}
+			//,...
+		],
+		'assignedTo': 'reviewer@example.org',
+		'assignedExpiration': '2014-07-06T12:24:45.000Z'
+	};
 var context = {
 		system: 'system-slug', 
 		issuer: 'issuer-slug', 
@@ -466,27 +465,26 @@ The updated `application`.
 
 ```js
 var proc = new Date();
-var editedApplication = 
-		{
-			slug: 'application-slug',
-			processed: proc,
-			learner: 'earner@example.org',
-			evidence: [
-				{
-				'reflection': 'I did this stuff.',
-				'mediaType': 'image',
-				'url': 'http://example.org/evidence.html'
-				},
-				{
-				'reflection': 'I did that stuff.',
-				'mediaType': 'link',
-				'url': 'http://example.org/evidence.html'
-				}
-				//,...
-			],
-			'assignedTo': 'reviewer@example.org',
-			'assignedExpiration': '2014-07-06T12:24:45.000Z'
-		};
+var editedApplication = {
+		slug: 'application-slug',
+		processed: proc,
+		learner: 'earner@example.org',
+		evidence: [
+			{
+			'reflection': 'I did this stuff.',
+			'mediaType': 'image',
+			'url': 'http://example.org/evidence.html'
+			},
+			{
+			'reflection': 'I did that stuff.',
+			'mediaType': 'link',
+			'url': 'http://example.org/evidence.html'
+			}
+			//,...
+		],
+		'assignedTo': 'reviewer@example.org',
+		'assignedExpiration': '2014-07-06T12:24:45.000Z'
+	};
 var context = {
 		system: 'system-slug', 
 		issuer: 'issuer-slug', 
@@ -632,8 +630,7 @@ _Reviews can include a generic comment and a comment for each criterion item in 
 ### Example method call
 
 ```js
-var newReview = 
-	{
+var newReview = {
 		author: 'reviewer@example.org',
 		comment: 'great job',
 		reviewItems: [
