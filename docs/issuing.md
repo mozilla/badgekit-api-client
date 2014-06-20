@@ -31,7 +31,13 @@ Array of badge instances.
 ### Example method call
 
 ```js
-client.getBadgeInstances({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: 'badge-slug'}, function (err, requestedInstances) {
+var context = {
+		system: 'system-slug', 
+		issuer: 'issuer-slug', 
+		program: 'program-slug', 
+		badge: 'badge-slug'
+	};
+client.getBadgeInstances(context, function (err, requestedInstances) {
  //...
   
 });
@@ -164,7 +170,14 @@ Requested badge instance.
 ### Example method call
 
 ```js
-client.getBadgeInstance({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: 'badge-slug', instance: 'earner@example.org'}, function (err, requestedInstance) {
+var context = {
+		system: 'system-slug', 
+		issuer: 'issuer-slug', 
+		program: 'program-slug', 
+		badge: 'badge-slug', 
+		instance: 'earner@example.org'
+	};
+client.getBadgeInstance(context, function (err, requestedInstance) {
  //...
   
 });
@@ -301,15 +314,21 @@ The created badge instance.
 var issueDate = new Date();
 var expDate = new Date();
 expDate.setDate(expDate.getDate()+365);
-var newBadgeInstance = 
-		{
-			email: 'earner@example.org',
-			slug: 'ihgfedcba',
+var newBadgeInstance = {
+		email: 'earner@example.org',
+		slug: 'ihgfedcba',
 			claimCode: 'a1b2c3d4e5',
-			issuedOn: issueDate,
-			expires: expDate
-		};		
-client.createBadgeInstance({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: 'badge-slug', instance: newBadgeInstance}, function (err, createdBadgeInstance) {
+		issuedOn: issueDate,
+		expires: expDate
+	};
+var context = {
+		system: 'system-slug', 
+		issuer: 'issuer-slug', 
+		program: 'program-slug', 
+		badge: 'badge-slug', 
+		instance: newBadgeInstance
+	};
+client.createBadgeInstance(context, function (err, createdBadgeInstance) {
  //...
   
 });
@@ -392,7 +411,14 @@ The deleted badge instance.
 ### Example method call
 
 ```js
-client.deleteBadgeInstance({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: 'badge-slug', instance: 'earner@example.org'}, function (err, deletedBadge) {
+var context = {
+		system: 'system-slug', 
+		issuer: 'issuer-slug', 
+		program: 'program-slug', 
+		badge: 'badge-slug', 
+		instance: 'earner@example.org'
+	};
+client.deleteBadgeInstance(context, function (err, deletedBadge) {
  //...
   
 });
