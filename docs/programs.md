@@ -12,7 +12,7 @@ The [`Client`](methods.md) object provides the following methods:
 
 ## `getPrograms`: `[Program]`
 
-Retrieve all available programs within a particular [`issuer`](issuers.md) and [`system`](systems.md).
+Retrieve all available programs within a particular issuer and system.
 
 ### Context
 
@@ -23,7 +23,7 @@ Retrieve all available programs within a particular [`issuer`](issuers.md) and [
 
 ### Returns
 
-All available programs for the given system/ issuer.
+All available `programs` for the given system/ issuer.
 
 ### Example method call
 
@@ -102,7 +102,7 @@ Retrieve a specific program.
 
 ### Returns
 
-The requested program.
+The requested `program`.
 
 ### Example method call
 
@@ -174,7 +174,7 @@ Create a new program within a system and issuer.
 |system|`slug`|program|`description`|
 |issuer|`slug`| |`email`|
 |program|`slug`| |`imageUrl`|
-| |`name`| |`programs` `[ ]`|
+| |`name`| | |
 | |`url`| | |
 
 ### Returns
@@ -354,6 +354,7 @@ var editedProgram =
 	{
 		"slug": "program-slug",
 		"name": "New Program Name"
+		//,...
 	};		
 client.updateProgram({system: 'system-slug', issuer: 'issuer-slug', program: editedProgram}, function (err, updatedProgram) {
 	 //...
