@@ -1,8 +1,8 @@
 # Badges
 
-BadgeKit models badges in two main ways: generic badges and badge instances (specific badges awarded to earners). A badge is represented by a series of data items issuers can define and use throughout the issuing process (including information for earners, reviewers and consumers interested in an earner's badges). When creating a badge, you can include information that will aid the assessment process, defining badge criteria and guidance for reviewers. 
+BadgeKit models badges in two ways: generic badges and badge instances (specific badges awarded to earners). A badge is represented by a series of data items to support various parts of the badging process (including information for earners, reviewers and consumers interested in an earner's badges). When creating a badge, you can include information that will aid the assessment process, defining badge criteria and guidance for reviewers. 
 
-When an earner is awarded a badge, BadgeKit creates a badge instance including the badge earned and the email address for the earner - see [issuing](issuing.md) for information about badge instances. This document regards generic badges, created and listed in issuer sites.
+When an earner is awarded a badge, BadgeKit creates a badge instance, including the badge earned and the email address for the earner - see [issuing](issuing.md) for information about badge instances. This document regards generic earnable badges, which would for example be listed on issuer sites and made available for earner applications.
 
 The [`Client`](methods.md) object provides the following methods:
 
@@ -499,7 +499,7 @@ var newBadge =
 			"image": "http://badgeissuersite.com/image.jpg",
 			//...
 		};		
-client.createBadge({system: 'system-slug', badge: newBadge}, function (err, createdBadge) {
+client.createBadge({system: 'system-slug', issuer: 'issuer-slug', program: 'program-slug', badge: newBadge}, function (err, createdBadge) {
  //...
   
 });
@@ -965,12 +965,16 @@ Incorrect context.
  
 Retrieve a badge using a claim code (claim codes are associated with specific badges).
 
+### Context 
+
 | |**Required**| |**Optional**|
 |:---|:---|:---|:---|
 |system|`slug`|issuer|`slug`|
 | | |program|`slug`|
 
-__Method also requires the query claim code as a second parameter.__
+### Parameter
+
+This method also requires the query claim code as a second parameter.
 
 ### Returns
 
