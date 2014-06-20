@@ -2,6 +2,8 @@
 
 In BadgeKit, issuing (awarding) a badge to an earner means creating a badge instance for the earner email address. Badge instances are specific instances of badges awarded to earners, rather than generic badges available for earning. Badges can be issued following various different processes: a badge being claimed with a claim code; a badge application being approved; a badge being issued directly.
 
+_Each badge instance exists within the context of a system/ issuer/ program and badge._
+
 The [`Client`](methods.md) object provides the following methods:
 
 * [`getBadgeInstances`](#getbadgeinstances-instance)
