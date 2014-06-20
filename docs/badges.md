@@ -504,17 +504,16 @@ The created `badge`.
 ### Example method call
 
 ```js
-var newBadge = 
-		{
-			"name": "New Badge Name",
-			"type": "badge type",
-			"earnerDescription": "Description for earners.",
-			"consumerDescription": "Description for consumers.",
-			"criteriaUrl": "http://badgeissuersite.com/criteria",
-			"unique": false,
-			"image": "http://badgeissuersite.com/image.jpg",
-			//...
-		};
+var newBadge = {
+		"name": "New Badge Name",
+		"type": "badge type",
+		"earnerDescription": "Description for earners.",
+		"consumerDescription": "Description for consumers.",
+		"criteriaUrl": "http://badgeissuersite.com/criteria",
+		"unique": false,
+		"image": "http://badgeissuersite.com/image.jpg",
+		//...
+	};
 var context = {
 		system: 'system-slug', 
 		issuer: 'issuer-slug', 
@@ -846,12 +845,11 @@ The updated `badge`.
 ### Example method call
 
 ```js
-var editedBadge = 
-		{
-			"slug": "badge-slug",
-			"strapline": "This is the new strapline.",
-			//...
-		};
+var editedBadge = {
+		"slug": "badge-slug",
+		"strapline": "This is the new strapline.",
+		//...
+	};
 var context = {
 		system: 'system-slug', 
 		issuer: 'issuer-slug', 
