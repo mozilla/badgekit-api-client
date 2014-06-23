@@ -1,22 +1,30 @@
 # Models
 
-Models are created either from a simple identifier, or a full object describing the model instance. Model instances also require a parent, which will vary depending on the context. `Badges` require a `System`, `Issuer` or `Program`, for example, while `Applications` require a `Badge`. With that said, client consumers will never actually need to construct model instances.
+You can access the full range of client functionality via the [client object methods](methods.md). However, you can also access a range of methods via the response objects returned from your client method calls, which you may find more convenient within your applications.
 
-```
+You should typically not have to create model instances, however the following overview explains how the client instantiates BadgeKit objects. See [Common Methods](#common-methods) below for functionality you can exploit in model instances such as response data items.
+
+## Instantiation
+
+Models are created either from a simple identifier, or a full object describing the model instance. Model instances also require a parent, which will vary depending on the context. `Badges` require a `System`, `Issuer` or `Program`, for example, while `Applications` require a `Badge`, and `Reviews` require an `Application`.
+
+As with client method calls, defining model objects involves JSON, which can be abbreviated:
+
+```js
 var item = new Model('item-slug', <parent>);
 ```
 
-Is equivalent to:
+...is equivalent to:
 
-```
+```js
 var item = new Model({
   slug: 'item-slug'
 }, <parent>);
 ```
 
-Alternatively, with a full context.
+...alternatively, with a full context:
 
-```
+```js
 var item = new Model({
   slug: 'item-slug',
   name: 'Item Name',
@@ -29,111 +37,129 @@ var item = new Model({
 
 * **`create`** - saves new model instance.
 
-  ```
-  item.create(function (err, item) {
-    ...
-  });
-  ```
+```js
+item.create(function (err, item) {
+  ...
+});
+```
 
 * **`load`** - loads model instance data.
 
-  ```
-  item.load(function (err, item) {
-    ...
-  });
-  ```
+```js
+item.load(function (err, item) {
+  ...
+});
+```
 
 * **`save`** - saves updated model instance.
 
-  ```
-  item.save(function (err, item) {
-    ...
-  });
-  ```
+```js
+item.save(function (err, item) {
+  ...
+});
+```
 
 * **`delete`** - deletes model instance.
 
-  ```
-  item.delete(function (err, item) {
-    ...
-  });
-  ```
+```js
+item.delete(function (err, item) {
+  ...
+});
+```
 
 Additionally, `Systems`, `Issuers` and `Programs` all have the following shared methods:
 
 * **getBadges** - loads all associated badges.
 
-  ```
-  item.getBadges(function (err, badges) {
-    ...
-  });
-  ```
+```js
+item.getBadges(function (err, badges) {
+  ...
+});
+```
 
 * **getBadge** - loads an associated badge.
 
-  ```
-  item.getBadge(badge, function (err, badge) {
-    ...
-  });
-  ```
+```js
+item.getBadge(badge, function (err, badge) {
+  ...
+});
+```
 
 * **addBadge** - adds a badge to this instance.
 
-  ```
-  item.addBadge(badge, function (err, badge) {
-    ...
-  });
-  ```
+```js
+item.addBadge(badge, function (err, badge) {
+  ...
+});
+```
 
 Along with `Badges`, `Systems`/`Issuers`/`Programs` also have these methods:
 
 * **getApplications** - gets all associated badge applications.
 
-  ```
-  item.getApplications(function (err, applications) {
-    ...
-  });
-  ```
+```js
+item.getApplications(function (err, applications) {
+  ...
+});
+```
 
 * **getClaimCodes** - gets all associated claim codes.
 
-  ```
-  item.getClaimCodes(function (err, claimCodes) {
-    ...
-  });
-  ```
+```js
+item.getClaimCodes(function (err, claimCodes) {
+  ...
+});
+```
 
+## Badge
+
+```js
+var badge = new Badge(<data>, System|Issuer|Program);
+```
+
+* **`addApplication`** - starts an application for this badge.
+
+```js
+badge.addApplication(application, function (err, application) {
+  ...
+});
+```
+
+* **`addClaimCode`** - add a claim code for the badge
+
+```js
+badge.addClaimCode(claimCode, function (err, claimCode) {
+  ...
+});
+```
+
+<!--* **`generateClaimCode`**-->
+
+* **`getInstances`**
+
+```js
+badge.getInstances(function (err, instances)) {
+  ...
+});
+```
 
 ## Application
 
-```
+```js
 var application = new Application(<data>, Badge);
 ```
 
-* ~~**`getEvidence`**~~
+<!--
+* **`getEvidence`**
+ 
+* **`getEvidenceItem`**
+ 
+* **`addEvidence`**
+ 
+* **`deleteEvidence`**
 
-  *TO DO*
-
-* ~~**`getEvidenceItem`**~~
-
-  *TO DO*
-
-* ~~**`addEvidence`**~~
-
-  *TO DO*
-
-* ~~**`deleteEvidence`**~~
-
-  *TO DO*
-
-* ~~**`addComment`**~~
-
-  *TO DO*
-
-* ~~**`deleteComment`**~~
-
-  *TO DO*
-
+* **`addComment`**
+* **`deleteComment`**
 * **`approve`** - approves this application.
 
   ```
@@ -149,97 +175,86 @@ var application = new Application(<data>, Badge);
     ...
   });
   ```
+-->
 
-## Badge
+## System
 
+```js
+var system = new System(<data>, Client);
 ```
-var badge = new Badge(<data>, System|Issuer|Program);
+
+* **`getIssuers`** - gets all issuers associated with this system
+
+```js
+system.getIssuers(function (err, issuers) {
+  ...
+});
 ```
 
-* **`addApplication`** - starts an application for this badge.
+* **`getIssuer`** - gets a specified issuer
 
-  ```
-  badge.addApplication(application, function (err, application) {
-    ...
-  });
-  ```
+```js
+system.getIssuer(issuer, function (err, issuer) {
+  ...
+});
+```
 
-* ~~**`addClaimCode`**~~
+* **`addIssuer`** - adds an issuer to this system
 
-  *TO DO*
-
-* ~~**`generateClaimCode`**~~
-
-  *TO DO*
-
-* ~~**`getInstances`**~~
-
-  *TO DO*
+```js
+system.addIssuer(issuer, function (err, issuer) {
+  ...
+});
+```
 
 ## Issuer
 
-```
+```js
 var issuer = new Issuer(<data>, System);
 ```
 
 * **`getPrograms`** - gets all programs associated with this issuer.
 
-  ```
-  issuer.getPrograms(function (err, programs) {
-    ...
-  });
-  ```
+```js
+issuer.getPrograms(function (err, programs) {
+  ...
+});
+```
 
 * **`getProgram`** - gets a specified program.
 
-  ```
-  issuer.getProgram(program, function (err, program) {
-    ...
-  });
-  ```
+```js
+issuer.getProgram(program, function (err, program) {
+  ...
+});
+```
 
 * **`addProgram`** - adds a program to this issuer.
 
-  ```
-  issuer.addProgram(program, function (err, program) {
-    ...
-  });
-  ```
+```js
+issuer.addProgram(program, function (err, program) {
+  ...
+});
+```
 
 ## Program
 
-```
+```js
 var program = new Program(<data>, Issuer);
 ```
 
-Programs have no additional methods.
+## ClaimCode
 
-## System
-
-```
-var system = new System(<data>, Client);
+```js
+var claimCode = new ClaimCode(<data>, Badge);
 ```
 
-* **getIssuers** - gets all issuers associated with this system
+<!--
+* **`claim`** - claims a code (takes email)
+-->
 
-  ```
-  system.getIssuers(function (err, issuers) {
-    ...
-  });
-  ```
+## Instance
 
-* **getIssuer** - gets a specified issuer
-
-  ```
-  system.getIssuer(issuer, function (err, issuer) {
-    ...
-  });
-  ```
-
-* **addIssuer** - adds an issuer to this system
-
-  ```
-  system.addIssuer(issuer, function (err, issuer) {
-    ...
-  });
-  ```
+```js
+var instance = new Instance(<data>, Badge);
+```

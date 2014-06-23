@@ -12,7 +12,7 @@ A Node client library for [`badgekit-api`](https://github.com/mozilla/badgekit-a
 
 ## Usage
 
-```
+```js
 const Client = require('badgekit-api-client');
 
 var apiEndpoint = 'https://api.example.org';
@@ -26,13 +26,13 @@ var client = new Client(apiEndpoint, auth);
 
 ## Documentation
 
-Full documentation is available under [`/docs`](docs/index.md).
+Full documentation is available in the project: [`/docs`](docs).
 
-All client methods accept a context object, and (optionally) a callback function. The context object is expected to contain namespaced sub-objects, describing the systems, badges, etc relevant to the function call. Passing in a simple string will auto-expand. That is, `{system: 'system-slug'}` is equivalent to `{system: {slug: 'system-slug'}}`.
+Most client methods accept a context object and (optionally) a callback function. The context object is expected to contain namespaced sub-objects, describing the systems, badges, etc relevant to the function call. Passing in a simple string will auto-expand. That is, `{system: 'system-slug'}` is equivalent to `{system: {slug: 'system-slug'}}`.
 
-Callback functions should accept two arguments; an error (where thrown), and any response data.
+Callback functions should accept two arguments: an error (where thrown) and any response data.
 
-```
+```js
 client.getBadges({system: 'system-slug'}, function (err, badges) {
   if (err) return handleError(err);
 
@@ -42,40 +42,30 @@ client.getBadges({system: 'system-slug'}, function (err, badges) {
 });
 ```
 
-[Response data items](docs/models.md) all have basic functionality to allow for manipulation without having to maintain the context.
+[Method calls](docs/methods.md) provide management for badges, assessment, issuing and system/ issuer/ program admin.
 
-```
+[Response data items](docs/models.md) all have basic functionality to allow for manipulation without having to maintain the context. For example:
+
+```js
 client.getBadge({system: 'system-slug', badge: 'badge-slug'}, function (err, badge) {
   if (err) return handleError(err);
 
-  badge.description = 'A new badge description';
-  client.saveBadge({system: 'system-slug', badge: badge});
+  badge.strapline = 'A new badge strapline';
+  client.updateBadge({system: 'system-slug', badge: badge});
 
-  client.getApplications({system: 'system-slug', badge: badge}, function (err, applications) {
-    if (err) return handleError(err);
-
-    applications.forEach(function (application) {
-      // handle application
-    });
-  });
+  //...
 });
 ```
 
-Is equivalent to:
+...is equivalent to:
 
-```
+```js
 client.getBadge({system: 'system-slug', badge: 'badge-slug'}, function (err, badge) {
   if (err) return handleError(err);
 
-  badge.description = 'A new badge description';
+  badge.strapline = 'A new badge strapline';
   badge.save();
 
-  badge.getApplications(function (err, applications) {
-    if (err) return handleError(err);
-
-    applications.forEach(function (application) {
-      // handle application
-    })
-  });
+  //...
 });
 ```

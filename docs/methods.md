@@ -1,116 +1,66 @@
 # Client Methods
 
-<a name="systems"></a>
-## Systems
+The `Client` object provides the following methods - see the linked pages for detailed overviews of data, sample method calls, expected response data and errors.
 
-* **`getSystems`**: `[System]`
-  * *Context* is not required
-  * *Returns* all available systems
+## [Systems](systems.md)
 
-* **`getSystem`**: `System`
-  * *Context* requires a `system`
-  * *Returns* the requested system
+* `getSystems`: `[System]` 
+* `getSystem`: `System`
+* `createSystem`: `System`
+* `deleteSystem`: `System`
+* `updateSystem`: `System`
 
-* **`createSystem`**: `System`
-  * *Context* requires a full `system`
-  * *Returns* the created system
+## [Issuers](issuers.md)
 
-* **`deleteSystem`**: `System`
-  * *Context* requires a `system`
-  * *Returns* the deleted system
+* `getIssuers`: `[Issuer]`
+* `getIssuer`: `Issuer`
+* `createIssuer`: `Issuer`
+* `deleteIssuer`: `Issuer`
+* `updateIssuer`: `Issuer`
 
-* **`updateSystem`**: `System`
-  * *Context* requires a full `system`
-  * *Returns* the updated system
+## [Programs](programs.md)
 
-<a name="issuers"></a>
-## Issuers
+* `getPrograms`: `[Program]`
+* `getProgram`: `Program`
+* `createProgram`: `Program`
+* `deleteProgram`: `Program`
+* `updateProgram`: `Program`
 
-* **`getIssuers`**: `[Issuer]`
-  * *Context* requires a `system`
-  * *Returns* all available issuers for the given system
+## [Badges](badges.md)
 
-* **`getIssuer`**: `Issuer`
-  * *Context* requires a `system` and an `issuer`
-  * *Returns* the requested issuer
+* `getBadges`: `[Badge]`
+* `getAllBadges`: `[Badge]`
+* `getBadge`: `Badge`
+* `createBadge`: `Badge`
+* `deleteBadge`: `Badge`
+* `updateBadge`: `Badge`
+* `getBadgeFromCode`: `Badge`
 
-* **`createIssuer`**: `Issuer`  
-  * *Context* requires a `system` and a full `issuer`
-  * *Returns* the created issuer
+## [Assessment](assessment.md)
 
-* **`deleteIssuer`**: `Issuer`
-  * *Context* requires a `system` and an `issuer`
-  * *Returns* the deleted system
+* `getApplications`
+* `getApplication`
+* `addApplication`
+* `updateApplication`
+* `addReview`
+* `deleteReview`
 
-* **`updateIssuer`**: `Issuer`
-  * *Context* requires a `system` and a full `issuer`
-  * *Returns* the updated system
+## [Issuing](issuing.md)
 
-<a name="programs"></a>
-## Programs
+* `getBadgeInstances`
+* `getBadgeInstance`
+* `createBadgeInstance`
+* `deleteBadgeInstance`
 
-* **`getPrograms`**: `[Program]`
-  * *Context* requires a `system` and an `issuer`
-  * *Returns* all available programs for the given system/issuer
+<!--* `updateBadgeInstance`-->
 
-* **`getProgram`**: `Program`
-  * *Context* requires a `system` and an `issuer`
-  * *Returns* the requested program
+## [Claim Codes](claim-codes.md)
 
-* **`createProgram`**: `Program`  
-  * *Context* requires a `system`, an issuer, and a full `program`
-  * *Returns* the created program
+* `getClaimCodes`
+* `getClaimCode`
+* `createClaimCode`
+* `deleteClaimCode`
 
-* **`deleteProgram`**: `Program`
-  * *Context* requires a `system`, an `issuer`, and a `program`
-  * *Returns* the deleted program
-
-* **`updateProgram`**: `Program`
-  * *Context* requires a `system`, an `issuer`, and a full `program`
-  * *Returns* the updated program
-
-<a name="badges"></a>
-## Badges
-
-* **`getBadges`**: `[Badge]`
-  * *Context* is variable, depending on the badge, but requires at least a `system`, and potentially an `issuer` and `program`
-  * *Returns* all available badges for the given system/issuer/program
-
-* **`getAllBadges`**: `[Badge]`
-  * *Context* is variable
-  * *Returns* all available badges, including those marked as 'archived'
-
-* **`getBadge`**: `Badge`
-  * *Context* is variable, as with `getBadges`, but also requires a `badge`
-  * *Returns* the requested badge
-
-* **`createBadge`**: `Badge`  
-  * *Context* is variable, but does require a full `badge`
-  * *Returns* the created badge
-
-* **`deleteBadge`**: `Badge`
-  * *Context* is variable, but does require a `badge`
-  * *Returns* the deleted badge
-
-* **`updateBadge`**: `Badge`
-  * *Context* is variable, but does require a full `badge`
-  * *Returns* the updated badge
-
-<a name="claimCodes"></a>
-## Claim Codes
-
-*TO DO*
-
-<a name="issuing"></a>
-## Issuing
-
-*TO DO*
-
-<a name="assessment"></a>
-## Assessment
-
-*TO DO*
-
-
-
-
+<!--* `generateRandomClaimCode`-->
+<!--* `updateClaimCode`-->
+<!--* `claimClaimCode`-->
