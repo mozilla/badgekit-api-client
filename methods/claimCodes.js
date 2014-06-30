@@ -2,19 +2,25 @@ const utils = require('../lib/modelUtils');
 
 const ClaimCode = require('../models/claimCode');
 
-exports.getClaimCodes = function getClaimCodes (context, callback) {
+exports.getClaimCodes = function getClaimCodes (context, options, callback) {
+  if (typeof options === 'function') {
+    callback = options;
+    options = {};
+  }
+
   utils.getContext(context, this, function (err, context) {
     if (err)
       return callback(err, null);
 
-    const options = {
+    const opts = {
       path: context._path + ClaimCode.pathPart,
       filter: 'claimCodes',
       default: [],
-      generator: new utils.Generator(ClaimCode, context)
+      generator: new utils.Generator(ClaimCode, context),
+      query: options.paginate ? options.paginate : undefined
     };
 
-    this._remote.get(options, callback);
+    this._remote.get(opts, callback);
   }.bind(this));
 }
 

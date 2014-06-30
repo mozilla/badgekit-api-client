@@ -7,7 +7,7 @@ function findBadges (context, client, callback, query) {
     if (err)
       return callback(err, null);
 
-    const options = {
+    const opts = {
       path: context._path + Badge.pathPart,
       filter: 'badges',
       default: [],
@@ -15,16 +15,39 @@ function findBadges (context, client, callback, query) {
       query: query ? query : undefined
     };
 
-    client._remote.get(options, callback);
+    client._remote.get(opts, callback);
   });
 }
 
-exports.getBadges = function getBadges (context, callback) {
-  findBadges(context, this, callback);
+exports.getBadges = function getBadges (context, options, callback) {
+  if (typeof options === 'function') {
+    callback = options;
+    options = {};
+  }
+
+  var query = null;
+
+  if (options.paginate) {
+    query = options.paginate;
+  }
+
+  findBadges(context, this, callback, query);
 }
 
-exports.getAllBadges = function getAllBadges (context, callback) {
-  findBadges(context, this, callback, {archived: 'any'});
+exports.getAllBadges = function getAllBadges (context, options, callback) {
+  if (typeof options === 'function') {
+    callback = options;
+    options = {};
+  }
+
+  var query = { archived: 'any' };
+
+  if (options.paginate) {
+    query.page = options.paginate.page;
+    query.count = options.paginate.count;
+  }
+
+  findBadges(context, this, callback, query);
 }
 
 function doBadgeAction(context, client, action, callback) {

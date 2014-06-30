@@ -2,19 +2,25 @@ const utils = require('../lib/modelUtils');
 
 const Program = require('../models/program');
 
-exports.getPrograms = function getPrograms (context, callback) {
+exports.getPrograms = function getPrograms (context, options, callback) {
+  if (typeof options === 'function') {
+    callback = options;
+    options = {};
+  }
+
   utils.getContext(context, this, 'Issuer', function (err, issuer) {
     if (err)
       return callback(err, null);
 
-    const options = {
+    const opts = {
       path: issuer._path + Program.pathPart,
       filter: 'programs',
       default: [],
-      generator: new utils.Generator(Program, issuer)
+      generator: new utils.Generator(Program, issuer),
+      query: options.paginate ? options.paginate : undefined
     };
 
-    this._remote.get(options, callback);
+    this._remote.get(opts, callback);
   }.bind(this));
 }
 

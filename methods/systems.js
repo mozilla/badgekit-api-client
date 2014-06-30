@@ -2,15 +2,21 @@ const utils = require('../lib/modelUtils');
 
 const System = require('../models/system');
 
-exports.getSystems = function getSystems (callback) {
-  const options = {
+exports.getSystems = function getSystems (options, callback) {
+  if (typeof options === 'function') {
+    callback = options;
+    options = {};
+  }
+
+  const opts = {
     path: this._path + System.pathPart,
     filter: 'systems',
     default: [],
-    generator: new utils.Generator(System, this)
+    generator: new utils.Generator(System, this),
+    query: options.paginate ? options.paginate : undefined
   };
 
-  this._remote.get(options, callback);
+  this._remote.get(opts, callback);
 }
 
 function doSystemAction(context, client, action, callback) {
