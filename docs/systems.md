@@ -24,7 +24,7 @@ Is not required.
 
 ### Options
 
-This method takes an optional second parameter to specify pagination data:
+This method takes an optional parameter to specify pagination data:
 
 * `paginate` - _JSON object_
  * `page` - _page of results to return_
