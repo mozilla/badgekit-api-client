@@ -27,6 +27,14 @@ Get available (published) badges within the system, issuer or program context.
 |system|`slug`|issuer|`slug`|
 | | |program|`slug`|
 
+### Options
+
+This method takes an optional second parameter to specify pagination data:
+
+* `paginate` - _JSON object_
+ * `page` - _page of results to return_
+ * `count` - _number of results per page_
+
 ### Returns
 
 All available (published) `badges` for the given context.
@@ -39,7 +47,13 @@ var context = {
 		issuer: 'issuer-slug', 
 		program: 'program-slug'
 	};
-client.getBadges(context, function (err, availableBadges) {
+var options = { 
+	paginate: { 
+		page: 1, 
+		count: 2 
+	}
+};
+client.getBadges(context, options, function (err, availableBadges) {
  //...
   
 });
@@ -179,6 +193,14 @@ Get all badges for a system, issuer or program, including archived badges (archi
 |system|`slug`|issuer|`slug`|
 | | |program|`slug`|
 
+### Options
+
+This method takes an optional second parameter to specify pagination data:
+
+* `paginate` - _JSON object_
+ * `page` - _page of results to return_
+ * `count` - _number of results per page_
+
 ### Returns
 
 All `badges`, including those marked as `archived`.
@@ -191,7 +213,12 @@ var context = {
 		issuer: 'issuer-slug', 
 		program: 'program-slug'
 	};
-client.getAllBadges(context, function (err, allAvailableBadges) {
+var options = { 
+	paginate: { 
+		page: 1, 
+		count: 2 
+	}
+client.getAllBadges(context, options, function (err, allAvailableBadges) {
  //...
   
 });
