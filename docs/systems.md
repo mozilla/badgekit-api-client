@@ -22,6 +22,14 @@ Retrieve all available systems.
 
 Is not required.
 
+### Options
+
+This method takes an optional second parameter to specify pagination data:
+
+* `paginate` - _JSON object_
+ * `page` - _page of results to return_
+ * `count` - _number of results per page_
+
 ### Returns
 
 Array containing available `systems`.
@@ -29,7 +37,13 @@ Array containing available `systems`.
 ### Example method call
 
 ```js
-client.getSystems(function (err, availableSystems) {
+var options = { 
+	paginate: { 
+		page: 1, 
+		count: 2 
+	}
+};
+client.getSystems(options, function (err, availableSystems) {
   //...
   
 });
