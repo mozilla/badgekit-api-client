@@ -22,6 +22,14 @@ Retrieve all available issuers within a particular system.
 |:---|:---|
 |system|`slug`|
 
+### Options
+
+This method takes an optional second parameter to specify pagination data:
+
+* `paginate` - _JSON object_
+ * `page` - _page of results to return_
+ * `count` - _number of results per page_
+
 ### Returns
 
 All available `issuers` for the given `system`.
@@ -29,7 +37,13 @@ All available `issuers` for the given `system`.
 ### Example method call
 
 ```js
-client.getIssuers({system: 'system-slug'}, function (err, availableIssuers) {
+var options = { 
+	paginate: { 
+		page: 1, 
+		count: 2 
+	}
+};
+client.getIssuers({system: 'system-slug'}, options, function (err, availableIssuers) {
   //...
   
 });
