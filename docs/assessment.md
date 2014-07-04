@@ -48,7 +48,7 @@ var context = {
 		program: 'program-slug', 
 		badge: 'badge-slug'
 	};
-var context = { 
+var options = { 
 	paginate: { 
 		page: 1, 
 		count: 2 
