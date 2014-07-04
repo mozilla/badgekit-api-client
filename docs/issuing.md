@@ -24,6 +24,14 @@ Retrieve awarded instances of a particular badge.
 |system|`slug`|issuer|`slug`|
 |badge|`slug`|program|`slug`|
 
+### Options
+
+This method takes an optional second parameter to specify pagination data:
+
+* `paginate` - _JSON object_
+ * `page` - _page of results to return_
+ * `count` - _number of results per page_
+
 ### Returns
 
 Array of badge instances.
@@ -37,7 +45,13 @@ var context = {
 		program: 'program-slug', 
 		badge: 'badge-slug'
 	};
-client.getBadgeInstances(context, function (err, requestedInstances) {
+var options = { 
+	paginate: { 
+		page: 1, 
+		count: 2 
+	}
+};
+client.getBadgeInstances(context, options, function (err, requestedInstances) {
  //...
   
 });
