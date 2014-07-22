@@ -61,13 +61,17 @@ exports.getBadgeInstance = function getBadgeInstance (context, callback) {
   doBadgeInstanceAction(context, this, 'load', callback);
 }
 
-exports.createBadgeInstance = function createBadgeInstance (context, code, callback) {
+exports.createBadgeInstance = function createBadgeInstance (context, options, callback) {
   if (!callback) {
-    callback = code;
-    code = undefined;
+    callback = options;
+    options = {};
   }
 
-  doBadgeInstanceAction(context, this, 'create', callback, code);
+  if (typeof options === 'string') {
+    options = { code: options }
+  }
+  
+  doBadgeInstanceAction(context, this, 'create', callback, options);
 }
 
 exports.deleteBadgeInstance = function deleteBadgeInstance (context, callback) {

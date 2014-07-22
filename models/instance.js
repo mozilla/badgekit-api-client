@@ -12,13 +12,14 @@ function Instance (data, parent) {
 Object.defineProperty(Instance, 'pathIdentifier', {value: 'email'});
 
 utils.initModel(Instance, '/instances', {
-  create: function create (code, callback) {
+  create: function create (opts, callback) {
     var filter = this.constructor.name;
     filter = filter.charAt(0).toLowerCase() + filter.substr(1);
 
     var data = this;
-    data.claimCode = code;
-    
+    data.claimCode = opts.code;
+    data.comment = opts.comment;
+
     const options = {
       path: this._parent._path + this.constructor.pathPart,
       data: data,
