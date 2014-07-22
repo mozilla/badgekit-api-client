@@ -318,6 +318,13 @@ Create a badge instance - this means issuing a badge to a particular earner. Bad
 | | | |`issuedOn` (_timestamp_)|
 | | | |`expires` (_timestamp_)|
 
+### Options
+
+This method takes an optional second parameter to specify a claim code and/or comment:
+
+* `code` - _claim code for the new badge instance_
+* `comment` - _comment to forward to the API webhook_
+
 ### Returns
 
 The created badge instance.
@@ -331,7 +338,7 @@ expDate.setDate(expDate.getDate()+365);
 var newBadgeInstance = {
 		email: 'earner@example.org',
 		slug: 'ihgfedcba',
-			claimCode: 'a1b2c3d4e5',
+		claimCode: 'a1b2c3d4e5',
 		issuedOn: issueDate,
 		expires: expDate
 	};
@@ -342,7 +349,11 @@ var context = {
 		badge: 'badge-slug', 
 		instance: newBadgeInstance
 	};
-client.createBadgeInstance(context, function (err, createdBadgeInstance) {
+var options = {
+		code: "claim-code",
+		comment: "excellent job"
+	};
+client.createBadgeInstance(context, options, function (err, createdBadgeInstance) {
  //...
   
 });
