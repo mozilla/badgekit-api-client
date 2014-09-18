@@ -74,6 +74,24 @@ exports.createBadgeInstance = function createBadgeInstance (context, options, ca
   doBadgeInstanceAction(context, this, 'create', callback, options);
 }
 
+exports.createBadgeInstances = function createBadgeInstances (context, callback) {
+  utils.getContext(context, this, function (err, populatedContext) {
+    if (err)
+      return callback(err, null);
+
+    const opts = {
+      path: populatedContext._path + BadgeInstance.pathPart + '/bulk',
+      filter: 'instances',
+      default: [],
+      generator: new utils.Generator(BadgeInstance, context), 
+      data: context
+    };
+
+    this._remote.post(opts, callback);
+  }.bind(this));
+}
+
+
 exports.deleteBadgeInstance = function deleteBadgeInstance (context, callback) {
   doBadgeInstanceAction(context, this, 'delete', callback);
 }
