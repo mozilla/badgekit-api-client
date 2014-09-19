@@ -13,6 +13,9 @@ exports.getApplications = function getApplications (context, options, callback) 
   if (options.processed !== undefined) {
     query.processed = options.processed;
   }
+  if (options.email !== undefined) {
+    query.email = options.email;
+  }
 
   utils.getContext(context, this, function (err, context) {
     if (err)
