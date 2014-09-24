@@ -9,6 +9,7 @@ The [`Client`](methods.md) object provides the following methods:
 * [`getBadgeInstances`](#getbadgeinstances-instance)
 * [`getBadgeInstance`](#getbadgeinstance-instance)
 * [`createBadgeInstance`](#createbadgeinstance-instance)
+* [`createBadgeInstances`](#createbadgeinstances-instances)
 * [`deleteBadgeInstance`](#deletebadgeinstance-instance)
 
 <!--* [`updateBadgeInstance`](#updatebadgeinstance-instance)-->
@@ -354,6 +355,102 @@ var options = {
 		comment: "excellent job"
 	};
 client.createBadgeInstance(context, options, function (err, createdBadgeInstance) {
+ //...
+  
+});
+```
+
+### Expected response
+
+```json
+{
+    "slug": "ihgfedcba",
+    "email": "earner@example.org",
+    "expires": "2015-06-13T18:51:15.000Z",
+    "issuedOn": "2014-06-13T18:51:15.000Z",
+    "claimCode": "claim-code",
+    "assertionUrl": "http://badgeissuersite.com/public/assertions/instance-slug",
+    "badge": null
+}
+```
+
+#### Response structure
+
+* slug
+* email
+* expires
+* issuedOn
+* claimCode
+* assertionUrl
+* [badge](badges.md)
+
+### Potential errors
+
+Badge instance data invalid.
+
+```
+[ValidationError: Could not validate required fields]
+```
+
+System, issuer, program or badge not found.
+
+```
+[ResourceNotFoundError: Could not find system field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find issuer field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find program field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find badge field: `slug`, value: `attempted-slug`]
+```
+
+Missing system or badge.
+
+```
+[ContextError: Missing system]
+
+[ContextError: Missing badge]
+```
+
+Incorrect context.
+
+```
+[ContextError: Context not of required type: Instance]
+```
+
+## `createBadgeInstances`: `Instances`
+
+Create multiple badge instances - this means issuing a particular badge to a group of earners.
+
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|issuer|`slug`|
+|badge|`slug`|program|`slug`|
+|instance|`emails`| | |
+
+### Options
+
+This method takes an array parameter including a list of emails to issue the badge to:
+
+* `emails` - _array of email addresses_
+
+### Returns
+
+Array of created badge instances.
+
+### Example method call
+
+```js
+var context = {
+		system: 'system-slug', 
+		issuer: 'issuer-slug', 
+		program: 'program-slug', 
+		badge: 'badge-slug', 
+		emails: ['earner@example.org', 'other@example.org']
+	};
+client.createBadgeInstances(context, function (err, createdBadgeInstances) {
  //...
   
 });
