@@ -29,8 +29,9 @@ Retrieve existing applications within a system, issuer, program or badge context
 
 ### Options
 
-This method takes an optional second parameter to specify pagination data:
+This method takes optional parameters to specify pagination and processed data:
 
+* `processed` - _boolean indicating processed or unprocessed applications_
 * `paginate` - _JSON object_
  * `page` - _page of results to return_
  * `count` - _number of results per page_
@@ -49,6 +50,7 @@ var context = {
 		badge: 'badge-slug'
 	};
 var options = { 
+	processed: true,
 	paginate: { 
 		page: 1, 
 		count: 2 
