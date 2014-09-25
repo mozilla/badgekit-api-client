@@ -428,7 +428,7 @@ Create multiple badge instances - this means issuing a particular badge to a gro
 |:---|:---|:---|:---|
 |system|`slug`|issuer|`slug`|
 |badge|`slug`|program|`slug`|
-|instance|`emails`| | |
+|emails|`[ ]`| | |
 
 ### Options
 
@@ -436,9 +436,11 @@ This method takes an array parameter including a list of emails to issue the bad
 
 * `emails` - _array of email addresses_
 
+_The bulk issuing method does not accept the claim code parameter._
+
 ### Returns
 
-Array of created badge instances.
+Array of created badge instances. ___If any of the email addresses passed have already been awarded this badge, new instances will not be created for them and they will not be included in the returned data. Similarly, any duplicate email addresses in the array will only return a single new badge instance.___
 
 ### Example method call
 
@@ -459,7 +461,7 @@ client.createBadgeInstances(context, function (err, createdBadgeInstances) {
 ### Expected response
 
 ```json
-{
+[{
     "slug": "ihgfedcba",
     "email": "earner@example.org",
     "expires": "2015-06-13T18:51:15.000Z",
@@ -467,18 +469,21 @@ client.createBadgeInstances(context, function (err, createdBadgeInstances) {
     "claimCode": "claim-code",
     "assertionUrl": "http://badgeissuersite.com/public/assertions/instance-slug",
     "badge": null
-}
+},
+...
+]
 ```
 
 #### Response structure
 
-* slug
-* email
-* expires
-* issuedOn
-* claimCode
-* assertionUrl
-* [badge](badges.md)
+* `[ ]`
+ * slug
+ * email
+ * expires
+ * issuedOn
+ * claimCode
+ * assertionUrl
+ * [badge](badges.md)
 
 ### Potential errors
 
@@ -506,12 +511,6 @@ Missing system or badge.
 [ContextError: Missing system]
 
 [ContextError: Missing badge]
-```
-
-Incorrect context.
-
-```
-[ContextError: Context not of required type: Instance]
 ```
 
 ## `deleteBadgeInstance`: `Instance`
