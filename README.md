@@ -1,3 +1,5 @@
+**This software is no longer supported.**
+
 # Badgekit API Client
 
 A Node client library for [`badgekit-api`](https://github.com/mozilla/badgekit-api).
