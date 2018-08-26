@@ -23,6 +23,14 @@ Retrieve all available programs within a particular issuer and system.
 |system|`slug`|
 |issuer|`slug`|
 
+### Options
+
+This method takes an optional second parameter to specify pagination data:
+
+* `paginate` - _JSON object_
+ * `page` - _page of results to return_
+ * `count` - _number of results per page_
+
 ### Returns
 
 All available `programs` for the given system/ issuer.
@@ -30,7 +38,13 @@ All available `programs` for the given system/ issuer.
 ### Example method call
 
 ```js
-client.getPrograms({system: 'system-slug', issuer: 'issuer-slug'}, function (err, availablePrograms) {
+var options = { 
+	paginate: { 
+		page: 1, 
+		count: 2 
+	}
+};
+client.getPrograms({system: 'system-slug', issuer: 'issuer-slug'}, options, function (err, availablePrograms) {
   //...
   
 });

@@ -9,6 +9,7 @@ The [`Client`](methods.md) object provides the following methods:
 * [`getBadgeInstances`](#getbadgeinstances-instance)
 * [`getBadgeInstance`](#getbadgeinstance-instance)
 * [`createBadgeInstance`](#createbadgeinstance-instance)
+* [`createBadgeInstances`](#createbadgeinstances-instances)
 * [`deleteBadgeInstance`](#deletebadgeinstance-instance)
 
 <!--* [`updateBadgeInstance`](#updatebadgeinstance-instance)-->
@@ -24,6 +25,14 @@ Retrieve awarded instances of a particular badge.
 |system|`slug`|issuer|`slug`|
 |badge|`slug`|program|`slug`|
 
+### Options
+
+This method takes an optional second parameter to specify pagination data:
+
+* `paginate` - _JSON object_
+ * `page` - _page of results to return_
+ * `count` - _number of results per page_
+
 ### Returns
 
 Array of badge instances.
@@ -37,7 +46,13 @@ var context = {
 		program: 'program-slug', 
 		badge: 'badge-slug'
 	};
-client.getBadgeInstances(context, function (err, requestedInstances) {
+var options = { 
+	paginate: { 
+		page: 1, 
+		count: 2 
+	}
+};
+client.getBadgeInstances(context, options, function (err, requestedInstances) {
  //...
   
 });
@@ -304,6 +319,13 @@ Create a badge instance - this means issuing a badge to a particular earner. Bad
 | | | |`issuedOn` (_timestamp_)|
 | | | |`expires` (_timestamp_)|
 
+### Options
+
+This method takes an optional second parameter to specify a claim code and/or comment:
+
+* `code` - _claim code for the new badge instance_
+* `comment` - _comment to forward to the API webhook_
+
 ### Returns
 
 The created badge instance.
@@ -317,7 +339,7 @@ expDate.setDate(expDate.getDate()+365);
 var newBadgeInstance = {
 		email: 'earner@example.org',
 		slug: 'ihgfedcba',
-			claimCode: 'a1b2c3d4e5',
+		claimCode: 'a1b2c3d4e5',
 		issuedOn: issueDate,
 		expires: expDate
 	};
@@ -328,7 +350,11 @@ var context = {
 		badge: 'badge-slug', 
 		instance: newBadgeInstance
 	};
-client.createBadgeInstance(context, function (err, createdBadgeInstance) {
+var options = {
+		code: "claim-code",
+		comment: "excellent job"
+	};
+client.createBadgeInstance(context, options, function (err, createdBadgeInstance) {
  //...
   
 });
@@ -390,6 +416,101 @@ Incorrect context.
 
 ```
 [ContextError: Context not of required type: Instance]
+```
+
+## `createBadgeInstances`: `Instances`
+
+Create multiple badge instances - this means issuing a particular badge to a group of earners.
+
+### Context
+
+| |**Required**| |**Optional**|
+|:---|:---|:---|:---|
+|system|`slug`|issuer|`slug`|
+|badge|`slug`|program|`slug`|
+|emails|`[ ]`| | |
+
+### Options
+
+This method takes an array parameter including a list of emails to issue the badge to:
+
+* `emails` - _array of email addresses_
+
+_The bulk issuing method does not accept the claim code parameter._
+
+### Returns
+
+Array of created badge instances. ___If any of the email addresses passed have already been awarded this badge, new instances will not be created for them and they will not be included in the returned data. Similarly, any duplicate email addresses in the array will only return a single new badge instance.___
+
+### Example method call
+
+```js
+var context = {
+		system: 'system-slug', 
+		issuer: 'issuer-slug', 
+		program: 'program-slug', 
+		badge: 'badge-slug', 
+		emails: ['earner@example.org', 'other@example.org']
+	};
+client.createBadgeInstances(context, function (err, createdBadgeInstances) {
+ //...
+  
+});
+```
+
+### Expected response
+
+```json
+[{
+    "slug": "ihgfedcba",
+    "email": "earner@example.org",
+    "expires": "2015-06-13T18:51:15.000Z",
+    "issuedOn": "2014-06-13T18:51:15.000Z",
+    "claimCode": "claim-code",
+    "assertionUrl": "http://badgeissuersite.com/public/assertions/instance-slug",
+    "badge": null
+},
+...
+]
+```
+
+#### Response structure
+
+* `[ ]`
+ * slug
+ * email
+ * expires
+ * issuedOn
+ * claimCode
+ * assertionUrl
+ * [badge](badges.md)
+
+### Potential errors
+
+Badge instance data invalid.
+
+```
+[ValidationError: Could not validate required fields]
+```
+
+System, issuer, program or badge not found.
+
+```
+[ResourceNotFoundError: Could not find system field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find issuer field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find program field: `slug`, value: `attempted-slug`]
+
+[ResourceNotFoundError: Could not find badge field: `slug`, value: `attempted-slug`]
+```
+
+Missing system or badge.
+
+```
+[ContextError: Missing system]
+
+[ContextError: Missing badge]
 ```
 
 ## `deleteBadgeInstance`: `Instance`
